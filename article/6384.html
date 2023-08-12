@@ -1,0 +1,1079 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>深度学习核心基础知识点 | 兼一书虫</title><meta name="keywords" content="深度学习,神经网络,卷积池化"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习核心基础知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习核心基础知识点">
+<meta property="og:url" content="https://study.hycbook.com/article/6384.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="深度学习核心基础知识点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%866.webp">
+<meta property="article:published_time" content="2023-05-20T08:16:17.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.712Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="卷积池化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%866.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/6384"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习核心基础知识点',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆6.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">深度学习核心基础知识点</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-20T08:16:17.000Z" title="发表于 2023-05-20 16:16:17">2023-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.712Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deep-learning/">deep_learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>41分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="深度学习核心基础知识点"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/6384.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>简单说明下机器学习和深度学习的主要区别：</p>
+<ul>
+<li><strong>模型结构</strong>：一般深度学习基于深度神经网络架构较为复杂化</li>
+<li><strong>自动提取特征</strong>：传统机器学习需要人工构造特征但深度学习基于神经网络自动提取特征</li>
+<li><strong>数据量</strong>：深度学习需要大量的数据集来训练多层神经网络</li>
+</ul>
+<h2 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h2><p><code>反向传播(Backpropagation)</code>算法是一种用于计算神经网络中各个参数梯度的方法，它基于<code>链式法则</code>和<code>梯度下降算法</code>，下面是反向传播算法的基本步骤：</p>
+<ol>
+<li><strong>前向传播</strong>(Forward Propagation)：<ul>
+<li>输入一个样本，通过神经网络的前向传播计算得到预测输出</li>
+<li>逐层计算每个神经元的输出值，直至输出层</li>
+<li>在前向传播过程中，将每一层的输入、权重和激活函数的结果保存下来，用于后续的反向传播计算</li>
+</ul>
+</li>
+<li><strong>计算损失函数</strong>(Loss Calculation)：<ul>
+<li>根据预测输出和真实标签计算损失函数的值</li>
+<li>常见的损失函数包括均方误差(Mean Squared Error)、交叉熵损失(Cross-Entropy Loss)等</li>
+</ul>
+</li>
+<li><strong>反向传播计算梯度</strong>(Backward Propagation)：<ul>
+<li>从输出层开始，根据链式法则计算每个参数的梯度</li>
+<li>逐层向后传播，通过链式法则将上一层的梯度乘以当前层的局部梯度，得到当前层的梯度</li>
+<li>根据梯度下降算法更新网络参数</li>
+</ul>
+</li>
+<li><strong>参数更新</strong>(Parameter Update)：<ul>
+<li>根据计算得到的梯度值，使用梯度下降算法或其变种方法来更新网络的参数</li>
+<li>常见的梯度下降算法包括随机梯度下降(Stochastic Gradient Descent，SGD)、动量法(Momentum)、Adam等</li>
+</ul>
+</li>
+<li><strong>重复以上步骤</strong>：<ul>
+<li>对于每个训练样本，重复执行前向传播、损失计算、反向传播和参数更新的步骤</li>
+<li>迭代训练过程直到达到预设的停止条件，如达到最大迭代次数或损失函数收敛</li>
+</ul>
+</li>
+</ol>
+<div class="note success modern"><p>注意，反向传播算法会重复利用前向传播中存储的中间值，以避免重复计算，因此，需要保留前向传播的中间结果，这也会导致模型训练比单纯的预测需要更多的内存(显存)</p>
+<p>同时这些中间结果占用内存(显存)大小与网络层的数量和批量(<code>batch_size</code>)大小成正比</p>
+<p>因此使用大<code>batch_size</code>训练更深层次的网络更容易导致内存不足(out of memory)的错误</p>
+</div>
+<p>反向传播算法通过有效地计算每个参数的梯度，使得神经网络可以通过梯度下降等<code>优化方法</code>来不断更新参数以最小化损失函数</p>
+<p>这样，神经网络可以逐步优化自身的权重和偏置，从而提高模型的性能和准确度</p>
+<blockquote>
+<p>深度学习优化存在许多挑战，其中一些最令人烦恼的是局部最小值、鞍点和梯度消失</p>
+</blockquote>
+<ul>
+<li><p><strong>局部最小值(local minimum)</strong>: 对于任何目标函数$f(x)$，如果在$x$处对应的$f(x)$值小于在$x$附近任何其他点的$f(x)$值，那么$f(x)$可能是局部最小值</p>
+<p>如果$f(x)$在$x$处的值是整个域上目标函数的最小值，那么$f(x)$是全局最小值</p>
+</li>
+<li><p><strong>鞍点(saddle point)</strong>: 指函数的所有梯度都消失但<strong>既不是全局最小值也不是局部最小值</strong>的任何位置</p>
+</li>
+<li><p><strong>梯度消失(vanishing gradient)</strong>: 因为某些原因导致目标函数$f$的梯度接近零(即梯度消失问题)，是在引入ReLU激活函数和ResNet之前训练深度学习模型相当棘手的原因之一</p>
+</li>
+</ul>
+<p>在深度学习中，大多数目标函数都很复杂，没有解析解，因此，我们需使用<code>数值优化算法</code></p>
+<h3 id="梯度消失和爆炸"><a href="#梯度消失和爆炸" class="headerlink" title="梯度消失和爆炸"></a>梯度消失和爆炸</h3><p>梯度不稳定的原因：<code>核心在于链式法则</code>，<strong>前面层上的梯度</strong>是来自<strong>后面层上梯度</strong>的<strong>乘积</strong>。当存在过多的层时，就会出现梯度不稳定场景，比如<code>梯度消失</code>和<code>梯度爆炸</code></p>
+<blockquote>
+<p>梯度爆炸</p>
+</blockquote>
+<p>在反向传播过程中需要对激活函数进行求导，如果导数大于1，那么随着网络层数的增加梯度更新将会朝着指数爆炸的方式增加这就是梯度爆炸</p>
+<blockquote>
+<p>梯度消失</p>
+</blockquote>
+<p>同样如果导数小于1，那么随着网络层数的增加梯度更新信息会朝着指数衰减的方式减少这就是梯度消失</p>
+<blockquote>
+<p>根本原因</p>
+</blockquote>
+<p>梯度消失和梯度爆炸，其根本原因在于<strong>反向传播训练法则</strong>，属于<code>先天不足</code></p>
+<p>计算权值更新信息的时候需要计算前层偏导信息，因此如果激活函数选择不合适</p>
+<p>比如使用sigmoid，梯度消失就会很明显了，如果使用sigmoid作为损失函数，<strong>其梯度是不可能超过0.25</strong>，这样经过链式求导之后，很容易发生<strong>梯度消失</strong></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p><code>梯度消失</code>和<code>梯度爆炸</code>是在神经网络训练过程中常见的问题，可能<strong>导致模型收敛困难</strong>或<strong>无法有效更新权重</strong>。下面是梯度消失和梯度爆炸的产生原因和解决方法：</p>
+<blockquote>
+<p>梯度消失(Gradient Vanishing)</p>
+</blockquote>
+<p><strong>原因</strong>：在深层神经网络中，梯度通过多个层传递时可能会逐渐衰减。特别是使用具有小梯度的激活函数(如Sigmoid、Tanh)时，梯度消失问题更为严重</p>
+<p>解决方法：</p>
+<ul>
+<li><strong>大梯度的激活函数</strong>：选择具有<strong>较大梯度的激活函数</strong>，如ReLU、Leaky ReLU等</li>
+<li><strong>参数初始化</strong>：合理初始化权重，<strong>避免初始梯度过小或过大</strong></li>
+<li><strong>批归一化(Batch Normalization)</strong>：通过对每一层的输入进行归一化，可以使得激活函数输入值的分布更稳定，有助于缓解梯度消失问题</li>
+<li><strong>残差连接(Residual Connections)</strong>：引入跨层的直接连接，使得梯度可以<strong>更容易地通过网络传播</strong>，例如ResNet中的残差连接结构</li>
+</ul>
+<blockquote>
+<p>梯度爆炸(Gradient Explosion)</p>
+</blockquote>
+<p><strong>原因</strong>：在某些情况下，梯度可能会指数级增长，导致数值溢出</p>
+<p>解决方法：</p>
+<ul>
+<li><strong>梯度裁剪(Gradient Clipping)</strong>：限制梯度的范围，通过设置阈值或缩放梯度来防止梯度爆炸</li>
+<li><strong>参数初始化</strong>：合理初始化权重，避免初始梯度过大</li>
+<li><strong>使用稀疏连接</strong>：减少网络中的连接数量，可以降低梯度爆炸的风险</li>
+<li><strong>更小的学习率</strong>：降低学习率，使得梯度更新更加稳定</li>
+</ul>
+<p><strong>正则化方法</strong>可以在一定程度上<strong>缓解</strong>梯度爆炸和梯度消失的问题</p>
+<p>总的来说，解决梯度消失和梯度爆炸问题的方法包括选择合适的激活函数、参数初始化策略、批归一化、残差连接、梯度裁剪等</p>
+<p>需要根据具体情况综合考虑并适当调整这些方法以提高训练的稳定性和效果</p>
+<h2 id="泛化问题"><a href="#泛化问题" class="headerlink" title="泛化问题"></a>泛化问题</h2><p><code>过拟合(Over fitting)</code>和<code>欠拟合(Under fitting)</code>是指机器学习模型在训练过程中对训练数据的拟合程度不合适的问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/过拟合和欠拟合.webp" alt="过拟合和欠拟合"></p>
+<h3 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h3><blockquote>
+<p>现象</p>
+</blockquote>
+<p><code>过拟合</code>指的是模型过于复杂，<strong>过度适应</strong>了训练数据的特征，导致在新的未见过的数据上表现不佳</p>
+<p>过拟合的表现是在训练数据上表现出较好的拟合效果，但在测试数据上的表现较差</p>
+<p>过拟合的原因可能是模型过于复杂，参数过多，导致模型具有很强的记忆能力而忽略了数据的真实规律</p>
+<blockquote>
+<p>产生原因</p>
+</blockquote>
+<ol>
+<li><strong>模型太复杂</strong>: 训练集的数量级和模型的复杂度不匹配，训练集的数量级要小于模型的复杂度</li>
+<li><strong>特征分布不一致</strong>: 训练集和测试集特征分布不一致</li>
+<li><strong>学习到噪音</strong>: 样本里的噪音数据干扰过大，大到模型过分的记住了噪音特征，而忽略了真实的输入输出间的关系</li>
+<li><strong>迭代过多</strong>: 权值学习迭代次数足够多(Over training)，拟合了训练数据中的噪声和训练样例中没有代表性的特征</li>
+</ol>
+<blockquote>
+<p>解决方案</p>
+</blockquote>
+<ol>
+<li><strong>简化模型</strong>: 使其适合自己训练集的数量级(缩小宽度和减小深度)，使模型更好地学习数据的真实分布</li>
+<li><strong>数据增强</strong>: 训练集越多，过拟合的概率越小。在计算机视觉领域中，增广的方式是对图像旋转，缩放，剪切，添加噪声等</li>
+<li><strong>正则化</strong>: 指通过引入额外新信息来解决过拟合问题的一种，这种额外信息通常的形式是模型复杂性带来的惩罚度。正则化可以保持模型简单</li>
+<li><strong>dropout</strong>: 在训练的时候让神经元以一定概率不工作</li>
+<li><strong>Early stopping</strong>: 迭代次数截断的方法来防止过拟合的，即在模型对训练数据集迭代收敛之前停止迭代来防止过拟合</li>
+</ol>
+<h3 id="欠拟合"><a href="#欠拟合" class="headerlink" title="欠拟合"></a>欠拟合</h3><blockquote>
+<p>现象</p>
+</blockquote>
+<p><code>欠拟合</code>指的是模型过于简单，不能很好地拟合训练数据的特征，导致在训练数据和测试数据上的表现都不佳</p>
+<p>欠拟合的表现是模型无法捕捉到数据中的复杂关系或规律，无法很好地拟合训练数据</p>
+<p>欠拟合的原因可能是模型过于简单，参数过少，无法充分学习数据的特征</p>
+<blockquote>
+<p>产生原因</p>
+</blockquote>
+<ol>
+<li><strong>模型复杂度不足</strong>：模型的复杂度不足以捕捉数据中的复杂关系。例如，线性模型无法很好地拟合非线性数据，导致欠拟合</li>
+<li><strong>特征提取不足</strong>：特征提取不足意味着模型无法从原始数据中提取出有用的特征。如果特征不具备较强的区分性，模型就无法很好地进行拟合</li>
+<li><strong>数据量不足</strong>：当训练数据较少时，模型难以学习数据的真实分布和规律。有限的数据样本可能无法提供足够的信息来训练一个复杂的模型</li>
+<li><strong>过度正则化</strong>：过度正则化可以导致模型过于简单，无法很好地拟合训练数据。例如，强制施加较强的正则化项或使用较高的正则化系数会限制模型的灵活性</li>
+<li><strong>数据噪声</strong>：当训练数据中存在噪声或错误标签时，模型可能会过于关注这些异常样本，从而导致欠拟合</li>
+</ol>
+<blockquote>
+<p>解决方案</p>
+</blockquote>
+<ol>
+<li><strong>特征工程</strong>: 欠拟合是由于学习不足，可以考虑添加特征，从数据中挖掘更多的特征，有时候还需要对特征进行变换，使用组合特征和高次特征</li>
+<li><strong>更强的模型</strong>: 模型简单也会导致欠拟合，如线性模型只能拟合一次函数的数据，尝试使用更高级的模型有助于解决欠拟合</li>
+<li><strong>调整超参数</strong>: 调整模型的超参数，如学习率、正则化系数等，以获得更好的模型拟合效果</li>
+</ol>
+<h1 id="核心网络层"><a href="#核心网络层" class="headerlink" title="核心网络层"></a>核心网络层</h1><h2 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h2><p>等待…</p>
+<h2 id="Conv卷积操作"><a href="#Conv卷积操作" class="headerlink" title="Conv卷积操作"></a>Conv卷积操作</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzU0NjgzMDIxMQ==&amp;mid=2247598498&amp;idx=1&amp;sn=19749729f3ce70ed4bc437934782cf2d&amp;chksm=fb54a34ecc232a589815e097fe4d82eb34358e047e2571408c5aca48e29316539eb194a153c1&amp;scene=27">一文详解各种卷积操作</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/fksfdh/article/details/122050391">pytorch中卷积网络的几种卷积和池化</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pytorch.org/docs/stable/nn.html#convolution-layers">pytorch官网关于cnn的说明</a></p>
+</blockquote>
+<p><code>卷积操作</code>是神经网络中常用的操作之一，特别是在图像处理和计算机视觉任务中</p>
+<p>卷积操作通过将输入数据与<code>卷积核</code>(也称为<code>滤波器</code>)进行逐元素相乘，并将结果进行求和，从而产生输出特征图</p>
+<p>在卷积神经网络(Convolutional Neural Network，CNN)中，卷积操作用于提取输入数据中的局部特征，它利用了特征的<code>局部相关性</code>和<code>平移不变性</code></p>
+<ul>
+<li><strong>局部相关性</strong>: 局部相关性指的是每个神经元只与输入数据的一小块区域连接，可以捕捉到输入数据的局部特征，减少了参数数量，降低了计算复杂度</li>
+<li><strong>平移不变性</strong>: 平移不变性指的是它对输入数据的平移具有不变性，卷积层可以通过共享权重和局部连接的方式来提取特征，从而使得对于不同位置的物体能够产生相似的特征表示</li>
+</ul>
+<blockquote>
+<p>卷积输出大小计算公式</p>
+</blockquote>
+<script type="math/tex; mode=display">
+L_{out} = \lfloor  \frac {L_{in} + 2 \times padding - dilation \times (kernel\_size-1) -1}{stride}+1 \rfloor</script><p>其中$L_{in}$表示输入的特征大小，$padding$是填充，<script type="math/tex">kernel\_size</script>是卷积核大小，$stride$是步长</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://ezyang.github.io/convolution-visualizer/index.html">一维卷积在线可视化</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://thomelane.github.io/convolutions/2DConvRGB.html">二维卷积在线可视化</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/卷积之间的关系脉络.svg" alt="卷积之间的关系脉络."></p>
+<h3 id="普通卷积"><a href="#普通卷积" class="headerlink" title="普通卷积"></a>普通卷积</h3><p>深度学习中卷积的概念与信号处理领域的卷积相似(只是深度学习的卷积在运算过程中的滤波器不经过翻转)，卷积核以一定的步长在输入图片上滑动，每一步都将对应元素相乘后求和的过程，如下图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/基本一维卷积示例.webp" alt="基本一维卷积示例"></p>
+<blockquote>
+<p>卷积核大小(kernel_size)</p>
+</blockquote>
+<p>卷积核大小定义了卷积的视图，根据卷积核的大小，常见的卷积尺寸有1×1卷积、3×3 卷积、5×5卷积、7×7卷积等</p>
+<ul>
+<li><strong><script type="math/tex">1 \times 1</script>卷积</strong>：通常用于<code>输出维度的升维或降维</code>。若特征图是尺寸是<script type="math/tex">H \times W \times D</script>，卷积核尺寸是<script type="math/tex">1 \times 1 \times D</script>，输出通道尺寸是<script type="math/tex">H \times W \times 1</script>。当我们将<script type="math/tex">N</script>次<script type="math/tex">1 \times 1</script>卷积结果连接在一起时，可以得到<script type="math/tex">H \times W \times N</script>的输出，从而实现升维或降维的功能</li>
+<li><strong><script type="math/tex">3 \times 3</script>卷积</strong>：由于大尺寸的卷积核的参数量较大，研究人员发现两个<script type="math/tex">3 \times 3</script>卷积的堆叠，感受野等同于一个<script type="math/tex">5 \times 5</script>卷积，但是参数量却减少了，所以从VGG的时代开始，基本后面的网络都离不开它的身影</li>
+<li><strong><script type="math/tex">5 \times 5</script>卷积</strong>：卷积核越大，感受野越大，看到的图片信息越多，所获得的全局特征越好。但是这样参数很多，会<strong>导致计算量暴增</strong>，层次少不利于模型深度的增加，<strong>表达能力弱</strong>。所以我们会看到在早期的网络会出现大卷积核的堆叠，或者当下研究人员一般将大尺寸卷积放在对输入图片的初始操作处(<script type="math/tex">7 \times 7</script>同理)</li>
+</ul>
+<blockquote>
+<p>步长(stride)</p>
+</blockquote>
+<p>核的步长定义了卷积核在图像中移动的每一步的大小，代表提取的精度，通常为1，也可以用大于等于2的步长，对图像进行下采样，<code>替代池化</code>操作</p>
+<blockquote>
+<p>填充(padding)</p>
+</blockquote>
+<p>卷积核与输入图像的尺寸不匹配，这时就需要填充图像，例如输入图片尺寸为<script type="math/tex">5 \times 5</script>，卷积核的大小为<script type="math/tex">3 \times 3</script></p>
+<p>如果不进行填充，步长为1的话，当卷积核沿着图片滑动后只能滑动出一个<script type="math/tex">3 \times 3</script>的图片出来，<strong>卷积后的图片越变越小</strong>，且输入图片边缘像素只被计算过一次</p>
+<p>而中间像素会被卷积计算多次，意味着丢失图像角落信息，所以为了避免这种情况，需要先对原始图片做边界填充处理</p>
+<h3 id="3D卷积"><a href="#3D卷积" class="headerlink" title="3D卷积"></a>3D卷积</h3><p>3D卷积的卷积核可以在输入图像的3个方向，即图像的高度，宽度，<code>深度</code>上移动。并与二维卷积类似，在每个位置各元素先相乘再相加，最后输出一个3D数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/基本3D卷积示例.webp" alt="基本3D卷积示例"></p>
+<p><strong>卷积特性：</strong>相比于普通的二维卷积，多了一个维度(深度)，可以把这个深度当作视频中的<strong>连续帧</strong>，或者是立体图像中的不同的切片。但是其参数量较大，会<strong>延缓网络的推理速度</strong></p>
+<p><strong>应用场景：</strong>3D卷积常应用在视频分类、医学影像、点云处理等领域。比如经典的<strong>VoxelNet</strong>网络就采用3D CNN提取点云的体素特征做目标检测任务</p>
+<h3 id="扩张卷积-膨胀、空洞"><a href="#扩张卷积-膨胀、空洞" class="headerlink" title="扩张卷积(膨胀、空洞)"></a>扩张卷积(膨胀、空洞)</h3><p><code>扩张卷积(Dilated Convolution)</code>，也称为<code>空洞卷积(Atrous Convolution)</code>，最早是由<strong>DeepLab团队</strong>提出的</p>
+<p>DeepLab是由Google Brain开发的一种用于<code>图像语义分割</code>的深度学习架构，随后，扩张卷积被广泛应用于其他计算机视觉任务，如<code>图像超分辨率</code>、<code>目标检测</code>、<code>图像生成</code>和<code>图像修复</code>等</p>
+<p>扩张卷积的主要目的是<strong>增加卷积操作的感受野，从而捕捉更大范围的上下文信息</strong></p>
+<p>传统的卷积操作具有固定的卷积核尺寸和步幅，限制了感受野的大小。而扩张卷积通过在卷积核的元素之间引入固定的间隔(扩张率或空洞率)，使得卷积核在输入特征图上的采样间隔扩大，从而实现<strong>感受野的扩大</strong></p>
+<p>扩张卷积最初用于图像语义分割任务，旨在提高分割结果的精度。语义分割需要将图像中的每个像素分类到不同的语义类别中，因此需要充分考虑像素周围的上下文信息</p>
+<p>通过使用扩张卷积，DeepLab团队可以更好地捕捉像素之间的长距离依赖关系，提高分割模型对细粒度边界和小尺寸物体的感知能力</p>
+<p>它在这些任务中的应用主要是为了增加感受野、提高分辨率和实现多尺度特征融合，以增强模型的感知能力和表达能力</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/基本空洞卷积示例.gif" alt="基本空洞卷积示例"></p>
+<p><strong>扩张的好处：</strong>使得在相同的计算成本下，避免因池化损失信息而增大了感受野</p>
+<blockquote>
+<p>膨胀卷积使用的方法</p>
+</blockquote>
+<ol>
+<li>连续使用多个膨胀卷积时应该如何设计它的膨胀系数</li>
+<li>将膨胀系数设置为锯齿形状，例如[1,2,3,1,2,3]</li>
+<li>公约数不能大于1，比如可以是[1,2,3]，而不是[2,4,8]</li>
+</ol>
+<h3 id="分组卷积"><a href="#分组卷积" class="headerlink" title="分组卷积"></a>分组卷积</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/Group_Convolution.html">分组卷积（Group Convolution）</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/80041030">Depthwise卷积与Pointwise卷积</a></p>
+</blockquote>
+<p><code>分组卷积</code>最开始被使用在经典入门卷积神经网络AlexNet上，用于解决显存不足的问题。在现在被广泛用于各种轻量化模型中，用于减少运算量和参数量，其中应用最广的就是<code>深度可分离卷积(Depthwise Separable Convolution)</code></p>
+<blockquote>
+<p>Depthwise卷积(深度卷积)和Pointwise卷积(逐点卷积)</p>
+</blockquote>
+<p>Depthwise卷积(深度卷积)和Pointwise卷积(逐点卷积)是MobileNet等轻量级神经网络中常用的卷积操作卷积，合起来被称作Depthwise Separable Convolution(参见Google的Xception)，该结构和常规卷积操作类似，可用来提取特征，但相比于常规卷积操作，其<strong>参数量和运算成本较低</strong>。所以在一些轻量级网络中会碰到这种结构如MobileNet</p>
+<p><code>可以将深度卷积和逐点卷积结合使用，作为分组卷积的一种实现方式，以提高模型的计算效率和参数效率</code></p>
+<p>深度卷积用于捕捉空间上的相关信息，逐点卷积用于整合和转换通道间的特征关系。这样的组合可以在一定程度上减少计算量，并保持模型的表达能力</p>
+<blockquote>
+<p>传统和分组卷积的比较</p>
+</blockquote>
+<ul>
+<li>在传统的卷积操作中，输入特征图的每个通道都与卷积核的每个通道进行卷积运算，<strong>输出的特征图是所有通道的叠加</strong></li>
+<li>在分组卷积中，将<strong>输入特征图和卷积核分成多个组</strong>，每个组中的通道进行独立的卷积运算，最后将<strong>各组的输出特征图进行连接</strong>，得到最终的输出结果</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/普通卷积和分组卷积比较.webp" alt="普通卷积和分组卷积比较"></p>
+<p>左图是普通的卷积，右图是分组卷积</p>
+<ul>
+<li><p>对于尺寸为<script type="math/tex">H_{1} \times W_{1} \times C_{1}</script>的输入矩阵，当标准卷积核的尺寸为<script type="math/tex">h_{1} \times w_{1} \times C_{1}</script>，共有<script type="math/tex">C_{2}</script>个标准卷积核时，标准卷积会对完整的输入数据进行运算，最终得到的输出矩阵尺寸为 <script type="math/tex">H_{2} \times W_{2} \times C_{2}</script>。这里我们假设卷积运算前后的特征图尺寸保持不变，则上述过程可以展示为左图</p>
+</li>
+<li><p>分组卷积中，通过指定组数<script type="math/tex">g</script>来确定分组数量，将输入数据分成<script type="math/tex">g</script>组。需要注意的是，这里的分组指的是在深度上进行分组，输入的宽和高保持不变，即将每<script type="math/tex">\frac{C_{1}}{g}</script>个通道的数据分为一组。因为输入数据发生了改变，相应的卷积核也需要进行对应的变化，即每个卷积核的输入通道数也就变为了<script type="math/tex">\frac{C_{1}}{g}</script>，而卷积核的大小是不需要改变的</p>
+<p>同时，每组的卷积核个数也由原来的<script type="math/tex">C_{2}</script>变为<script type="math/tex">\frac{C_{2}}{g}</script>。对于每个组内的卷积运算，同样采用标准卷积运算的计算方式，这样就可以得到<script type="math/tex">g</script>组尺寸为<script type="math/tex">H_{2} \times W_{2} \times \frac{C_{2}}{g}</script>的输出矩阵，最终将这<script type="math/tex">g</script>组输出矩阵进行拼接就可以得到最终的结果。这样拼接完成后，最终的输出尺寸就可以保持不变，仍然是<script type="math/tex">H_{2} \times W_{2} \times C_{2}</script>。分组卷积的运算过程如右图所示</p>
+</li>
+</ul>
+<p><strong>分组卷积的主要优点是减少了计算量和参数数量，因为每个组内的卷积操作是独立进行的，相当于将整个卷积操作拆分成了多个较小的卷积操作</strong></p>
+<p>这在一些计算资源有限的情况下，如移动设备或嵌入式系统中，可以显著减少计算成本，提高模型的速度和效率</p>
+<p>需要注意的是，分组卷积的使用需要在考虑计算效率的同时权衡模型性能。<strong>分组卷积可能会损失一定的表示能力，特别是对于那些具有跨通道相关性的特征</strong></p>
+<p>因此，在设计网络结构时，需要根据任务的需求和资源的限制来选择合适的分组数和组内通道数，以在效率和准确性之间找到平衡点</p>
+<h3 id="反卷积-转置"><a href="#反卷积-转置" class="headerlink" title="反卷积(转置)"></a>反卷积(转置)</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.kaggle.com/code/prvnkmr/unet-architecture-breakdown">UNet Architecture Breakdown</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_39906884/article/details/125088871">Pytorch 转置卷积</a></p>
+</blockquote>
+<p><code>转置卷积(Transposed Convolution)</code>，也称为<code>反卷积(Deconvolution)</code>，是卷积神经网络中常用的一种操作</p>
+<p>它与标准卷积操作相反，用于<strong>将低维特征映射扩展为高维特征映射</strong></p>
+<p>在传统的卷积操作中，输入特征图通过卷积核进行卷积运算，得到输出特征图。而转置卷积则是通过对输出特征图应用反向卷积操作，以重建高维特征映射</p>
+<blockquote>
+<p>转置卷积常用于以下几个任务和应用中：</p>
+</blockquote>
+<ol>
+<li><strong>图像生成</strong>：转置卷积被广泛应用于图像生成任务，如图像生成、图像修复等。通过将低维特征映射转换为高维特征映射，可以生成具有更高分辨率和更多细节的图像</li>
+<li><strong>图像分割</strong>：在图像分割任务中，转置卷积常用于将低分辨率的语义特征映射恢复到与输入图像相同的尺寸，以获得像素级别的分割结果</li>
+<li><strong>目标检测</strong>：转置卷积在目标检测任务中被用于生成高分辨率的特征映射，以便更准确地定位和识别目标</li>
+</ol>
+<p>需要注意的是，转置卷积的名称可能会引起一些误解，因为它实际上并不是真正的卷积操作的逆运算。转置卷积的名称起源于其与卷积操作的相似性，但其计算过程与卷积并不完全相同</p>
+<p>在神经网络中，我们经常需要上采样来提高低分辨率图片的分辨率。而转置卷积就可以作为一种通过卷积学习参数，从而获得最优上采样的方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/trans_conv_stride2.svg" alt="trans_conv_stride2"></p>
+<blockquote>
+<p>可视化解释</p>
+</blockquote>
+<p>下图是一个$4 \times 4$的输入矩阵，用$3 \times 3$的卷积核进行没有填充，步长为1的卷积操作，结果是一个$2 \times 2$的矩阵</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/转置卷积示例步骤_1.webp" alt="转置卷积示例步骤_1"></p>
+<p>我们将$3 \times 3$的卷积核重排为$4 \times 16$的形式(下图第一项)，同时将$4 \times 4$的输入矩阵展开为$16 \times 1$的列向量的形式(下图第二项)。通过矩阵乘法得到一个$4 \times 1$的列向量，可以看出这个列向量正是由上图的$2 \times 2$卷积输出矩阵展开得到的，也就是说，我们可以将卷积操作写成矩阵乘法运算</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/转置卷积示例步骤_2.webp" alt="转置卷积示例步骤_2"></p>
+<p>通过这样的操作，可以把16($4 \times 4$的矩阵)个值映射为4($2 \times 2$的矩阵)个值，那么将这个操作反过来，我们就可以把4($2 \times 2$的矩阵)个值映射为16($4 \times 4$的矩阵)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/转置卷积示例步骤_3.webp" alt="转置卷积示例步骤_3"></p>
+<p>最后将输出矩阵可以reshape为$4 \times 4$的形式</p>
+<p><strong>卷积特征：</strong>虽然转置卷积能够通过学习参数进行最优的上采样，但是实际应用中，研究人员往往更加倾向于使用<strong>线性插值</strong>的方式做上采样，效率更高</p>
+<h3 id="可分离卷积"><a href="#可分离卷积" class="headerlink" title="可分离卷积"></a>可分离卷积</h3><blockquote>
+<p>空间可分离卷积</p>
+</blockquote>
+<p>空间可分离卷积主要处理图像和卷积核的空间维度：宽度和高度</p>
+<p>将一个卷积核划分为两个较小的卷积核，如将$3 \times 3$的卷积核分为$3 \times 1$和$1 \times 3$的卷积核，再依次进行卷积</p>
+<p>如此，则可以将一次卷积的9次乘法减少为两次卷积共6次乘法，减少计算量，从而加快网络运行速度</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}-1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1\end{array}\right]=\left[\begin{array}{l}1 \\ 2 \\ 1\end{array}\right] \times\left[\begin{array}{lll}-1 & 0 & 1\end{array}\right]</script><blockquote>
+<p>深度可分离卷积</p>
+</blockquote>
+<p>深度可分离卷积不仅涉及空间维度，还对深度维度进行处理。它主要分为两个过程，分别为<strong>逐通道卷积</strong>和<strong>逐点卷积</strong></p>
+<ol>
+<li><p><strong>逐通道卷积</strong>: 逐通道卷积的卷积核与通道是一一对应的，所以输出的特征图片的深度和输入的深度完全一样</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/逐通道卷积.webp" alt="逐通道卷积"></p>
+</li>
+<li><p><strong>逐点卷积</strong>: 逐点卷积的运算与常规卷积运算相似，它的卷积核的尺寸为$1 \times 1 \times M$，$M$为上一层的深度。它是将上一步的特征图在深度方向上进行加权相加，生成新的特征图,有几个卷积核就有几层新的特征图输出</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/逐点卷积.webp" alt="逐点卷积"></p>
+</li>
+</ol>
+<p><strong>卷积特性：</strong>深度可分离卷积的优势在于需要提取的属性越多，就能够节省越多的参数，减少计算量。最早出现在mobilenet中，也是用于轻量化网络的特征提取部分，使嵌入式部署的神经网络推理更快速</p>
+<p>相较于传统的标准卷积，它只需要对每个通道进行卷积操作，而不是对每个通道和每个位置都进行卷积操作。因此，它能够在保持模型性能的同时，显著减少计算开销，特别适用于轻量级模型和计算资源受限的场景</p>
+<p>可分离卷积常用于移动设备、嵌入式设备和计算资源有限的环境中，如移动端的图像分类、目标检测、语义分割等任务</p>
+<p>通过采用可分离卷积，可以实现轻量级的模型结构，提高模型的计算效率和速度，同时降低模型的存储空间和内存消耗</p>
+<h3 id="可变形卷积"><a href="#可变形卷积" class="headerlink" title="可变形卷积"></a>可变形卷积</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://openaccess.thecvf.com/content_ICCV_2017/papers/Dai_Deformable_Convolutional_Networks_ICCV_2017_paper.pdf">Deformable Convolutional Networks 2017</a></p>
+</blockquote>
+<p><code>可变形卷积(Deformable Convolution)</code>是一种具有自适应感受野的卷积操作，能够更好地捕捉图像中非刚性形变的特征。与传统的卷积操作相比，可变形卷积引入了可学习的偏移参数，用于调整卷积核在输入特征图上的采样位置</p>
+<p>在传统的卷积操作中，卷积核的采样位置是固定的，对输入特征图的不同区域应用相同的采样模式。而可变形卷积通过在每个位置引入偏移参数，使得卷积核可以自适应地调整采样位置，从而适应不同区域的非刚性形变</p>
+<blockquote>
+<p>思路</p>
+</blockquote>
+<p>可变形卷积是一种卷积核内部点按不规则的方式组合，如下图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/不规则卷积.webp" alt="不规则卷积"></p>
+<p>(a)普通卷积采样的9个点(绿点)；(b)(c)(d)都为可变形卷积，在普通卷积采样坐标上加上一个位移量(蓝色箭头)，得到变形的采样位置(深蓝点)</p>
+<p>对于输入的一张特征图，把普通卷积的过程分成两路，先通过上面一路学习得到offset；下面的可变形卷积是基于上面生成的offset，我们的卷积窗口将由规整的绿色窗口变成蓝色部分，然后再执行普通的卷积，<strong>这种实现方式相当于于比正常的卷积操作多学习了卷积核的偏移offset</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/可变性卷积.webp" alt="可变性卷积"></p>
+<p>如下图所示，左边普通卷积方法没有提取到完整绵羊的特征，而右边的可变形卷积方法提取到了完整的绵羊的特征</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/可变性卷积和传统卷积比较.webp" alt="可变性卷积和传统卷积比较"></p>
+<blockquote>
+<p>实现DCN中的两个问题QA</p>
+</blockquote>
+<p><strong>QA1</strong>: 如何将可变形卷积变成单独的一个层，而不影响别的层</p>
+<p>在实际操作时，并不是真正地把卷积核进行扩展，而是对卷积前图片的像素重新整合，变相地实现卷积核的扩张。也就是说，实际上变的是每次进行卷积后得到的带偏移值的坐标值，根据这些坐标取像素点，然后双线性差值，得到新feature map，然后作为输出并成为下一层的新输入</p>
+<p><strong>QA2</strong>: 在前向传播实现可变性卷积中，如何能有效地进行反向传播</p>
+<p>在图片像素整合时，需要对像素进行偏移操作，偏移量的生成会产生浮点数类型，而偏移量又必须转换为整形，直接对偏移量取整的话无法进行反向传播，这时采用双线性差值的方式来得到对应的像素</p>
+<blockquote>
+<p>可变形卷积的使用程度取决于具体的应用场景和任务要求</p>
+</blockquote>
+<ol>
+<li><strong>目标检测</strong>：可变形卷积在目标检测任务中被广泛使用。由于目标在图像中可能存在尺度变化、形变等非刚性变化，传统的固定感受野的卷积核难以准确捕捉目标的细节和形状信息。可变形卷积通过引入可学习的偏移参数，能够自适应地调整感受野，从而提高目标检测的精度和鲁棒性</li>
+<li><strong>语义分割</strong>：对于语义分割任务，可变形卷积也被广泛使用。语义分割需要对图像中的每个像素进行分类，因此准确地捕捉像素周围的上下文信息至关重要。可变形卷积能够通过自适应调整采样位置来更好地捕捉非刚性形变的目标边界和细节，提高语义分割的精度和细节保留能力</li>
+<li><strong>人体姿态估计</strong>：在人体姿态估计任务中，可变形卷积也被广泛应用。人体姿态具有复杂的非刚性形变，传统的卷积操作往往无法准确地捕捉到人体关节的位置和姿态信息。通过引入可变形卷积，可以更好地建模人体的非刚性形变，提高姿态估计的准确性和鲁棒性</li>
+</ol>
+<p>需要注意的是，可变形卷积的<strong>计算量较大</strong>，可能会<strong>增加模型的复杂性</strong>和<strong>训练的难度</strong></p>
+<p>因此，它通常在需要对非刚性形变建模的任务中使用，并且在设计模型时需要根据具体情况进行权衡和选择</p>
+<h2 id="池化操作"><a href="#池化操作" class="headerlink" title="池化操作"></a>池化操作</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.hanspub.org/journal/PaperInformation.aspx?PaperID=38018&amp;#abstract">卷积神经网络池化方法综述</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s/CAZIbnthuCNMotLBMi_D-A">那些鬼斧神工的池化操作，看完我炸裂！</a></p>
+<p>池化的作用</p>
+</blockquote>
+<ol>
+<li><strong>抑制噪声</strong>，降低信息冗余</li>
+<li>提升模型的<strong>尺度不变性</strong>、<strong>旋转不变性</strong></li>
+<li><strong>降低模型计算量</strong></li>
+<li><strong>防止过拟合</strong></li>
+</ol>
+<blockquote>
+<p><strong>池化回传梯度的原则</strong>是保证传递的loss(或者说梯度)总和不变</p>
+</blockquote>
+<ol>
+<li><strong>最大池化</strong>: 取每个块的最大值作为下一层的一个元素值，因此下一个元素的Loss只来源于这个最大值，因此梯度更新也只更新这个最大值，其他值梯度为0</li>
+<li><strong>平均池化</strong>: 将输入区域内的梯度均匀地分配给该区域中的每个位置。反向传播过程中，将梯度均匀分配给输入区域内的所有位置</li>
+</ol>
+<blockquote>
+<p>池化输出大小计算公式</p>
+</blockquote>
+<script type="math/tex; mode=display">
+L_{out} = \left\lfloor \frac{L_{in}-kernel\_size}{stride}\right\rfloor+1</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/池化之间的关系脉络.svg" alt="池化之间的关系脉络."></p>
+<h3 id="最大最小池化"><a href="#最大最小池化" class="headerlink" title="最大最小池化"></a>最大最小池化</h3><blockquote>
+<p>定义</p>
+</blockquote>
+<p><code>最大池化(Max Pooling)</code>: 选择输入区域中的<strong>最大值</strong>作为输出，忽略其他值</p>
+<p><code>最小池化(Min Pooling)</code>: 选择输入区域中的最小值作为输出，忽略其他值</p>
+<p>下图是最大池化的示例图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/最大池化.webp" alt="最大池化"></p>
+<blockquote>
+<p>重叠池化和非重叠池化</p>
+</blockquote>
+<p>池化又分为<code>重叠池化</code>和<code>非重叠池化</code></p>
+<ul>
+<li><strong>非重叠池化</strong>: stride=kernel size的情况</li>
+<li><strong>重叠池化</strong>: stride&lt;kernel size的情况</li>
+</ul>
+<p>重叠池化相比于非重叠池化不仅可以提升预测精度，同时在一定程度上可以缓解过拟合</p>
+<h3 id="平均池化"><a href="#平均池化" class="headerlink" title="平均池化"></a>平均池化</h3><p><code>平均池化(Average Pooling)</code>: 计算输入区域内的平均值作为输出，将输入区域的值平均分配</p>
+<p>最大池化和均值池化的弊端如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/最大池化与均值池化的弊端.webp" alt="最大池化与均值池化的弊端"></p>
+<h3 id="随机池化"><a href="#随机池化" class="headerlink" title="随机池化"></a>随机池化</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1301.3557.pdf">Stochastic Pooling for Regularization of Deep Convolutional Neural Networks 2013</a></p>
+</blockquote>
+<p><code>Stochastic pooling</code>是论文《Stochastic Pooling for Regularization of Deep Convolutional Neural Networks》中提到的一种池化策略，大意是只需对特征区域元素按照其概率值大小随机选择，元素值大的被选中的概率也大</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/随机池化.webp" alt="随机池化"></p>
+<p>下表是随机池化在CIFAR-10上的表现，可以看出，<strong>使用随机池化效果和采用dropout的结果接近</strong>，证明了其有一定<strong>防止过拟合</strong>的作用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/随机池化_cifar数据集.webp" alt="随机池化_cifar数据集"></p>
+<h3 id="Lp池化"><a href="#Lp池化" class="headerlink" title="Lp池化"></a>Lp池化</h3><p><code>Lp池化(Lp Pooling)</code>是通过调整参数p的值来实现不同的池化方式，当p=1时，为平均池化，当p趋近于无穷大时，为最大池化</p>
+<p>Lp池化的好处是可以在<strong>一定程度上保留更多的信息</strong>。平均池化会平均化局部区域的特征，可能丢失一些细节信息；而最大池化只保留局部区域的最大值，可能丢失其他重要的信息</p>
+<p>Lp池化通过调整参数p的值，可以在特征汇聚时平衡信息的丰富性和抗噪性能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/LP池化.webp" alt="LP池化"></p>
+<p>池化具体操作如下公式所描述</p>
+<script type="math/tex; mode=display">
+f(X)=\sqrt[p]{\sum_{x \in X} x^{p}}</script><p>当p=1时，使用局部求和，而p为无穷大时，对应max-pooling</p>
+<blockquote>
+<p>在Lp池化中，p的选择需要根据具体任务和数据集进行调整</p>
+</blockquote>
+<ul>
+<li>较小的p值可以更加注重细节信息，适用于需要保留细粒度特征的任务</li>
+<li>较大的p值可以更加注重全局信息，适用于更加整体化的任务</li>
+</ul>
+<p>通常情况下，p取2时能够获得较好的性能</p>
+<h3 id="组合池化"><a href="#组合池化" class="headerlink" title="组合池化"></a>组合池化</h3><p><code>组合池化则</code>是同时利用最大值池化与均值池化两种的优势而引申的一种池化策略，常见组合策略有Cat和Add这两种</p>
+<p>常常被当做分类任务的一个trick，其作用就是丰富特征层，maxpool更关注重要的局部特征，而average pooling更关注全局特征</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_avgmax_pool2d</span>(<span class="params">x, output_size=<span class="number">1</span></span>):</span><br><span class="line">    x_avg = F.adaptive_avg_pool2d(x, output_size)</span><br><span class="line">    x_max = F.adaptive_max_pool2d(x, output_size)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * (x_avg + x_max)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cat_avgmax_pool2d</span>(<span class="params">x, output_size=<span class="number">1</span></span>):</span><br><span class="line">    x_avg = F.adaptive_avg_pool2d(x, output_size)</span><br><span class="line">    x_max = F.adaptive_max_pool2d(x, output_size)</span><br><span class="line">    <span class="keyword">return</span> torch.cat([x_avg, x_max], <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="SPP池化"><a href="#SPP池化" class="headerlink" title="SPP池化"></a>SPP池化</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1406.4729.pdf">Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition 2015</a></p>
+</blockquote>
+<p><code>SPP(空间金字塔池化)</code>是在SPPNet中提出的，SPPNet提出比较早，在RCNN之后提出的，用于解决<strong>重复卷积计算</strong>和<strong>固定输出</strong>的两个问题，具体方法如下图所示</p>
+<p>空间金字塔池化的基本思想是将输入特征图分割成多个不同大小的子区域，并对每个子区域进行池化操作。这些子区域的大小和数量构成了一个金字塔形状的层次结构</p>
+<p>然后，对每个子区域进行池化操作（通常是最大池化），生成固定大小的特征向量。最后，将所有尺度上得到的特征向量拼接在一起，形成最终的特征表示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/SPP池化.webp" alt="SPP池化"></p>
+<p>通过空间金字塔池化，模型能够在不同尺度上捕捉到更加丰富的局部特征，从而增强了模型对尺度变化和物体大小变化的鲁棒性</p>
+<p>这对于处理不同尺度的物体检测、图像分类和语义分割等任务非常有用</p>
+<h3 id="ROI池化"><a href="#ROI池化" class="headerlink" title="ROI池化"></a>ROI池化</h3><p><code>ROI池化(Region of Interest Pooling)</code>是在目标检测任务中广泛使用的操作。它对于来自输入列表的每个感兴趣区域，它采用与其对应的输入特征图的一部分并将其<strong>缩放到某个预定义的大小</strong>。这可以显着加快训练和测试时间，它允许重新使用卷积网络中的特征映射，同时也允许以端到端的方式训练物体检测系统</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/ROI池化.jfif" alt="ROI池化"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hycbook.com/article/34192.html">ROI Pooling与SPP池化的区别</a></p>
+</blockquote>
+<p>通过上面的介绍，可以看到两者起到的作用是相同的，把不同尺寸的特征输入转化为相同尺寸的特征输出</p>
+<p>SPP针对同一个输入使用了多个不同尺寸的池化操作，把不同尺度的结果拼接作为输出；而ROI Pooling可看作单尺度的SPP，对于一个输入只进行一次池化操作</p>
+<h3 id="反池化"><a href="#反池化" class="headerlink" title="反池化"></a>反池化</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cloud.tencent.com/developer/article/2089397">[CNN] 卷积、反卷积、池化、反池化</a></p>
+</blockquote>
+<p><code>反池化(Unpooling)</code>与池化操作相反，<strong>用于恢复特征图的尺寸</strong>，常见的方法包括<strong>最大反池化</strong>和<strong>平均反池化</strong></p>
+<p>在传统的池化操作中，通过将特征图的大小减小，以实现特征的降维和减少计算量。然而，这也导致了信息的损失和空间分辨率的降低</p>
+<p>为了补偿这种信息损失，反池化和Unpooling操作用于还原特征图的空间分辨率，使其与输入特征图具有相同的尺寸</p>
+<p><strong>反池化通常是通过转置卷积(Transpose Convolution)来实现的</strong>。转置卷积通过在特征图之间插入空白像素或零填充，并使用适当的卷积核对这些空白像素进行卷积运算，以恢复特征图的尺寸</p>
+<p>Unpooling则是在反池化操作中与转置卷积结合使用的一种方式。在池化操作中，通常会记录池化操作时的最大值或平均值的位置。在Unpooling中，根据这些位置信息，将反池化操作的输出值放置回原始特征图的对应位置。这样可以在恢复空间分辨率的同时保留一定的位置信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/反池化.webp" alt="反池化"></p>
+<p>反池化和Unpooling在卷积神经网络中起着重要的作用，特别是在语义分割和图像重建等任务中。它们帮助网络恢复输入图像的详细结构和空间信息，从而提高模型的精度和质量</p>
+<h3 id="其他池化"><a href="#其他池化" class="headerlink" title="其他池化"></a>其他池化</h3><ol>
+<li><strong>LIP池化</strong>: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Gao_LIP_Local_Importance-Based_Pooling_ICCV_2019_paper.pdf">LIP: Local Importance-based Pooling</a></li>
+<li><strong>自适应池化(Adaptive Pooling)</strong>: 根据输入的尺寸自动调整池化窗口的大小，适应不同大小的输入</li>
+</ol>
+<h2 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/xu_fu_yong/article/details/93721585">BatchNormalization、LayerNormalization、InstanceNorm、GroupNorm简介</a></p>
+</blockquote>
+<p>神经网络中有各种归一化算法，从公式看它们都差不多：无非是减去均值，除以标准差，再施以线性映射</p>
+<script type="math/tex; mode=display">
+y=\gamma\left(\frac{x-\mu(x)}{\sigma(x)}\right)+\beta</script><p>归一化算法的<strong>主要区别在于操作的feature map维度不同</strong></p>
+<p>下图来自何凯明的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1803.08494.pdf">Group Normalization 2018</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/归一化层之间的比较.webp" alt="归一化层之间的比较"></p>
+<p>可以看出</p>
+<ul>
+<li><p>BN: 针对整个batch不同通道，具体来说，就是把第1个样本的第1个通道，加上第2个样本第1个通道…加上第N个样本第1个通道，求平均，得到通道1的均值</p>
+<script type="math/tex; mode=display">
+\begin{align}{c}
+\mu_{c}(x)=\frac{1}{N H W} \sum_{n=1}^{N} \sum_{h=1}^{H} \sum_{w=1}^{W} x_{n c h w} \\
+\sigma_{c}(x)=\sqrt{\frac{1}{N H W} \sum_{n=1}^{N} \sum_{h=1}^{H} \sum_{w=1}^{W}\left(x_{n c h w}-\mu_{c}(x)\right)^{2}+\epsilon}
+\end{align}</script></li>
+<li><p>LN：针对每个样本，对每个样本的C、H、W维度上的数据求均值和标准差，保留N维度</p>
+<script type="math/tex; mode=display">
+\begin{align}{c}
+\mu_{n}(x)=\frac{1}{C H W} \sum_{c=1}^{C} \sum_{h=1}^{H} \sum_{w=1}^{W} x_{n c h w}
+\\
+\sigma_{n}(x)=\sqrt{\frac{1}{C H W} \sum_{c=1}^{C} \sum_{h=1}^{H} \sum_{w=1}^{W}\left(x_{n c h w}-\mu_{n}(x)\right)^{2}+\epsilon}
+\end{align}</script></li>
+<li><p>IN：针对每个样本下的每个通道，对每个样本的H、W维度的数据求均值和标准差，保留N 、C维度，也就是说，它只在channel内部求均值和标准差</p>
+<script type="math/tex; mode=display">
+\begin{align}{c}
+\mu_{n c}(x)=\frac{1}{H W} \sum_{h=1}^{H} \sum_{w=1}^{W} x_{n c h w}
+\\
+\sigma_{n c}(x)=\sqrt{\frac{1}{H W} \sum_{h=1}^{H} \sum_{w=1}^{W}\left(x_{n c h w}-\mu_{n c}(x)\right)^{2}+\epsilon}
+\end{align}</script></li>
+<li><p>GN：针对每个样本下的多个通道，计算均值和标准差时，把每一个样本feature map的channel分成G组，每组将有C/G个channel，然后将这些channel中的元素求均值和标准差。各组channel用其对应的归一化参数独立地归一化</p>
+<script type="math/tex; mode=display">
+\begin{align}{c}
+\mu_{n g}(x)=\frac{1}{(C / G) H W} \sum_{c=g C / G}^{(g+1) C / G} \sum_{h=1}^{H} \sum_{w=1}^{W} x_{n c h w}
+\\
+\sigma_{n g}(x)=\sqrt{\frac{1}{(C / G) H W} \sum_{c=g C / G}^{(g+1) C / G} \sum_{h=1}^{H} \sum_{w=1}^{W}\left(x_{n c h w}-\mu_{n g}(x)\right)^{2}+\epsilon}
+\end{align}</script></li>
+</ul>
+<h3 id="批归一化"><a href="#批归一化" class="headerlink" title="批归一化"></a>批归一化</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.jianshu.com/p/1ae269b414c6">背景</a></p>
+</blockquote>
+<p>机器学习领域有个很重要的假设：<strong>IID 独立同分布假设</strong>，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障</p>
+<p>在把数据喂给机器学习模型之前，<strong>白化(whitening)</strong>是一个重要的数据预处理步骤</p>
+<ol>
+<li><strong>独立</strong>: 去除特征之间的相关性</li>
+<li><strong>同分布</strong>: 使得所有特征具有相同的均值和方差</li>
+</ol>
+<p>每批训练数据的分布各不相同，那么网络需要在每次迭代中去学习适应不同的分布，这样将会大大降低网络的训练速度。对于深度网络的训练是一个非常复杂的过程，只要网络的前面几层发生微小的改变，那么这些微小的改变在后面的层就会被累积放大下去</p>
+<p>一旦网络某一层的输入数据的分布发生改变，那么这一层网络就需要去适应学习这个新的数据分布，所以如果训练过程中，训练数据的分布一直在发生变化，那么将会影响网络的训练速度</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/jhsignal/article/details/115749349">一文搞懂BN的原理及其实现过程（Batch Normalization）</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_43827595/article/details/121877901">深入理解NLP中LayerNorm的原理以及LN的代码详解</a></p>
+</blockquote>
+<p>引入<code>批归一化Batch Normalization</code>的原因：在图像预处理过程中通常会对图像进行标准化处理，也就是image normalization，使得每张输入图片的数据分布能够统均值为$\mu$，方差为$ \sigma ^2$的分布。这样能够加速网络的收敛。但是当一张图片输入到神经网络经过卷积计算之后，这个分布就不会满足刚才经过image normalization操作之后的分布了，可能适应了新的数据分布规律，这个时候将数据接入激活函数中，很可能一些新的数据会落入激活函数的饱和区，导致神经网络训练的梯度消失</p>
+<p>这个时候我们引入Batch Normalization的目的就是使我们卷积以后的feature map满足均值为0，方差为1的分布规律，再接入激活函数就不会发生这样的情况</p>
+<div class="note success modern"><p>数据归一化都是在数据输入时做的，但是实际上在任何位置都是可以进行数据归一化，在神经网络里上一层网络的输出正好就是下一层网络的输入</p>
+</div>
+<blockquote>
+<p>优点</p>
+</blockquote>
+<ol>
+<li><strong>加速收敛</strong>：归一化操作可以减少网络中不稳定的因素，有助于梯度的传播和收敛。它使得网络在训练过程中更容易优化，加速了训练的速度</li>
+<li><strong>减少梯度弥散问题</strong>：神经网络在深层时容易出现梯度消失或梯度爆炸的问题。Batch Normalization通过将数据归一化到一个合适的范围，使得激活函数的输入更加稳定，减少了梯度消失的风险</li>
+<li><strong>提高泛化能力</strong>：Batch Normalization作为一种正则化方法，有助于减少过拟合的风险。通过在训练过程中引入一些噪声，它可以提高模型的泛化能力，并使得网络对输入数据的变化更加鲁棒</li>
+</ol>
+<p><strong>Batch Normalization在每个小批量训练样本中对输入进行标准化，使其具有零均值和单位方差</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/btach Normalization可视化.webp" alt="btach Normalization可视化"></p>
+<blockquote>
+<p>图像下的BN示例</p>
+</blockquote>
+<p>下图展示了一个batch size为2(两张图片，每张图片有3个通道，其中颜色红，绿，蓝分别代表r,g,b通道)的Batch Normalization的原理，首先会统计每个通道数目所有点的像素值，求得均值和方差，然后在每个通道上分别用该点的像素值减均值除方差得到该点的像素值，此过程就是BN。最后将其接入到激活函数中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/btach Normalization神经网络示例.webp" alt="btach Normalization神经网络示例"></p>
+<p>如下图所示，其中红，绿，蓝分别代表图像不同的通道，假设假设feature map1、feature map2分别是由image1、image2经过一系列卷积池化后得到的特征矩阵</p>
+<p>其中每个网格的值代表该点的像素值，分别统计feature map1和feature map2每个通道的像素值，得到一个矩阵，在使用BN的计算公式计算经过BN以后每个通道每个像素点的像素值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心基础知识点/btach Normalization示例.webp" alt="btach Normalization示例"></p>
+<p>定义$x$为以下矩阵</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}x^{(1)}=\{1,1,1,2,0,-1,2,2\} \\ x^{(2)}=\{-1,1,0,1,0,-1,3,1\} \\ x^{(3)}=\{2,1,1,2,1,2,-1,0\}\end{array}</script><p>可以计算得到$\mu$和$\sigma ^2$</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}\mu_{1}=\frac{1}{m} \sum_{i=1}^{m} x_{i}^{(1)}=1 \\ \mu_{2}=\frac{1}{m} \sum_{i=1}^{m} x_{i}^{(2)}=0.5 \\ \mu_{3}=\frac{1}{m} \sum_{i=1}^{m} x_{i}^{(3)}=1
+
+\\
+
+\sigma_{1}^{2}=\frac{1}{m} \sum_{i=1}^{m}\left(x_{i}^{(1)}-u_{1}\right)^{2}=1 \\ \sigma_{2}^{2}=\frac{1}{m} \sum_{i=1}^{m}\left(x_{i}^{(2)}-u_{2}\right)^{2}=1.5 \\ \sigma_{3}^{2}=\frac{1}{m} \sum_{i=1}^{m}\left(x_{i}^{(3)}-u_{3}\right)^{2}=1
+
+\end{array}</script><p>即得到均值和方差为<script type="math/tex">\mu=\left[\begin{array}{c}1 \\ 0.5 \\ 1\end{array}\right]</script>和<script type="math/tex">\sigma^{2}=\left[\begin{array}{c}1 \\ 1.5 \\ 1\end{array}\right]</script></p>
+<p>这有助于解决训练过程中的<code>内部协变量偏移(Internal Covariate Shift)问题</code>，即网络在训练过程中的每一层的输入分布发生变化，导致网络的训练变得困难</p>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">data = [[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>], [<span class="number">2</span>, <span class="number">5</span>, <span class="number">8.5</span>], [<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>]],</span><br><span class="line">        [[<span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">6</span>, <span class="number">4</span>]],</span><br><span class="line">        [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">0.5</span>, <span class="number">6</span>, <span class="number">0.2</span>]]]</span><br><span class="line">data = torch.tensor(data)</span><br><span class="line">data_bn = nn.BatchNorm1d(<span class="number">3</span>)(data)</span><br><span class="line">data_ln = nn.LayerNorm(<span class="number">3</span>)(data)</span><br><span class="line">mean = torch.<span class="built_in">sum</span>(data_bn)</span><br><span class="line">mu = torch.<span class="built_in">sum</span>(th.<span class="built_in">pow</span>(data_bn - mean, <span class="number">2</span>) / <span class="number">27</span>)</span><br><span class="line"><span class="built_in">print</span>(data_bn)</span><br><span class="line"><span class="built_in">print</span>(mean)</span><br><span class="line"><span class="built_in">print</span>(mu)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">tensor([[[-<span class="number">0.7734</span>, -<span class="number">0.3384</span>,  <span class="number">0.9667</span>],</span><br><span class="line">         [-<span class="number">0.7714</span>,  <span class="number">0.2967</span>,  <span class="number">1.5428</span>],</span><br><span class="line">         [-<span class="number">0.0400</span>, -<span class="number">0.0400</span>, -<span class="number">0.0400</span>]],</span><br><span class="line">        [[-<span class="number">0.3384</span>,  <span class="number">2.2718</span>,  <span class="number">0.5317</span>],</span><br><span class="line">         [-<span class="number">1.1274</span>, -<span class="number">0.4154</span>,  <span class="number">1.7208</span>],</span><br><span class="line">         [-<span class="number">0.5542</span>,  <span class="number">1.5027</span>,  <span class="number">0.4742</span>]],</span><br><span class="line">        [[-<span class="number">0.7734</span>, -<span class="number">0.7734</span>, -<span class="number">0.7734</span>],</span><br><span class="line">         [-<span class="number">1.1274</span>, -<span class="number">0.4154</span>,  <span class="number">0.2967</span>],</span><br><span class="line">         [-<span class="number">1.3256</span>,  <span class="number">1.5027</span>, -<span class="number">1.4798</span>]]], grad_fn=&lt;NativeBatchNormBackward0&gt;)</span><br><span class="line">tensor(-<span class="number">5.9605e-07</span>, grad_fn=&lt;SumBackward0&gt;)  <span class="comment"># 约等于0</span></span><br><span class="line">tensor(<span class="number">1.0000</span>, grad_fn=&lt;SumBackward0&gt;)</span><br></pre></td></tr></table></figure>
+<h3 id="层归一化"><a href="#层归一化" class="headerlink" title="层归一化"></a>层归一化</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_52785473/article/details/127395632">深度学习基础之BatchNorm和LayerNorm</a></p>
+</blockquote>
+<p>为什么Transformer使用LayerNorm ，而不使用BatchNorm</p>
+<p>BN的特点是强行拉平数据之间的分布，使得模型收敛速度更快，并且起到了正则化的作用，使模型效果更佳。但是，BatchNorm对Batch Size大小很敏感，并且在LSTM网络上效果极差。</p>
+<p>LayerNorm是横向归一化，不受Batch Size大小的影响，并且可以很好地应用在时序数据中，而且不需要额外的储存空间。</p>
+<p>《Rethinking Batch Normalization in Transformers》一文对比了LayerNorm和BatchNorm对于Transformer的作用，并且提出了一种新的归一化方式</p>
+<blockquote>
+<p>批归一化和层归一化比较</p>
+</blockquote>
+<ul>
+<li><p>适用场景</p>
+<ul>
+<li><p><strong>batch norm</strong>: 适用于CV，因为计算机视觉喂入的数据都是像素点，可以说数据点与点之间是可以比较的，所以使用batch norm可以有比较好的效果，</p>
+</li>
+<li><p><strong>layer norm</strong>: NLP里，<strong>每个词的词向量是一组向量表示一个词，一个词向量割裂开来看是没有意义的</strong>，因此不同词向量里的数据点是不能混为一谈的</p>
+<p>所以batch norm之后可能会使得词损失语义，效果就可能不好了，但是使用layer norm只是让各个词向量进行标准化，就能够有比较理想的效果了</p>
+</li>
+</ul>
+</li>
+<li><p>归一化维度</p>
+<ul>
+<li><strong>batch norm</strong>: 以CV为例，归一化的是相同通道，均值和方差计算是每个通道的值</li>
+<li><strong>layer norm</strong>: 以NLP为例，归一化的每个词向量，一个词向量自己做归一化</li>
+</ul>
+</li>
+</ul>
+<h3 id="实例归一化"><a href="#实例归一化" class="headerlink" title="实例归一化"></a>实例归一化</h3><p>等待…</p>
+<h3 id="组归一化"><a href="#组归一化" class="headerlink" title="组归一化"></a>组归一化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">GroupNorm</span>(<span class="params">x, gamma, beta, G, eps=<span class="number">1e-5</span></span>):</span><br><span class="line">    <span class="comment"># x: input features with shape [N,C,H,W]</span></span><br><span class="line">    <span class="comment"># gamma, beta: scale and offset, with shape [1,C,1,1]</span></span><br><span class="line">    <span class="comment"># G: number of groups for GN</span></span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    x = tf.reshape(x, [N, G, C // G, H, W])</span><br><span class="line">    mean, var = tf.nn.moments(x, [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], keepdims=<span class="literal">True</span>)</span><br><span class="line">    x = (x - mean) / tf.sqrt(var + eps)</span><br><span class="line">    x = tf.reshape(x, [N, C, H, W])</span><br><span class="line">    <span class="keyword">return</span> x * gamma + beta</span><br></pre></td></tr></table></figure>
+<h2 id="Embedding层"><a href="#Embedding层" class="headerlink" title="Embedding层"></a>Embedding层</h2><p>等待…</p>
+<h2 id="Dropout层"><a href="#Dropout层" class="headerlink" title="Dropout层"></a>Dropout层</h2><p>等待…</p>
+<h1 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h1><p>等待…</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/6384.html">https://study.hycbook.com/article/6384.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E5%8D%B7%E7%A7%AF%E6%B1%A0%E5%8C%96/">卷积池化</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆6.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/451.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆5.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">图像分类算法</div></div></a></div><div class="next-post pull-right"><a href="/article/22410.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆7.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">深度学习核心之激活函数</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/46832.html" title="深度学习核心之损失函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之损失函数</div></div></a></div><div><a href="/article/22410.html" title="深度学习核心之激活函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆7.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之激活函数</div></div></a></div><div><a href="/article/36065.html" title="深度学习核心之优化器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆9.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之优化器</div></div></a></div><div><a href="/article/451.html" title="图像分类算法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆5.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-18</div><div class="title">图像分类算法</div></div></a></div><div><a href="/article/53377.html" title="深度学习模型压缩技术"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆11.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">深度学习模型压缩技术</div></div></a></div><div><a href="/article/35455.html" title="深度学习在图像领域的应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-23</div><div class="title">深度学习在图像领域的应用</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">反向传播算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E7%88%86%E7%82%B8"><span class="toc-number">1.1.1.</span> <span class="toc-text">梯度消失和爆炸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.1.2.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">泛化问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">1.2.2.</span> <span class="toc-text">欠拟合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">核心网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">全连接层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conv%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">Conv卷积操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%8D%B7%E7%A7%AF"><span class="toc-number">2.2.1.</span> <span class="toc-text">普通卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D%E5%8D%B7%E7%A7%AF"><span class="toc-number">2.2.2.</span> <span class="toc-text">3D卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%BC%A0%E5%8D%B7%E7%A7%AF-%E8%86%A8%E8%83%80%E3%80%81%E7%A9%BA%E6%B4%9E"><span class="toc-number">2.2.3.</span> <span class="toc-text">扩张卷积(膨胀、空洞)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E5%8D%B7%E7%A7%AF"><span class="toc-number">2.2.4.</span> <span class="toc-text">分组卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E8%BD%AC%E7%BD%AE"><span class="toc-number">2.2.5.</span> <span class="toc-text">反卷积(转置)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF"><span class="toc-number">2.2.6.</span> <span class="toc-text">可分离卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%BD%A2%E5%8D%B7%E7%A7%AF"><span class="toc-number">2.2.7.</span> <span class="toc-text">可变形卷积</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%A0%E5%8C%96%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.</span> <span class="toc-text">池化操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.1.</span> <span class="toc-text">最大最小池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.2.</span> <span class="toc-text">平均池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.3.</span> <span class="toc-text">随机池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lp%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.4.</span> <span class="toc-text">Lp池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.5.</span> <span class="toc-text">组合池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPP%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.6.</span> <span class="toc-text">SPP池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROI%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.7.</span> <span class="toc-text">ROI池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.8.</span> <span class="toc-text">反池化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%B1%A0%E5%8C%96"><span class="toc-number">2.3.9.</span> <span class="toc-text">其他池化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">2.4.</span> <span class="toc-text">归一化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">2.4.1.</span> <span class="toc-text">批归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%82%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">2.4.2.</span> <span class="toc-text">层归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">2.4.3.</span> <span class="toc-text">实例归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">2.4.4.</span> <span class="toc-text">组归一化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Embedding%E5%B1%82"><span class="toc-number">2.5.</span> <span class="toc-text">Embedding层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dropout%E5%B1%82"><span class="toc-number">2.6.</span> <span class="toc-text">Dropout层</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E6%A0%87"><span class="toc-number">3.</span> <span class="toc-text">指标</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

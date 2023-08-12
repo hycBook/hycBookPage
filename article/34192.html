@@ -1,0 +1,1626 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>目标检测与跟踪算法 | 兼一书虫</title><meta name="keywords" content="目标检测算法,Yolo,Rcnn,SPP-Net,目标跟踪,目标追踪"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="目标检测与跟踪算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目标检测与跟踪算法">
+<meta property="og:url" content="https://study.hycbook.com/article/34192.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="目标检测与跟踪算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%864.webp">
+<meta property="article:published_time" content="2023-04-16T08:52:47.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.712Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="目标检测算法">
+<meta property="article:tag" content="Yolo">
+<meta property="article:tag" content="Rcnn">
+<meta property="article:tag" content="SPP-Net">
+<meta property="article:tag" content="目标跟踪">
+<meta property="article:tag" content="目标追踪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%864.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/34192"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '目标检测与跟踪算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆4.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">目标检测与跟踪算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-16T08:52:47.000Z" title="发表于 2023-04-16 16:52:47">2023-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.712Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deep-learning/">deep_learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">14k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>47分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="目标检测与跟踪算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/34192.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/523370272">经典目标检测Object Detection模型整理</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/172121380">深入浅出Yolo系列之Yolov5核心基础知识完整讲解</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/mengxianglong123/article/details/125784062">目标检测 YOLO系列算法</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/abs/1905.05055">Object Detection in 20 Years: A Survey</a></p>
+<p>论文详解</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43702653/article/details/123973629">R-CNN史上最全讲解</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.codenong.com/cs105792250/">YOLOv1论文翻译解读</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzU0NjgzMDIxMQ==&amp;mid=2247489929&amp;idx=1&amp;sn=2801722c6f3038ae3d476bc03d202e74&amp;chksm=fb56fb65cc217273f1025597dac784f6d0131642831a3b06151aa7bf78a565733793eb599070&amp;scene=27">YOLO v4：物体检测的最佳速度和精度</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/558723090">Yolo系列代码</a></p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/a264672/article/details/122952162">目标检测——RCNN与YOLO系列</a></p>
+<p>核心问题</p>
+</blockquote>
+<ul>
+<li>分类问题：即图片(或某个区域)中的图像属于哪个类别</li>
+<li>定位问题：目标可能出现在图像的任何位置</li>
+<li>大小问题：目标有各种不同的大小</li>
+<li>形状问题：目标可能有各种不同的形状</li>
+</ul>
+<blockquote>
+<p>算法分类</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Anchor Based模型</th>
+<th>Anchor Free模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-stage模型</td>
+<td>YoloV2-5系列、SSD、RetinaNet</td>
+<td>YoloV1、FCOS、CornerNet</td>
+</tr>
+<tr>
+<td>Two-stage模型</td>
+<td>Faster RCNN、Cascade RCNN、MaskRCNN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>two stage：<ul>
+<li>先进行区域生成，该区域称为region proposal（RP，一个有可能包含物体的预选框）；再通过卷积神经网络进行样本分类</li>
+<li>任务流程：特征提取—生成RP—分类/定位回归</li>
+<li>常见two stage：R-CNN、SPP-Net、Fast R-CNN、Faster R-CNN、R-FCN</li>
+</ul>
+</li>
+<li>one stage：<ul>
+<li>不用RP，直接在网络中提取特征来预测物体的分类和位置</li>
+<li>任务流程：特征提取—分类/定位回归</li>
+<li>常见one stage：OverFeat、YOLOv1、YOLOv2、YOLOv3、SSD、RetinaNet</li>
+</ul>
+</li>
+</ul>
+<p>目标检测分为两大系列——RCNN系列和YOLO系列：</p>
+<ul>
+<li>RCNN系列是<code>基于区域检测</code>的代表性算法</li>
+<li>YOLO是<code>基于区域提取</code>的代表性算法</li>
+<li>还有著名的SSD是基于前两个系列的改进</li>
+</ul>
+<blockquote>
+<p>发展脉络</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>2014</th>
+<th>2015</th>
+<th>2016</th>
+<th>2017</th>
+<th>2018</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-CNN</td>
+<td>Fast R-CNN<br />Faster R-CNN<br />YOLO</td>
+<td>YOLO<br />SSD</td>
+<td>YOLOv2<br />RetinaNet<br />Mask R-CNN<br />FPN</td>
+<td>YOLOv3<br />Cascade R-CNN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>2020</th>
+<th>2022</th>
+<th>2023</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YOLOv4<br />YOLOv5<br />EfficientDet</td>
+<td>YOLOv6(美团)<br />YOLOv7</td>
+<td>YOLOv8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="指标和数据"><a href="#指标和数据" class="headerlink" title="指标和数据"></a>指标和数据</h2><blockquote>
+<p>map指标</p>
+</blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_29422755/article/details/115533789">mAP—目标检测模型的评估指标</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_63708623/article/details/128508776">YOLO 模型的评估指标——IOU、Precision、Recall、F1-score、mAP</a></p>
+<blockquote>
+<p>mAP@0.5</p>
+</blockquote>
+<p>在YOLO模型中，你会见到mAP@0.5这样的表现形式，<strong>这种形式表示在IOU阈值为0.5的情况下，mAP的值为多少。</strong>当预测框与标注框的IOU大于0.5时，就认为这个对象预测正确，在这个前提下再去计算mAP。<strong>一般来说，mAP@0.5即为评价YOLO模型的指标之一</strong></p>
+<blockquote>
+<p>mAP@[0.5:0.95]</p>
+</blockquote>
+<p>YOLO模型中还存在mAP@[0.5:0.95]这样一种表现形式，这形式是多个IOU阈值下的mAP，会在q区间[0.5,0.95]内，以0.05为步长，取10个IOU阈值，分别计算这10个IOU阈值下的mAP，再取平均值。mAP@[0.5:0.95]越大，表示预测框越精准，因为它去取到了更多IOU阈值大的情况</p>
+<blockquote>
+<p>数据集准备</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.roboflow.com/how-to-train-yolov8-on-a-custom-dataset/#preparing-a-custom-dataset-for-yolov8">How to Train YOLOv8 Object Detection on a Custom Dataset</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_38716233/article/details/124623978">深度学习系列之Anchor based 和 Anchor free 目标检测方法</a></p>
+</blockquote>
+<h1 id="RCNN系列"><a href="#RCNN系列" class="headerlink" title="RCNN系列"></a>RCNN系列</h1><blockquote>
+<p>候选区域的产生</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.jianshu.com/p/99e121c3beb8">选择性搜索算法 （Selective Search)</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43694096/article/details/121610856">选择性搜索算法(Selective Search)超详解（通俗易懂版）</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/RCNN系列发展脉络.svg" alt="RCNN系列发展脉络"></p>
+<p>很多目标检测技术都会涉及候选框(bounding boxes)的生成，物体候选框获取当前主要使用图像分割与区域生长技术。<code>区域生长</code>(合并)主要由于检测图像中存在的物体具有局部区域相似性(颜色、纹理等)</p>
+<ol>
+<li><p><code>滑动窗口法</code></p>
+<ul>
+<li><strong>滑动</strong>：首先对输入图像进行不同窗口大小的滑窗进行从左往右、从上到下的滑动</li>
+<li><strong>检测</strong>：每次滑动时候对当前窗口执行分类器(分类器是事先训练好的)。如果当前窗口得到较高的分类概率，则认为检测到了物体</li>
+<li><strong>不同尺度</strong>：对每个不同窗口大小的滑窗都进行检测后，会得到不同窗口检测到的物体标记，这些窗口大小会存在重复较高的部分，</li>
+<li><strong>NMS</strong>：采用非极大值抑制(Non-Maximum Suppression, NMS)的方法进行筛选，最终，经过NMS筛选后获得检测到的物体</li>
+</ul>
+</li>
+<li><p><code>选择性搜索</code>：selective search(简称SS)方法是当下最为熟知的图像bounding boxes提取算法，由Koen E.A于2011年提出</p>
+<p>只对图像中最有可能包含物体的区域进行搜索以此来提高计算效率，图像中物体可能存在的区域应该是有某些相似性或者连续性区域的</p>
+<ul>
+<li><strong>分割</strong>：对输入图像进行分割算法产生许多小的子区域</li>
+<li><strong>合并</strong>：根据这些子区域之间相似性(相似性标准主要有颜色、纹理、大小等等)进行区域合并，不断的进行区域迭代合并</li>
+<li><strong>候选框</strong>：每次迭代过程中对这些合并的子区域做bounding boxes(外切矩形)，这些子区域外切矩形就是通常所说的候选框</li>
+</ul>
+</li>
+</ol>
+<p>滑窗法简单易于理解，但是不同窗口大小进行图像全局搜索导致效率低下，而且设计窗口大小时候还需要考虑物体的长宽比。所以，对于实时性要求较高的分类器，不推荐使用滑窗法</p>
+<p>选择搜索计算效率优于滑窗法，由于采用子区域合并策略，所以可以包含各种大小的疑似物体框，合并区域相似的指标多样性，提高了检测物体的概率</p>
+<blockquote>
+<p>数据表示</p>
+</blockquote>
+<p>预测输出可以表示为：</p>
+<script type="math/tex; mode=display">
+\mathrm{y}=\left[\begin{array}{l}
+\mathrm{p}_{\mathrm{c}} \\
+\mathrm{b}_{\mathrm{x}} \\
+\mathrm{b}_{\mathrm{y}} \\
+\mathrm{b}_{\mathrm{w}} \\
+\mathrm{b}_{\mathrm{h}} \\
+\mathrm{C}_{1} \\
+\mathrm{C}_{2} \\
+\mathrm{C}_{3}
+\end{array}\right] \quad \quad \quad \mathrm{y}_{\text {true }}=\left[\begin{array}{c}
+1 \\
+40 \\
+45 \\
+80 \\
+60 \\
+0 \\
+1 \\
+0
+\end{array}\right] \quad \quad  \quad \mathrm{y}_{\mathrm{pred}}=\left[\begin{array}{c}
+0.88 \\
+41 \\
+46 \\
+82 \\
+59 \\
+0.01 \\
+0.95 \\
+0.04
+\end{array}\right]</script><p>其中， <script type="math/tex">\mathrm{p}_{\mathrm{c}}</script>为预测结果的置信概率， <script type="math/tex">\mathrm{b}_{\mathrm{x}}, \mathrm{b}_{\mathrm{y}}, \mathrm{b}_{\mathrm{w}}, \mathrm{b}_{\mathrm{h}}</script>为边框坐标， <script type="math/tex">\mathrm{C}_{1}, \mathrm{C}_{2}, \mathrm{C}_{3}</script>为属于某个类别的概率，通过预测结果，实际结果，构建损失函数，损失函数包含了分类、回归两部分组成</p>
+<blockquote>
+<p>效果评估</p>
+</blockquote>
+<p>使用IoU(Intersection over Union，交并比)来判断模型的好坏。所谓交并比，是指预测边框、实际边框交集和并集的比率，一般约定0.5为一个可以接受的值</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.jianshu.com/p/d452b5615850">非极大值抑制</a></p>
+</blockquote>
+<p>预测结果中，可能多个预测结果间存在重叠部分，需要保留交并比最大的、去掉非最大的预测结果，这就是<code>非极大值抑制</code>(Non-Maximum Suppression，简写作NMS)，非极大值抑制的流程如下：</p>
+<ul>
+<li>根据置信度得分进行排序</li>
+<li>选择置信度最高的比边界框添加到最终输出列表中，将其从边界框列表中删除</li>
+<li>计算所有边界框的面积</li>
+<li>计算置信度最高的边界框与其它候选框的IoU。</li>
+<li>删除IoU大于阈值的边界框</li>
+<li>重复上述过程，直至边界框列表为空</li>
+</ul>
+<blockquote>
+<p>bbox回归训练：其实就是训练 <script type="math/tex">d</script> 矩阵向 <script type="math/tex">t</script> 矩阵靠齐的过程</p>
+</blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/60794316">【目标检测】基础知识：IoU、NMS、Bounding box regression</a></p>
+<p>即: 给定 <script type="math/tex">\left(P_{x}, P_{y}, P_{w}, P_{h}\right)</script>，寻找一种映射<script type="math/tex">f</script>，使得</p>
+<script type="math/tex; mode=display">
+f\left(P_{x}, P_{y}, P_{w}, P_{h}\right)=\left(G_{x}^{\prime}, G_{y}^{\prime}, G_{w}^{\prime}, G_{h}^{\prime}\right) \text { , 且 }\left(G_{x}^{\prime}, G_{y}^{\prime}, G_{w}^{\prime}, G_{h}^{\prime}\right) \approx\left(G_{x}, G_{y}, G_{w}, G_{h}\right)</script><p>主要操作就是平移+缩放</p>
+<h2 id="rcnn"><a href="#rcnn" class="headerlink" title="rcnn"></a>rcnn</h2><blockquote>
+<p>RCNN</p>
+</blockquote>
+<p>分为三个module：</p>
+<ul>
+<li><p>独立类别的候选区域（category-independent region proposals），生成一组对检测器可用的检测坐标</p>
+<ul>
+<li>常见的候选区生成的方法有很多（objectness、selective search、category-independent object proposals、constrained parametric min-cuts (CPMC) 、multi-scale combinatorial grouping），本文用的是选择搜索。产生了2000个候选区域（region proposal）</li>
+</ul>
+</li>
+<li><p>使用卷积神经网络从每个区域从提取固定的特征向量</p>
+<ul>
+<li><p>本文每个区域提取到的固定长度的特征向量是4096，使用的网络是AlexNet</p>
+</li>
+<li><p>需要注意的是 Alextnet 的输入图像大小是$ 227\times227$，而通过 Selective Search 产生的候选区域大小不一，为了与 Alexnet 兼容，R-CNN 采用了非常暴力的手段，那就是无视候选区域的大小和形状，统一变换到$ 227\times227$的尺寸(就是只有候选框里保留，剩余部分填充其它像素，或者先在候选框周围加上16的padding，再进行各向异性缩放，这种形变使得mAp提高了3到5个百分点)。有一个细节，在对 Region 进行变换的时候，首先对这些区域进行膨胀处理，在其 box 周围附加了 p 个像素，也就是人为添加了边框，在这里 p=16</p>
+</li>
+<li><p>在 ImageNet 上先进行预训练，然后利用成熟的权重参数在 PASCAL VOC 数据集上进行 fine-tune，如果不针对特定任务进行fine-tuning，而是把CNN当做特征提取器，卷积层所学到的特征其实就是基础的共享特征提取层，就类似于SIFT算法一样，可以用于提取各种图片的特征，而f6、f7所学习到的特征是用于针对特定任务的特征。</p>
+<p><code>训练过程</code>：首先对 <strong>PASCAL VOC数据集</strong> 进行<code>Selective Search</code>，搜索到2000个<code>Region Proposal</code>对Pre-trained模型进行fine-tuning。将原来预训练模型最后的1000-way的全连接层（分类层）换成21-way的分类层（20类物体+背景），然后计算每个region proposal和ground truth 的IoU，对于IoU&gt;0.5的region proposal被视为正样本，否则为负样本（即背景）。另外，由于对于一张图片的多有候选区域来说，负样本是远远大于正样本数，所以需要<strong>将正样本进行上采样</strong>来保证样本分布均衡。在每次迭代的过程中，选择层次采样，每个mini-batch中采样两张图像，从中随机选取32个正样本和96个负样本组成一个mini-batch（128，正负比：1：3）。我们使用0.001的学习率和SGD来进行训练，提取特征的CNN网络经过了预训练和微调后不再训练，就固定不变了，只单纯的作为一个<code>提特征的工具</code>了</p>
+</li>
+</ul>
+</li>
+<li><p>SVM线性分类器，对特征进行分类：在训练CNN提取特征时，设置的IOU是0.5以上为正样本，小于0.5的是负样本。但在SVM分类中，只有bbox完全包围了物体（也可以理解为IOU＞0.7时）才是正样本，IOU小于0.3的是负样本。前者是大样本训练，后者是小样本训练，<strong>svm适用于少样本训练</strong>，如果用CNN反而不合适</p>
+<ul>
+<li>用SVM对每个特征向量进行评分，然后用非极大值抑制</li>
+</ul>
+</li>
+</ul>
+<p>简单说就是：</p>
+<ul>
+<li>给定一张输入图片，从图片中提取 2000 个类别独立的候选区域</li>
+<li>对于每个区域利用 CNN 抽取一个固定长度的特征向量</li>
+<li>再对每个特征向量利用 SVM 进行目标分类</li>
+</ul>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43702653/article/details/123973629">测试步骤</a>：</p>
+<ol>
+<li><p>Region proposal的确定：VOC测试图像输入后，利用SS搜索方法，根据相似度从大到小排序，筛选出2000个region proposals</p>
+</li>
+<li><p>RP的Features提取：将RP通过resize成$ 227 \times 227$，然后分别输入进CNN特征提取网络，得到了2000个4096维features</p>
+</li>
+<li><p>SVM分类：将<code>(2000,4096)</code>维矩阵输入进SVM分类器中，最终得到<code>(2000，21)</code>矩阵。每一行的21个列值，分别代表了这个RP属于每一个类的可能性。通过提前设置好的background阈值$\alpha$和所属于类的阈值$\beta$，筛选出满足条件的m个RP区域</p>
+</li>
+<li><p>BoundingBox-Regression：将<code>(m,4096)</code>维矩阵输入进 <code>(4096,4)</code>的回归矩阵 d d<em>d</em> 中，最后输出<code>(m,4)</code>偏移矩阵。代表RP中心点的位置偏移 和 bbox的尺寸变换</p>
+<p>将SVM筛选出的m个RP区域对应的特征向量，组成<code>(m,4096)</code>矩阵 代入 <code>(4096,4)</code>的回归矩阵d中，最后输出<code>(m,4)</code>偏移矩阵</p>
+</li>
+<li><p>Non-maximum suppression处理：只画出SVM筛选出的m个RP区域的修正后的检测框，进行<strong>非极大值抑制(NMS)</strong>，得到最终检测结果</p>
+</li>
+</ol>
+<p>缺点：</p>
+<ul>
+<li>重复计算，每个region proposal，都需要经过一个AlexNet特征提取，为所有的RoI（region of interest）提取特征大约花费47秒，占用空间</li>
+<li>selective search方法生成region proposal，对一帧图像，需要花费2秒</li>
+<li>三个模块（提取、分类、回归）是分别训练的，并且在训练时候，对于存储空间消耗较大</li>
+</ul>
+<h2 id="spp-net"><a href="#spp-net" class="headerlink" title="spp-net"></a>spp-net</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/v1_vivian/article/details/73275259">SPP-Net</a>: 出自2015年发表在IEEE上的论文-《Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition》</p>
+</blockquote>
+<p>所有的神经网络都是需要输入固定尺寸的图片，比如$ 224 \times 224$(ImageNet)、$ 32 \times 32$(LenNet)、$ 96\times 96$等。这样对于我们希望检测各种大小的图片的时候，需要经过crop，或者warp等一系列操作，这都在一定程度上导致图片信息的丢失和变形，限制了识别精确度</p>
+<p>为什么要固定输入图片的大小？：卷积层的参数和输入大小无关，它仅仅是一个卷积核在图像上滑动，不管输入图像多大都没关系，只是对不同大小的图片卷积出不同大小的特征图，但是全连接层的参数就和输入图像大小有关，因为它要把输入的所有像素点连接起来,需要指定输入层神经元个数和输出层神经元个数，所以需要规定输入的feature的大小，因此，<strong>固定长度的约束仅限于全连接层</strong></p>
+<p><code>SPP-Net在最后一个卷积层后，接入了金字塔池化层，使用这种方式，可以让网络输入任意的图片，而且还会生成固定大小的输出</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/SSP池化层.png" alt="SSP池化层"></p>
+<p>金字塔池化，使得任意大小的特征图都能够转换成固定大小的特征向量，这就是空间金字塔池化的意义(多尺度特征提取出固定大小的特征向量)</p>
+<p>SPP-Net，整个过程是：</p>
+<ol>
+<li>首先通过选择性搜索，对待检测的图片进行搜索出2000个候选窗口。这一步和R-CNN一样。</li>
+<li>特征提取阶段。<strong>这一步就是和R-CNN最大的区别</strong>了，这一步骤的具体操作如下：把整张待检测的图片，输入CNN中，进行一次性特征提取，得到feature maps，然后在feature maps中找到各个候选框的区域，再对各个候选框采用金字塔空间池化，提取出固定长度的特征向量。而R-CNN输入的是每个候选框，然后在进入CNN，因为<strong>SPP-Net只需要一次对整张图片进行特征提取</strong>，速度会大大提升</li>
+<li>最后一步也是和R-CNN一样，采用SVM算法进行特征向量分类识别</li>
+</ol>
+<blockquote>
+<p>难点</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_39190382/article/details/125848297">候选区域（原图与特征图）的映射</a></p>
+</blockquote>
+<p>假设$(x’,y’)$表示特征图上的坐标点，坐标点$(x,y)$表示原输入图片上的点，那么它们之间有如下转换关系，这种映射关心与网络结构有关：</p>
+<script type="math/tex; mode=display">
+(x,y) = (S \times x' , S \times y' )</script><p>其中$S$就是CNN中所有的strides的乘积，包含了池化、卷积的stride</p>
+<h2 id="fast-rcnn"><a href="#fast-rcnn" class="headerlink" title="fast-rcnn"></a>fast-rcnn</h2><blockquote>
+<p>Fast-Rcnn：提出了<strong>ROI pooling</strong></p>
+</blockquote>
+<p>R-CNN存在一些问题：</p>
+<ul>
+<li><strong>训练分多步</strong>：R-CNN的训练先要fine tuning一个预训练的网络，然后针对每个类别都训练一个SVM分类器，最后还要用regressors对bounding-box进行回归，另外region proposal也要单独用selective search的方式获得，步骤比较繁琐</li>
+<li><strong>时间和内存消耗大</strong>：在训练SVM和回归的时候需要用网络训练的特征作为输入，特征保存在磁盘上再读入的时间消耗还是比较大的</li>
+<li><strong>测试慢</strong>：每张图片的每个region proposal都要做卷积，重复操作太多</li>
+</ul>
+<p>虽然在Fast RCNN之前有提出过SPPnet算法来解决RCNN中重复卷积的问题，但是SPPnet依然存在和RCNN一样的一些缺点比如：训练步骤过多，需要训练SVM分类器，需要额外的回归器，特征也是保存在磁盘上</p>
+<p>因此Fast RCNN相当于全面改进了原有的这两个算法，不仅训练步骤减少了，也不需要额外将特征保存在磁盘上</p>
+<p>基于VGG16的Fast RCNN算法的速度：</p>
+<ul>
+<li>在训练速度上比RCNN快了将近9倍，比SPPnet快大概3倍</li>
+<li>测试速度比RCNN快了213倍，比SPPnet快了10倍</li>
+<li><p>在VOC2012上的mAP在66%左右</p>
+</li>
+<li><p><strong>网络有两个输入</strong>：图像和对应的region proposal。其中region proposal由selective search方法得到，没有表示在流程图中</p>
+</li>
+<li>对每个类别都训练一个回归器，且只有非背景的region proposal才需要进行回归</li>
+<li><strong>ROI pooling</strong>：ROI Pooling的作用是对不同大小的region proposal，从最后卷积层输出的feature map提取大小固定的feature map(ROI Pooling使用自适应(根据输入feature的大小自调整)池化区域，不再固定池化区域大小，而固定池化区域个数，这样就确保了输入什么大小的feature，输出的feature大小完全相等，等于池化区域个数)。<code>简单讲可以看做是SPPNet的简化版本</code>，因为全连接层的输入需要尺寸大小一样，所以不能直接将不同大小的region proposal映射到feature map作为输出，需要做尺寸变换。在文章中，VGG16网络使用$H = W = 7$的参数，即将一个$h \times w$的region proposal分割成$ H \times W$大小的网格，然后将这个region proposal映射到最后一个卷积层输出的feature map，最后计算每个网格里的最大值作为该网格的输出，所以不管ROI pooling之前的feature map大小是多少，ROI pooling后得到的feature map大小都是$ H \times W$</li>
+<li>简单说ROI pooling就是：<ul>
+<li>把图片上selective search选出的候选框映射到<strong>特征图上对应的位置</strong>，这个映射是根据输入图片缩小的尺寸来的；</li>
+<li>将映射后的区域划分为相同大小的sections（sections数量与输出的维度相同）</li>
+<li>对每个sections进行max pooling操作； 这样我们就可以从不同大小的方框得到固定大小的相应 的feature maps</li>
+</ul>
+</li>
+<li>两个loss：第一个优化目标是分类，使用softmax（就不用像前面的R-CNN和SPP再用SVM了），第二个优化目标是bbox regression，使用了一个平滑的L1-loss</li>
+</ul>
+<p><strong>ROI Pooling 与 SPP 的区别：</strong></p>
+<p>通过上面的介绍，可以看到两者起到的作用是相同的，把不同尺寸的特征输入转化为相同尺寸的特征输出。SPP针对同一个输入使用了多个不同尺寸的池化操作，把不同尺度的结果拼接作为输出；而ROI Pooling可看作单尺度的SPP，对于一个输入只进行一次池化操作</p>
+<p>可以看出Fast RCNN主要有3个改进：</p>
+<ul>
+<li>卷积不再是对每个region proposal进行，而是直接对整张图像，这样减少了很多重复计算。原来RCNN是对每个region proposal分别做卷积，因为一张图像中有2000左右的region proposal，肯定相互之间的重叠率很高，因此产生重复计算</li>
+<li>用ROI pooling进行特征的尺寸变换，因为全连接层的输入要求尺寸大小一样，因此不能直接把region proposal作为输入</li>
+<li>将regressor放进网络一起训练，每个类别对应一个regressor，同时用softmax代替原来的SVM分类器</li>
+<li>在实际训练中，每个mini-batch包含2张图像和128个region proposal（或者叫ROI），也就是每张图像有64个ROI。然后从这些ROI中挑选约25%的ROI，这些ROI和ground truth的IOU值都大于0.5。另外只采用随机水平翻转的方式增加数据集</li>
+<li>测试的时候则每张图像大约2000个ROI</li>
+</ul>
+<p><strong>总结：</strong></p>
+<p>Fast RCNN将RCNN众多步骤整合在一起，不仅大大提高了检测速度，也提高了检测准确率。其中，对整张图像卷积而不是对每个region proposal卷积，ROI Pooling，分类和回归都放在网络一起训练的multi-task loss是算法的三个核心。另外还有SVD分解等是加速的小贡献，数据集的增加时mAP提高的小贡献</p>
+<p>当然Fast RCNN的主要缺点在于region proposal的提取使用selective search，目标检测时间大多消耗在这上面（提region proposal 2~3s，而提特征分类只需0.32s），这也是后续Faster RCNN的改进方向之一</p>
+<p>缺点：</p>
+<ul>
+<li>依旧采用selective search提取region proposal（耗时2~3秒，特征提取耗时0.32秒）</li>
+<li>无法满足实时应用，没有真正实现端到端训练测试</li>
+<li>利用了GPU，但是region proposal方法是在CPU上实现的</li>
+</ul>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<p><strong>RCNN</strong>:</p>
+<ol>
+<li>给定一张输入图片，通过 Selective Search从图片中提取 2000 个类别独立的候选区域</li>
+<li>对于每个区域利用 CNN 抽取一个固定长度的特征向量</li>
+<li>对每个特征向量利用 SVM 进行目标分类</li>
+<li>对于SVM分好类的Region Proposal做边框回归，用Bounding box回归值校正原来的建议窗口，生成预测窗口坐标</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>重复计算，每个region proposal，都需要经过一个AlexNet特征提取</li>
+<li>selective search方法生成region proposal，对一帧图像，需要花费2秒</li>
+<li>三个模块(提取、分类、回归)是分别训练的，并且在训练时候，对于存储空间消耗较大</li>
+<li>训练分为多个阶段，步骤繁琐：微调网络+训练SVM+训练边框回归器</li>
+<li>SVM和回归是事后操作，在SVM和回归过程中CNN特征没有被学习更新</li>
+</ol>
+<p><strong>SPPNet</strong>: 金字塔池化层<br>当网络输入的是一张任意大小的图片，这个时候我们可以一直进行卷积、池化，直到网络的倒数几层的时候，也就是我们即将与全连接层连接的时候，就要使用金字塔池化，使得任意大小的特征图都能够转换成固定大小的特征向量，这就是空间金字塔池化的意义（多尺度特征提取出固定大小的特征向量）</p>
+<ol>
+<li>首先通过选择性搜索，对待检测的图片进行搜索出2000个候选窗口。这一步和R-CNN一样</li>
+<li>特征提取阶段,把整张待检测的图片，输入CNN中，进行一次性特征提取，得到feature maps，然后在feature maps中找到各个候选框的区域，再对各个候选框采用金字塔空间池化，提取出固定长度的特征向量，只需要一次对整张图片进行特征提取，速度会大大提升</li>
+<li>最后一步也是和R-CNN一样，采用SVM算法进行特征向量分类识别</li>
+</ol>
+<p><strong>Fast-RCNN</strong>:</p>
+<ol>
+<li>给定一张输入图片，通过 Selective Search从图片中提取 2000 个类别独立的候选区域</li>
+<li>对每个类别都训练一个回归器，且只有非背景的region proposal才需要进行回归。</li>
+<li>ROI pooling：ROI Pooling的作用是对不同大小的region proposal，从最后卷积层输出的feature map提取大小固定的feature map。简单讲可以看做是SPPNet的简化版本(把图片上selective search选出的候选框映射到特征图上对应的位置，这个映射是根据输入图片缩小的尺寸来的)，因为全连接层的输入需要尺寸大小一样，所以不能直接将不同大小的region proposal映射到feature map作为输出，需要做尺寸变换</li>
+<li>两个loss：第一个优化目标是分类，使用softmax（就不用像前面的R-CNN和SPP再用SVM了），第二个优化目标是bbox regression，使用了一个平滑的L1-loss</li>
+</ol>
+<p>优点</p>
+<ol>
+<li>卷积不再是对每个region proposal进行，而是直接对整张图像，这样减少了很多重复计算</li>
+<li>用ROI pooling进行特征的尺寸变换，因为全连接层的输入要求尺寸大小一样</li>
+<li>将regressor放进网络一起训练，每个类别对应一个regressor，同时用softmax代替原来的SVM分类器<br> 三个核心：对整张图像卷积、ROI Pooling、分类和回归一起训练的multi-task loss<br> 主要缺点在于region proposal的提取使用selective search，目标检测时间大多消耗在这上面</li>
+</ol>
+<p>相比R-CNN，主要两处不同：</p>
+<ol>
+<li>最后一层卷积层后加了一个ROI pooling layer；</li>
+<li>损失函数使用了多任务损失函数(multi-task loss)，将边框回归直接加入到CNN网络中训练</li>
+</ol>
+<h2 id="faster-rcnn"><a href="#faster-rcnn" class="headerlink" title="faster-rcnn"></a>faster-rcnn</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.telesens.co/2018/03/11/object-detection-and-classification-using-r-cnns/">推荐这篇文章-Object Detection and Classification using R-CNNs</a></p>
+<p>Faster R-CNN：提出了<strong>RPN(region proposal network)</strong></p>
+</blockquote>
+<p>主要就是多了一个RPN(region proposal network)，就是在卷积提取特征之后，多出一条路来进行候选框的提取</p>
+<p>推荐有关RPN层的文章：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/Missayaaa/article/details/81561183">RPN层解析</a></p>
+<p>RPN只是将框内认为是目标，框外认为是背景，做了个<strong>二分类</strong>，至于框内目标具体是啥，最终是交给分类网络去做</p>
+<p>下图来自<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/xue_csdn/article/details/98522585">Faster-RCNN（二）之RPN层</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/Faster-RCNN网络结构图.webp" alt="Faster-RCNN网络结构图"></p>
+<p><strong>Faster-RCNN</strong>: RPN(region proposal network)，就是在卷积提取特征之后，多出一条路来进行候选框的提取</p>
+<ol>
+<li>将整张图片输入CNN，进行特征提取</li>
+<li>用RPN生成建议窗口(proposals)，每张图片生成300个建议窗口</li>
+<li>通过RoI pooling层使每个RoI生成固定尺寸的feature map</li>
+<li>利用Softmax Loss(探测分类概率) 和Smooth L1 Loss(探测边框回归)对分类概率和边框回归(Bounding box regression)联合训练<br>相比Fast R-CNN，主要两处不同：</li>
+<li>使用RPN(Region Proposal Network)代替原来的Selective Search方法产生建议窗口；</li>
+<li>产生建议窗口的CNN和目标检测的CNN共享</li>
+</ol>
+<p>如何高效快速产生建议框？</p>
+<p>Faster R-CNN创造性地采用卷积网络自行产生建议框，并且和目标检测网络共享卷积网络，使得建议框数目从原有的约2000个减少为300个，且建议框的质量也有本质的提高</p>
+<h1 id="Yolo系列"><a href="#Yolo系列" class="headerlink" title="Yolo系列"></a>Yolo系列</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/Yolo系列发展脉络.svg" alt="Yolo系列发展脉络"></p>
+<h2 id="Yolov1"><a href="#Yolov1" class="headerlink" title="Yolov1"></a>Yolov1</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43702653/article/details/123959840">YOLO_v1讲解</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_48778017/article/details/128508694">浅谈不同版本YOLO的区别（V1-V3）</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/yolov1结构图.webp" alt="yolov1结构图"></p>
+<blockquote>
+<p>输出层$7 \times 7 \times 30$的含义</p>
+</blockquote>
+<p>$7 \times 7$把原图平均分成49个网格，每个网格允许预测出2个边框，总共 49*2=98 个bounding box。可以理解为98个候选区，它们很粗略的覆盖了图片的整个区域</p>
+<p>30代表20个类别的条件概率和两个boundingbox的五个参数（中心坐标x，y，框的宽和高，置信度）</p>
+<p>每个cell只能预测一个类别，并且无法解决物体重叠的问题，此外，YOLOV1对小物体的检测效果也不理想</p>
+<h3 id="loss"><a href="#loss" class="headerlink" title="loss"></a>loss</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43702653/article/details/123959840">最核心的loss详解</a></p>
+</blockquote>
+<div class="note primary modern"><p>可以认为Yolo系列里最核心的就是<code>loss</code>的设计，理解YOLOv1的损失函数可以对后续的YOLO系列有一定的帮助</p>
+<p>因为后续的YOLO版本在损失函数设计上有所改进，但仍然保留了一些基本的思想和原则</p>
+</div>
+<p>先看来以下loss的计算公式</p>
+<script type="math/tex; mode=display">
+\begin{array}{l} 
+
+loss = \lambda_{\text {coord }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\mathrm{obj}}\left(x_{i}-\hat{x}_{i}\right)^{2}+\left(y_{i}-\hat{y}_{i}\right)^{2} \\ 
+
+\qquad + \lambda_{\text {coord }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\mathrm{obj}}\left(\sqrt{w_{i}}-\sqrt{\hat{w}_{i}}\right)^{2}+\left(\sqrt{h_{i}}-\sqrt{\hat{h}_{i}}\right)^{2} \\ 
+
+\qquad +\sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\mathrm{obj}}\left(C_{i}-\hat{C}_{i}\right)^{2} \\ 
+
+\qquad + \lambda_{\text {noobj }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\mathrm{noobj}}\left(C_{i}-\hat{C}_{i}\right)^{2} \\ 
+
+\qquad +\sum_{i=0}^{S^{2}} \mathbb{1}_{i}^{\mathrm{obj}} \sum_{c \in \text { classes }} \left(p_{i}(c)-\hat{p}_{i}(c)\right)^{2}
+
+\end{array}</script><p>这里的loss分成了五个部分：</p>
+<ol>
+<li><strong>含目标的xy</strong>: 含有物体中心点的cell里，负责预测的bbox预测出的xy的MSE</li>
+<li><strong>含目标的wh</strong>: 含有物体中心点的cell里，负责预测的bbox预测出的wh的MSE</li>
+<li><strong>含目标的置信度</strong>: 含有物体中心点的cell里，负责预测的bbox预测出的存在物体的置信度的误差</li>
+<li><strong>不含目标的置信度</strong>: 不含有物体中心点的cell里，每一个bbox都要参与到loss的计算，$C<em>i=0$；$\hat{C}</em>{i}$=bbox的预测值，然后累加MSE</li>
+<li><strong>含目标的分类损失</strong>: 含有物体中心点的cell里，预测出的物体类别向量和GT对应的向量的MSE</li>
+</ol>
+<blockquote>
+<p>不含目标的loss</p>
+</blockquote>
+<p>当cell中不包含物体的中心点，那这个cell的bbox预测出物体的置信度就要趋近于0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/YoloV1不含目标的loss.webp" alt="不含目标的loss"></p>
+<ul>
+<li><strong>A步骤</strong>：Yolo对输入图像前向传播的输出张量，下面是该图的目标张量</li>
+<li><strong>B步骤</strong>：乘以不含物体中心点的cell的掩码，相当于只留下<strong>无目标</strong>的cell</li>
+<li><strong>C步骤</strong>：挖去了三个洞(去除了3个含有物体中心点的cell的数据)</li>
+<li><strong>D步骤</strong>：一共49个格子，挖去3个剩46，B=2，因此拉直的向量长度为92</li>
+<li><strong>E步骤</strong>：计算MSE，这里对应公式中的<code>第4部分</code></li>
+</ul>
+<blockquote>
+<p>含目标的loss</p>
+</blockquote>
+<p>如果有物体，预测正确类别误差就等于0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/YoloV1含目标的loss.webp" alt="含目标的loss"></p>
+<ul>
+<li><strong>A步骤</strong>：Yolo对输入图像前向传播的输出张量，下面是该图的目标张量</li>
+<li><strong>B步骤</strong>：乘以含物体中心点的cell的掩码，，相当于只留下<strong>含目标</strong>的cell</li>
+<li><strong>C步骤</strong>：只留下三个向量(3个含有物体中心点的cell的数据)</li>
+<li><strong>D步骤</strong>：向量合并</li>
+<li><strong>E步骤</strong>：提取出类别的向量</li>
+<li><strong>F步骤</strong>：计算MSE，这里对应公式中的<code>第5部分</code></li>
+<li><strong>G步骤</strong>：提取出xywh和<strong>置信度</strong>的向量，向量合并</li>
+<li><strong>H步骤</strong>：每一个cell会有2个bbox，计算每个bbox与ground truth的IOU，然后得到索引矩阵(可以用来确定哪个bbox来处理这个cell)</li>
+<li><strong>I步骤</strong>：提取出<strong>有责任</strong>的bbox的向量</li>
+<li><strong>J步骤</strong>：bbox预测出的xy与GT算MSE，对应公式中的<code>第1部分</code>；bbox预测出的wh与GT算MSE，对应公式中的<code>第2部分</code></li>
+<li><strong>K步骤</strong>：bbox预测出的置信度与GT算MSE，对应公式中的<code>第3部分</code></li>
+</ul>
+<blockquote>
+<p>测试阶段</p>
+</blockquote>
+<ol>
+<li><p>输入图像，经过YOLO网络后，输出$ 7 \times 7 \times (2 \times 5 + 20 )$的张量</p>
+</li>
+<li><p>计算每个bbox的类别得分</p>
+<p>从每一个cell中找出20个类别score中最大的类别，作为cell中两box预测出的类别</p>
+<p>针对每一个cell中的两个bbox，选择置信度大的box来代表这个cell，并计算出box的类别得分</p>
+</li>
+<li><p>剩下49个bbox，最后进行NMS</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+Score_{i j} = P ( C_{i} |  Object ) * Confidence _{j}</script><h2 id="Yolov2-Yolo9000"><a href="#Yolov2-Yolo9000" class="headerlink" title="Yolov2(Yolo9000)"></a>Yolov2(Yolo9000)</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/m0_37940804/article/details/116244606">YOLO算法之YOLOv2精讲</a></p>
+</blockquote>
+<p>相比较于Yolov1主要改进点：</p>
+<ol>
+<li><p><strong>网络改进</strong>：使用DarckNet19代替了YOLOv1的GoogLeNet网络，这里主要改进是去掉了全连接层，用卷积和softmax进行代替</p>
+</li>
+<li><p><strong>加入BN</strong>：使用Batch Normalization对网络进行优化，让网络提高了收敛性，同时还消除了对其他形式的正则化(regularization)的依赖</p>
+</li>
+<li><p><strong>HighResolution Classifier</strong>：新的YOLO网络把分辨率直接提升到了$448 \times 448$，这也意味着原有的网络模型必须进行某种调整以适应新的分辨率输入，mAP获得了4%的提升</p>
+</li>
+<li><p><strong>Multi-ScaleTraining</strong>：让网络在不同的输入尺寸上都能达到一个很好的预测效果，同一网络能在不同分辨率上进行检测。当输入图片尺寸比较小的时候跑的比较快，输入图片尺寸比较大的时候精度高</p>
+</li>
+<li><p><strong>Anchor机制</strong>：Anchor首先要预设好几个虚拟框，在用回归的方法确定最终的预测框，在YOLOv2中，使用K-means算法来生成Anchor bbox，如图1所示，当k=5时，模型的复杂度与召回率达到了一个比较好的平衡，所以YOLOv2使用了5个Anchor bbox</p>
+</li>
+<li><p>分类、检测训练集<strong>联合训练</strong>：联合训练方法思路简单清晰，Yolo v2中物体矩形框生成，不依赖于物理类别预测，二者同时独立进行</p>
+<ul>
+<li>当输入是检测数据集时，标注信息有类别、有位置，那么对整个loss函数计算loss，进行反向传播</li>
+<li>当输入图片只包含分类信息时，loss函数只计算分类loss，其余部分loss为零</li>
+</ul>
+<p>当然，一般的训练策略为，先在检测数据集上训练一定的epoch，待预测框的loss基本稳定后，再联合分类数据集、检测数据集进行交替训练，同时为了分类、检测数据量平衡，作者对coco数据集进行了上采样，使得coco数据总数和ImageNet大致相同</p>
+</li>
+</ol>
+<blockquote>
+<p>输出和Yolov1比较如下</p>
+</blockquote>
+<ul>
+<li>YOLOv1是的输出$7 \times 7 \times 30$的多维向量，其中$7 \times 7$是分辨率，对原图进行了$7 \times 7$的分割，每个网格对应一个包含30个参数的向量，每个向量中包含两个bbox，每个bbox中包含5个向量，分别是bbox的质心坐标（x, y）和bbox的长和宽，还有一个bbox的置信度，剩下20个则是类别概率</li>
+<li>YOLOv2输出的是$13 \times 13 \times 5 \times 25$的一个多维向量，其中$13 \times 13$是分辨率，也就是说网络将输入图片分成了$13 \times 13$的网格，每一个网格对应一个包含$5 \times 25 =125 $个参数的一维向量，其中5代表5个Anchor bbox，每个Anchor bbox中包含25个参数，分别是bbox的质心坐标$(x,y)$和bbox的长和宽，还有一个bbox的置信度，剩下20个则是类别概率。这样的好处是YOLOv2可以对一个区域进行多个标签的预测，最主要的改变是：bbox的四个位置参数的损失函数计算方法发生了改变</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/yolov2的anchor.webp" alt="yolov2的anchor"></p>
+<p>训练主要包括以下三个阶段：</p>
+<ol>
+<li>先在ImageNet分类数据集上预训练Darknet-19，此时模型输入$224 \times 224$，共训练160个epochs。</li>
+<li>将网络的输入调整为$448 \times 448$，继续在ImageNet数据集上finetune分类模型，训练10个epochs，此时分类模型的top-1准确度为76.5%，而top-5准确度为93.3%。</li>
+<li>修改Darknet-19分类模型为检测模型：即移除最后一个卷积层、global avg pooling层以及softmax层，并且新增了三个$3 \times 3 \times 2014$卷积层，同时增加了一个passthrough层，最后使用$1 \times 1$卷积层输出预测结果，并在检测数据集上继续finetune网络</li>
+</ol>
+<h2 id="yolov3"><a href="#yolov3" class="headerlink" title="yolov3"></a>yolov3</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_44791964/article/details/105310627">睿智的目标检测26——Pytorch搭建yolo3目标检测平台</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/yolov3结构图.webp" alt="yolov3结构图"></p>
+<p>从<strong>特征获取预测结果的过程</strong>可以分为两个部分，分别是：</p>
+<ul>
+<li>构建<strong>FPN特征金字塔进行加强特征提取</strong></li>
+<li>利用<strong>Yolo Head对三个有效特征层进行预测</strong></li>
+</ul>
+<p>在特征利用部分，YoloV3提取<strong>多特征层进行目标检测</strong>，一共<strong>提取三个特征层</strong>，三个特征层位于主干部分Darknet53的不同位置，分别位于<strong>中间层，中下层，底层</strong></p>
+<p>三个特征层的<strong>shape分别为(52,52,256)、(26,26,512)、(13,13,1024)</strong></p>
+<blockquote>
+<p>输出维度解析</p>
+</blockquote>
+<p>网络有三个输出，维度分别为$bs \times 13 \times 13 \times 75$、$bs \times 26 \times 26 \times 75$和$bs \times 52 \times 52 \times 75$，其中75可以分解成$3 \times (4+1+20)$</p>
+<p>3表示三个候选框，4表示的是xywh的位置信息，1表示是否为背景，20为物体的类别数(这里用的是<strong>voc</strong>数据集)</p>
+<p>因为有三个输出，因此该网络有个$13 \times 13 \times 3 + 26\times 26\times 3 + 52 \times 52\times 3 = 10647$预测框</p>
+<p>对于这些预测框，如果其与任何真实框的IoU大于一定的阈值（如0.5），则将其分配给对应的输出层作为正样本。否则，将其视为负样本</p>
+<p>YOLOv3 使用的损失函数是组合了多个部分的综合损失函数，其中包括定位损失（Localization Loss）、分类损失（Classification Loss）和置信度损失（Confidence Loss）</p>
+<script type="math/tex; mode=display">
+L=L_{c l s}+L_{c o n f}+L_{l o c}</script><p>只有正样本才有这三类损失，而负样本只有置信度损失</p>
+<p>以下是 YOLOv3 的损失函数的伪代码实现，包含详细注释：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">yolo_loss</span>(<span class="params">pred_boxes, pred_cls, target_boxes, target_cls</span>):</span><br><span class="line">    <span class="comment"># pred_boxes: 预测的边界框坐标，shape 为 [batch_size, num_anchors, grid_size, grid_size, 4]</span></span><br><span class="line">    <span class="comment"># pred_cls: 预测的类别概率，shape 为 [batch_size, num_anchors, grid_size, grid_size, num_classes]</span></span><br><span class="line">    <span class="comment"># target_boxes: 真实的边界框坐标，shape 为 [batch_size, num_anchors, grid_size, grid_size, 4]</span></span><br><span class="line">    <span class="comment"># target_cls: 真实的类别标签，shape 为 [batch_size, num_anchors, grid_size, grid_size, num_classes]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算预测框和真实框的IoU</span></span><br><span class="line">    iou_scores = calculate_iou(pred_boxes, target_boxes)  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算类别损失，使用交叉熵损失函数</span></span><br><span class="line">    cls_loss = cross_entropy_loss(pred_cls, target_cls)  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算边界框损失，使用平滑L1损失函数</span></span><br><span class="line">    box_loss = smooth_l1_loss(pred_boxes, target_boxes)  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算正样本的掩码，即与真实框IoU大于阈值的位置为1，其余为0</span></span><br><span class="line">    pos_mask = (iou_scores &gt; positive_iou_threshold).<span class="built_in">float</span>()  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算负样本的掩码，即与真实框IoU小于阈值的位置为1，其余为0</span></span><br><span class="line">    neg_mask = (iou_scores &lt; negative_iou_threshold).<span class="built_in">float</span>()  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将正样本和负样本的掩码相乘得到最终的样本掩码</span></span><br><span class="line">    sample_mask = pos_mask + neg_mask  <span class="comment"># shape: [batch_size, num_anchors, grid_size, grid_size]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对类别损失和边界框损失按照样本掩码进行加权求和</span></span><br><span class="line">    loss = lambda_cls * cls_loss * sample_mask + lambda_box * box_loss * sample_mask</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对损失进行归约操作，取平均或求和</span></span><br><span class="line">    loss = reduction_func(loss)  <span class="comment"># 可根据实际情况选择平均或求和</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>正负样本数</p>
+</blockquote>
+<p>在 YOLOv3 中，通常会为每个目标选择一个正样本，即与真实目标框具有最高 IoU 的预测框。这确保了每个目标都有至少一个正样本来参与损失函数的计算和网络的训练。</p>
+<p>至于负样本的选择，一般会设置一个阈值来确定预测框与真实框之间的 IoU 阈值。如果预测框的 IoU 低于该阈值，则被视为负样本。对于每个负样本，可以选择保留一定数量的负样本，以确保正负样本的平衡性。</p>
+<p>具体来说，关于正负样本的选择数量并没有一个固定的标准，它可以根据具体的数据集和应用场景来确定。在实践中，可以根据数据集的统计信息和训练效果进行调整，以找到一个适合的正负样本比例，从而平衡目标检测的准确性和效率。</p>
+<h2 id="yolov5"><a href="#yolov5" class="headerlink" title="yolov5"></a>yolov5</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/yolov5架构图.webp" alt="yolov5架构图"></p>
+<h2 id="Yolov8"><a href="#Yolov8" class="headerlink" title="Yolov8"></a>Yolov8</h2><blockquote>
+<p>Yolov8 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/ultralytics">github地址</a>和<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.ultralytics.com/">文档</a></p>
+</blockquote>
+<p>目标检测</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>size (pixels)</th>
+<th>mAPval 50-95</th>
+<th>Speed CPU ONNX (ms)</th>
+<th>Speed A100 TensorRT (ms)</th>
+<th>params (M)</th>
+<th>FLOPs (B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt">YOLOv8n</a></td>
+<td>640</td>
+<td>37.3</td>
+<td>80.4</td>
+<td>0.99</td>
+<td>3.2</td>
+<td>8.7</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt">YOLOv8s</a></td>
+<td>640</td>
+<td>44.9</td>
+<td>128.4</td>
+<td>1.20</td>
+<td>11.2</td>
+<td>28.6</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8m.pt">YOLOv8m</a></td>
+<td>640</td>
+<td>50.2</td>
+<td>234.7</td>
+<td>1.83</td>
+<td>25.9</td>
+<td>78.9</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8l.pt">YOLOv8l</a></td>
+<td>640</td>
+<td>52.9</td>
+<td>375.2</td>
+<td>2.39</td>
+<td>43.7</td>
+<td>165.2</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8x.pt">YOLOv8x</a></td>
+<td>640</td>
+<td>53.9</td>
+<td>479.1</td>
+<td>3.53</td>
+<td>68.2</td>
+<td>257.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>tensorRt加速</p>
+</blockquote>
+<p>可以用tensorRt加速，环境教程可以参考这个<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/CV_Autobot/article/details/129002357">文档</a></p>
+<p>进行tensort加速，cmake编译失败，缺少zlibwapi.<a target="_blank" rel="noopener external nofollow noreferrer" href="https://so.csdn.net/so/search?q=dll文件&amp;spm=1001.2101.3001.7020">dll文件</a>，解决办法，去<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.winimage.com/zLibDll/zlib123dllx64.zip">cudnn官网</a>下载<code>zlib123dllx64</code></p>
+<ol>
+<li><p>lib文件放到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\lib</p>
+</li>
+<li><p>dll文件放到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin</p>
+</li>
+</ol>
+<p>YoloV8提供了导出工具，详见<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.ultralytics.com/modes/export/">文档</a>，python代码导出可以这样子写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line">    model = YOLO(<span class="string">&quot;../../weights/yolov8s.pt&quot;</span>)  <span class="comment"># load an official detection model</span></span><br><span class="line">    model.export(<span class="built_in">format</span>=<span class="string">&#x27;engine&#x27;</span>, device=<span class="string">&#x27;0&#x27;</span>, workspace=<span class="number">8</span>, batch=<span class="number">4</span>, dynamic=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>或者直接命令行执行</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo <span class="built_in">mode</span>=export model=yolov8s.pt <span class="built_in">format</span>=engine device=<span class="number">0</span> workspace=<span class="number">8</span> batch=<span class="number">4</span> dynamic=True</span><br></pre></td></tr></table></figure>
+<p>关键参数如下：</p>
+<ul>
+<li><strong>device</strong>: 其中device必须是GPU，可以是多张显卡</li>
+<li><strong>workspace</strong>: TensorRT: workspace size (GB)</li>
+<li><strong>batch</strong>: 最大批次大小，当设置参数时必须有<code>dynamic=True</code>，可以运行最大不超过batch的数量</li>
+<li><strong>dynamic</strong>: 动态参数，ONNX/TF/TensorRT: dynamic axes</li>
+<li><strong>imgsz</strong>: image size as scalar or (h, w) list, i.e. (640, 480)</li>
+</ul>
+<p>注意事项：</p>
+<ol>
+<li><p>TensorRT发布的模型(engine)不能跨平台使用</p>
+<p>例如linux发布的模型不能在windows下用</p>
+</li>
+<li><p>TensorRT发布的模型需要在相同GPU算力(compute capability)的情况下使用</p>
+<p>否则会导致compute capability不匹配问题，例如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://so.csdn.net/so/search?q=算力&amp;spm=1001.2101.3001.7020">算力</a>6.1发布的模型不能在7.5上用</p>
+</li>
+</ol>
+<blockquote>
+<p>动态batch和动态宽高的处理方式</p>
+</blockquote>
+<p><strong>动态batch</strong>：源自tensorRT编译时对batch的处理，若静态batch则意味着无论你多少图，都按照固定大小batch推理，耗时是固定的</p>
+<ol>
+<li>导出模型时，注意view操作不能固定batch维度数值，通常写-1</li>
+<li>导出模型时，通常可以指定dynamic_axes，实际上不指定也没关系</li>
+</ol>
+<p><strong>动态宽高</strong>：源自onnx导出时指定的宽高是固定的，trt编译时也得到固定大小引擎，此时若你想得到一个不同大小的trt引擎时，就需要动态宽高的存在。而使用trt的动态宽高会带来太多不必要的复杂度，这里使用中间方案，编译时修改onnx输入实现相对动态，避免重回pytorch再做导出</p>
+<ol>
+<li><p>不建议使用dynamic_axes指定0以外的维度为动态，复杂度太高，并且存在有的layer不支持，这种需求也不常用，性能也很差</p>
+</li>
+<li><p>真正需要的，是onnx文件已经导出，但是输入shape固定了，此时希望修改这个onnx的输入shape</p>
+</li>
+<li><p>步骤一: 使用TRT::compile函数的inputsDimsSetup参数重定义输入的shape</p>
+<p>步骤二: 使用TRT:set_layer_hook_reshape钩子动态修改reshape的参数实现适配</p>
+</li>
+</ol>
+<h1 id="其他检测系列"><a href="#其他检测系列" class="headerlink" title="其他检测系列"></a>其他检测系列</h1><h2 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h2><h2 id="FPN"><a href="#FPN" class="headerlink" title="FPN"></a>FPN</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1612.03144.pdf">Feature Pyramid Networks for Object Detection</a></p>
+<p>概述</p>
+</blockquote>
+<p><code>FPN</code>(feature pyramid networks) 是<strong>何凯明</strong>等作者提出的适用于多尺度目标检测算法</p>
+<p>原来多数的object detection算法(比如 faster rcnn)都是只采用顶层特征做预测，但我们知道<strong>低层的特征语义信息比较少，但是目标位置准确；高层的特征语义信息比较丰富，但是目标位置比较粗略</strong></p>
+<p>另外虽然也有些算法采用多尺度特征融合的方式，但是一般是采用融合后的特征做预测，而本文不一样的地方在于预测是在不同特征层独立进行的，这里主要借鉴了</p>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/77794592">ResNet的残差</a>: 结合了浅层特征和深层特征</li>
+<li><strong>SSD的检测策略</strong>: 在不同分辨率的特征图上分别做预测</li>
+</ul>
+<blockquote>
+<p>特征金字塔图示，越粗表示特征语义更强</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/78160468">薰风读论文：Feature Pyramid Network 详解特征金字塔网络FPN的来龙去脉</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/FPN网络结构比较图.webp" alt="FPN网络结构比较图"></p>
+<p>图中将特征金字塔和其他的金字塔做了比较</p>
+<ul>
+<li><strong>(a)</strong>是传统中的图片金字塔，图片缩放到不同的大小，分别预测，每个特征提取/预测都是独立进行的，同一张图片的不同分辨率，也很难共享它们中间提取的特征，让模型预测的过程费时费力</li>
+<li><strong>(b)</strong>是原生的CNN提取的特征，由于后续存在池化和降采样，浅层网络的特征图可以保留更多的分辨率，但是特征语义较为低级</li>
+<li><strong>(c)</strong>是SSD中的特征，把不同分辨率特征，在不同分辨率的特征上直接预测，那么大物体小物体都能预测到，但仍存在<strong>底层特征语义不够</strong>和<strong>最高分辨率不高</strong>的问题</li>
+<li><strong>(d)</strong>是FPN中用的特征金字塔，结合深浅特征，兼顾分辨率与特征语义</li>
+</ul>
+<h2 id="RetinaNet"><a href="#RetinaNet" class="headerlink" title="RetinaNet"></a>RetinaNet</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1708.02002.pdf">Focal Loss for Dense Object Detection 2018</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.csc.kth.se/cvap/cvg/rg/materials/louise_001_slides.pdf">ppt: Focal Loss for Dense Object Detection</a></p>
+</blockquote>
+<p><code>RetinaNet</code>是使用<code>FPN</code>和<code>Focal Loss</code>(详情看本站<a target="_blank" rel="noopener external nofollow noreferrer" href="https://hycbook.com/article/46832.html">深度学习核心之损失函数</a>部分)的目标检测模型，能够有效解决类别不平衡问题</p>
+<p>它通过<strong>特征金字塔网络</strong>生成多尺度的特征图，并使用Focal Loss重点关注难以分类的样本，从而提高了检测性能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/RetinaNet网络架构图.webp" alt="RetinaNet网络架构图"></p>
+<h2 id="DETR"><a href="#DETR" class="headerlink" title="DETR"></a>DETR</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/2005.12872.pdf">End-to-End Object Detection with Transformers DETR 2020</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/baidu_36913330/article/details/120495817">深度学习之目标检测（十一）—DETR详解</a></p>
+</blockquote>
+<p>继Transformer应用于图像分类后，Transformer应用于图像目标检测的开山之作–DEtection TRansformer，其大大简化了目标检测的框架，更直观</p>
+<p><code>DETR</code>是Facebook团队于2020年提出的基于Transformer的端到端目标检测，没有非极大值抑制NMS后处理步骤、没有anchor等先验知识和约束，整个由网络实现端到端的目标检测实现，大大简化了目标检测的pipeline。结果在COCO数据集上效果与Faster RCNN相当，在<strong>大目标</strong>上效果比Faster RCNN好，且可以很容易地将DETR迁移到其他任务例如全景分割</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/DETR模型结构.webp" alt="DETR模型结构"></p>
+<h1 id="目标跟踪"><a href="#目标跟踪" class="headerlink" title="目标跟踪"></a>目标跟踪</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzU2NjU3OTc5NA==&amp;mid=2247552006&amp;idx=2&amp;sn=925d1cbb7e8e3cca57b12274863486f8&amp;chksm=fca80b3bcbdf822df3e5b43342d750bd9cd9b01de79193057fead4c0f588bdcb1ee9a998c89d&amp;scene=27">万字长文 | 多目标跟踪最新综述(基于Transformer/图模型/检测和关联/孪生网络)</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.iotword.com/4705.html">【yolov4目标检测】(2) 多目标跟踪，案例：车辆行人的跟踪和计数，附python完整代码和数据集</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/theAIGuysCode/yolov4-deepsort">yolov4-deepsort tensorflow代码</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/lyk_ffl/article/details/114378927">转载：一线算法工程师整理！超实用的3大多目标跟踪算法</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_52002919/article/details/123954823">Deep-Sort 多目标跟踪算法原理和代码解析</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/darkpgmr/DarkLabel">Darklabel多目标跟踪标注工具</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s/1FDEMbuJFMBaYkP4fEZl1g">万字综述：目标检测模型YOLOv1-v7深度解析</a></p>
+</blockquote>
+<p><code>目标跟踪 = 目标检测+目标跟踪算法</code></p>
+<p>目标追踪算法分为<code>单目标追踪SOT</code>(Single-Object Track)和<code>多目标追踪MOT</code>(Multi-Object Track)[1][2]</p>
+<ul>
+<li>在单目标跟踪中，使用给定的初始目标位置，在后续视频帧中对给定的物体进行位置预测</li>
+<li>多目标跟踪算法，大部分都是不考虑初始目标位置的，目标可自行消失与产生</li>
+</ul>
+<blockquote>
+<p>目标跟踪分类</p>
+</blockquote>
+<p>目标跟踪通常可分为单目标跟踪和多目标跟踪两类</p>
+<ul>
+<li><p>单目标跟踪</p>
+</li>
+<li><p>多目标跟踪</p>
+<ul>
+<li><p>SDE(separate detecting and embeding)</p>
+<p>每部分独立优化能够取得比较高的精度，缺点就是计算量会增加</p>
+</li>
+<li><p>JDE(joint detecting and embeding)</p>
+<p>JDE将目标检测与REID特征提取放在一个网络，这样能有效减少计算量，但是多任务学习的精度会低些</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>解决的任务和视频目标检测相同的点在于都需要对每帧图像中的目标精准定位，不同点在于目标跟踪不考虑目标的识别问题</p>
+<p>SDE将REID特征提取和目标检测分为两个独立网络来实现，这样做的优点是每部分独立优化能够取得比较高的精度，缺点就是计算量会增加；JDE将目标检测与REID特征提取放在一个网络，这样能有效减少计算量，但是多任务学习的精度目前来说还没有SDE高。在工程应用上我更偏向于JDE，毕竟跟踪要保证实时性，在能够提取一个不太差的REID特征基础上，加强检测器性能和优化数据关联部分也能一定程度上弥补REID特征不够好带来的性能损失</p>
+<h2 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h2><h2 id="DeepSort"><a href="#DeepSort" class="headerlink" title="DeepSort"></a>DeepSort</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/499240427">目标跟踪基础——DeepSORT</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/202993073">【MOT】详解DeepSORT多目标追踪模型</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/deepsort 算法简要的草图.webp" alt="deepsort 算法简要的草图"></p>
+<h2 id="StrongSort"><a href="#StrongSort" class="headerlink" title="StrongSort"></a>StrongSort</h2><p>StrongSort相比于DeepSort的区别：</p>
+<ul>
+<li><p>使用BoT替代CNN做外表特征的提取</p>
+</li>
+<li><p>使用EMA(exponential moving average：指数移动平均)策略更新新帧中的目标外观特征</p>
+<p>EMA更新策略不仅提高了匹配质量，而且减少了时间消耗</p>
+</li>
+<li><p>在做Kalman filter之前，使用ECC（enhanced correlation coefficient：增强相关系数）进行相机运动补偿；并使用NSA Kalman代替Kalman进行运动特征获取</p>
+</li>
+<li><p>将运动信息和外观信息结合来进行匹配</p>
+</li>
+<li><p>使用Vanilla全局线性赋值代替了匹配级联</p>
+</li>
+</ul>
+<h2 id="BotSort"><a href="#BotSort" class="headerlink" title="BotSort"></a>BotSort</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/abs/2206.14651">BoT-SORT: Robust Associations Multi-Pedestrian Tracking</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://aijishu.com/a/1060000000336999">BoT-SORT ｜超越 DeepSORT、StrongSORT++ 和 ByteTrack</a></p>
+</blockquote>
+<h2 id="ByteTrack"><a href="#ByteTrack" class="headerlink" title="ByteTrack"></a>ByteTrack</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/abs/2110.06864v1">ByteTrack: Multi-Object Tracking by Associating Every Detection Box</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/目标检测与跟踪算法/ByteTrack_算法流程图.svg" alt="ByteTrack_算法流程图"></p>
+<h2 id="依赖的算法"><a href="#依赖的算法" class="headerlink" title="依赖的算法"></a>依赖的算法</h2><h3 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h3><p>卡尔曼滤波被广泛应用于无人机、自动驾驶、卫星导航等领域</p>
+<p>简单来说，其作用就是<strong>基于传感器的测量值来更新预测值，以达到更精确的估计</strong></p>
+<p>假设我们要跟踪小车的位置变化，如下图所示，蓝色的分布是卡尔曼滤波预测值，棕色的分布是传感器的测量值，灰色的分布就是预测值基于测量值更新后的最优估计</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic4.zhimg.com/80/v2-ec9fb1fee9048ae99f553c18d77605fb_720w.webp" alt="卡尔曼滤波"></p>
+<p>在目标跟踪中，需要估计track的以下两个状态：</p>
+<ul>
+<li><p><strong>均值(Mean)：</strong>表示目标的位置信息，由bbox的中心坐标 (cx, cy)，宽高比r，高h，以及各自的速度变化值组成</p>
+<p>由8维向量表示为 x = [cx, cy, r, h, vx, vy, vr, vh]，各个速度值初始化为0</p>
+</li>
+<li><p><strong>协方差(Covariance )：</strong>表示目标位置信息的不确定性，由8x8的对角矩阵表示，矩阵中数字越大则表明不确定性越大，可以以任意值初始化</p>
+</li>
+</ul>
+<p>卡尔曼滤波分为两个阶段：(1) <strong>预测</strong>track在下一时刻的位置，(2) 基于detection来<strong>更新</strong>预测的位置。</p>
+<h3 id="匈牙利匹配算法"><a href="#匈牙利匹配算法" class="headerlink" title="匈牙利匹配算法"></a>匈牙利匹配算法</h3><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/90835266">目标跟踪初探(DeepSORT)</a></p>
+</blockquote>
+<p>先介绍一下什么是<strong>分配问题（Assignment Problem）：</strong>假设有N个人和N个任务，每个任务可以任意分配给不同的人，已知每个人完成每个任务要花费的代价不尽相同，那么如何分配可以使得总的代价最小</p>
+<p>举个例子，假设现在有3个任务，要分别分配给3个人，每个人完成各个任务所需<strong>代价矩阵(cost matrix)</strong>如下所示(这个代价可以是金钱、时间等等)：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>15</td>
+<td>40</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td>20</td>
+<td>60</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>20</td>
+<td>40</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>怎样才能找到一个最优分配，使得完成所有任务花费的代价最小呢？</p>
+<p>匈牙利算法(又叫<strong>KM</strong>算法)就是用来解决分配问题的一种方法，它基于定理：</p>
+<blockquote>
+<p>如果代价矩阵的<code>某一行或某一列同时加上或减去某个数</code>，则这个新的代价矩阵的最优分配<code>仍然是原代价矩阵的最优分配</code></p>
+</blockquote>
+<p>算法步骤(假设矩阵为N阶方阵)：</p>
+<ol>
+<li>对于矩阵的每一行，减去其中最小的元素</li>
+<li>对于矩阵的每一列，减去其中最小的元素</li>
+<li>用最少的水平线或垂直线覆盖矩阵中所有的0</li>
+<li>如果线的数量等于N，则找到了最优分配，算法结束，否则进入步骤5</li>
+<li>找到没有被任何线覆盖的最小元素，每个<strong>没被线覆盖的行</strong>减去这个元素，每个<strong>被线覆盖的列</strong>加上这个元素，返回步骤3</li>
+</ol>
+<p>继续拿上面的例子做演示：</p>
+<p>step1 每一行最小的元素分别为15、20、20，减去得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>0</td>
+<td>25</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td>0</td>
+<td>40</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>0</td>
+<td>20</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>step2 每一列最小的元素分别为0、20、5，减去得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>0</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td>0</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>step3 用最少的水平线或垂直线覆盖所有的0，得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td><del>0</del></td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td><del>0</del></td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td><del>0</del></td>
+<td><del>0</del></td>
+<td><del>0</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>step4 线的数量为2，小于3，进入下一步；</p>
+<p>step5 现在没被覆盖的最小元素是5，没被覆盖的行(第一和第二行)减去5，得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>-5</td>
+<td>0</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td>-5</td>
+<td>15</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>被覆盖的列(第一列)加上5，得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>0</td>
+<td>0</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td>0</td>
+<td>15</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>跳转到step3，用最少的水平线或垂直线覆盖所有的0，得到：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td><del>0</del></td>
+<td><del>0</del></td>
+<td><del>20</del></td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td><del>0</del></td>
+<td><del>15</del></td>
+<td><del>5</del></td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td><del>5</del></td>
+<td><del>0</del></td>
+<td><del>0</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>step4：线的数量为3，满足条件，算法结束</p>
+<p>显然，将任务2分配给第1个人、任务1分配给第2个人、任务3分配给第3个人时，总的代价最小(0+0+0=0)：</p>
+<p>所以原矩阵的最小总代价为40+20+25=85</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Task_1</th>
+<th>Task_2</th>
+<th>Task_3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Person_1</td>
+<td>15</td>
+<td><strong>40</strong></td>
+<td>45</td>
+</tr>
+<tr>
+<td>Person_2</td>
+<td><strong>20</strong></td>
+<td>60</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Person_3</td>
+<td>20</td>
+<td>40</td>
+<td><strong>25</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>sklearn</strong>里的<strong>linear_assignment()</strong>函数以及<strong>scipy</strong>里的<strong>linear_sum_assignment()</strong>函数都实现了匈牙利算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linear_sum_assignment</span><br><span class="line"> </span><br><span class="line">cost_matrix = np.array([</span><br><span class="line">    [<span class="number">15</span>,<span class="number">40</span>,<span class="number">45</span>],</span><br><span class="line">    [<span class="number">20</span>,<span class="number">60</span>,<span class="number">35</span>],</span><br><span class="line">    [<span class="number">20</span>,<span class="number">40</span>,<span class="number">25</span>]</span><br><span class="line">])</span><br><span class="line"> </span><br><span class="line">matches = linear_sum_assignment(cost_matrix)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;scipy API result:\n&#x27;</span>, matches)</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">scipy API result:</span><br><span class="line"> (array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], dtype=int64), array([<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>], dtype=int64))</span><br></pre></td></tr></table></figure>
+<h2 id="追踪指标"><a href="#追踪指标" class="headerlink" title="追踪指标"></a>追踪指标</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/fuss1207/article/details/126806570">多目标跟踪评价指标总结——MOTA、IDF1、HOTA等</a></p>
+</blockquote>
+<ol>
+<li><p><strong>MOTA(Multiple Object Tracking Accuracy)</strong>: 指标体现多目标跟踪的准确度</p>
+<script type="math/tex; mode=display">
+MOTA=1-\left(\sum_{t}\left(m_{t}+f p_{t}+m m e_{t}\right)\right) /\left(\sum_{t} g_{t}\right)</script><p>MOTA指标是衡量多目标跟踪算法精确性方面最重要的指标，以1为最佳情况，<code>数值越高代表跟踪精确度越好</code></p>
+</li>
+<li><p><strong>IDF1</strong>: 指标代表被检测和跟踪的目标中获取正确的ID的检测目标的比例，综合考虑ID准确率和ID召回率，代表两者的调和均值</p>
+<script type="math/tex; mode=display">
+IDF1=2 /(1 / IDP+1 / IDR)</script><p>其中，IDP代表ID跟踪的准确率，IDR代表ID跟踪的召回率，IDF1指标更聚焦于跟踪算法跟踪某个目标的时间长短，考察跟踪的连续性和重识别的准确性，IDF1以1为最佳情况，<code>数值越高代表跟踪特定目标的精度越好</code></p>
+</li>
+<li><p><strong>HOTA</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>道路监控管理</p>
+</blockquote>
+<ol>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.roboflow.com/quick-start">Roboflow数据集标注</a></li>
+<li>目标检测算法_模型训练</li>
+<li>目标跟踪算法_ByteTrack(实时性)</li>
+<li>物体检测分类</li>
+<li>主动学习和强化学习</li>
+</ol>
+<p><strong>主动学习</strong>：是一种通过主动选择最有价值的样本进行标注的机器学习或人工智能方法。其目的是使用尽可能少的、高质量的样本标注使模型达到尽可能好的性能。也就是说，主动学习方法能够提高样本及标注的增益，在有限标注预算的前提下，最大化模型的性能，是一种从样本的角度，提高数据效率的方案，因而被应用在标注成本高、标注难度大等任务中，例如医疗图像、无人驾驶、异常检测、基于互联网大数据的相关问题</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.mysecretrainbow.com/ai/21730.html">强化学习介绍及应用</a></p>
+</blockquote>
+<p><strong>强化学习</strong>：强化学习是一个非常吸引人的人工智能领域，2016年 Alpha Go在围棋领域挑战李世石，以几乎碾压的结果夺冠，引起了人们对于人工智能的广泛讨论。2019年Alpha Star横空出世，在复杂的星际争霸2游戏中达到能和人类顶级玩家PK的水平，登上Nature。这两次与人类顶级玩家的抗衡之战，背后的技术都是强化学习。强化学习是机器学习领域的一个分支，强调基于环境而行动，以取得最大化的长期利益。与监督学习、非监督学习不同，监督学习解决如分类、回归等感知和认知类的任务，而强化学习处理决策问题，着重于环境的交互、序列决策、和长期收益。强化学习与环境的交互模式可以抽象为：智能体Agent在环境Environment中学习，根绝环境的状态State，执行动作Action，并根据环境反馈的奖励Reward来指导输出更好的动作</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/34192.html">https://study.hycbook.com/article/34192.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/">目标检测算法</a><a class="post-meta__tags" href="/tags/Yolo/">Yolo</a><a class="post-meta__tags" href="/tags/Rcnn/">Rcnn</a><a class="post-meta__tags" href="/tags/SPP-Net/">SPP-Net</a><a class="post-meta__tags" href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/">目标跟踪</a><a class="post-meta__tags" href="/tags/%E7%9B%AE%E6%A0%87%E8%BF%BD%E8%B8%AA/">目标追踪</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/42221.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆3.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据标注工具</div></div></a></div><div class="next-post pull-right"><a href="/article/451.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆5.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">图像分类算法</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">目标检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E6%A0%87%E5%92%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">指标和数据</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RCNN%E7%B3%BB%E5%88%97"><span class="toc-number">2.</span> <span class="toc-text">RCNN系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#rcnn"><span class="toc-number">2.1.</span> <span class="toc-text">rcnn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spp-net"><span class="toc-number">2.2.</span> <span class="toc-text">spp-net</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fast-rcnn"><span class="toc-number">2.3.</span> <span class="toc-text">fast-rcnn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#faster-rcnn"><span class="toc-number">2.4.</span> <span class="toc-text">faster-rcnn</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Yolo%E7%B3%BB%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">Yolo系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Yolov1"><span class="toc-number">3.1.</span> <span class="toc-text">Yolov1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#loss"><span class="toc-number">3.1.2.</span> <span class="toc-text">loss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Yolov2-Yolo9000"><span class="toc-number">3.2.</span> <span class="toc-text">Yolov2(Yolo9000)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yolov3"><span class="toc-number">3.3.</span> <span class="toc-text">yolov3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yolov5"><span class="toc-number">3.4.</span> <span class="toc-text">yolov5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Yolov8"><span class="toc-number">3.5.</span> <span class="toc-text">Yolov8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%A3%80%E6%B5%8B%E7%B3%BB%E5%88%97"><span class="toc-number">4.</span> <span class="toc-text">其他检测系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SSD"><span class="toc-number">4.1.</span> <span class="toc-text">SSD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FPN"><span class="toc-number">4.2.</span> <span class="toc-text">FPN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RetinaNet"><span class="toc-number">4.3.</span> <span class="toc-text">RetinaNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DETR"><span class="toc-number">4.4.</span> <span class="toc-text">DETR</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA"><span class="toc-number">5.</span> <span class="toc-text">目标跟踪</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sort"><span class="toc-number">5.1.</span> <span class="toc-text">Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DeepSort"><span class="toc-number">5.2.</span> <span class="toc-text">DeepSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StrongSort"><span class="toc-number">5.3.</span> <span class="toc-text">StrongSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BotSort"><span class="toc-number">5.4.</span> <span class="toc-text">BotSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ByteTrack"><span class="toc-number">5.5.</span> <span class="toc-text">ByteTrack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E7%AE%97%E6%B3%95"><span class="toc-number">5.6.</span> <span class="toc-text">依赖的算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">5.6.1.</span> <span class="toc-text">卡尔曼滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%88%E7%89%99%E5%88%A9%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95"><span class="toc-number">5.6.2.</span> <span class="toc-text">匈牙利匹配算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%BD%E8%B8%AA%E6%8C%87%E6%A0%87"><span class="toc-number">5.7.</span> <span class="toc-text">追踪指标</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

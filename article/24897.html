@@ -1,0 +1,755 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>LLM模型部署调试推理 | 兼一书虫</title><meta name="keywords" content="深度学习,LLM模型"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="LLM模型部署调试推理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLM模型部署调试推理">
+<meta property="og:url" content="https://study.hycbook.com/article/24897.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="LLM模型部署调试推理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%8612.webp">
+<meta property="article:published_time" content="2023-06-12T13:22:34.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.708Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="LLM模型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%8612.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/24897"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LLM模型部署调试推理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆12.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LLM模型部署调试推理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-12T13:22:34.000Z" title="发表于 2023-06-12 21:22:34">2023-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.708Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deep-learning/">deep_learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="LLM模型部署调试推理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/24897.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="LLM模型"><a href="#LLM模型" class="headerlink" title="LLM模型"></a>LLM模型</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/626377667">什么是LLM（大语音模型）</a></p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>Large Language Model(LLM)</code>，也称为<code>大型语言模型</code>，是一种基于机器学习和自然语言处理技术的模型，它通过对大量的文本数据进行训练，来学习服务人类语言理解和生成的能力</p>
+<p>LLM的核心思想是通过大规模的无监督训练来学习自然语言的模式和语言结构，这在一定程度上能够模拟人类的语言认知和生成过程</p>
+<p>与传统的NLP模型相比，LLM能够更好地理解和生成自然文本，同时还能够表现出一定的逻辑思维和推理能力</p>
+<p>近年来，LLM得到了广泛的应用，其中最具代表性的是谷歌的BERT和OpenAI的GPT系列。这些模型在多个自然语言处理领域已经取得了显著的成果，包括文本分类、命名实体识别、情感分析、机器翻译、自动问答等</p>
+<p>然而，在实际应用中，LLM面临着更多的挑战</p>
+<ol>
+<li>首先，LLM需要大量的计算资源和大规模的数据集来训练，这对于一般的企业和个人来说十分困难</li>
+<li>其次，由于LLM模型的复杂性和计算量较大，对于实时的语言处理应用来说，LLM在应用效率和响应速度上还存在一定的局限性</li>
+</ol>
+<p>因此，如何解决模型训练和应用过程中的计算性能和效率问题，是LLM面临的主要挑战之一</p>
+<h2 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h2><p>LLM在实际应用中有多种形式，以下是一些具体的示例：</p>
+<ol>
+<li><strong>自然语言理解</strong>：通过语法词汇、句法语义、语境等相互作用，使计算机能够理解人类语言。如通过语音合成功能，实现文字转语音的技术。另外，基于LLM技术的英语学习App可以针对不同的用户让机器进行自适应教学，帮助用户更加高效地学习英语</li>
+<li><strong>机器翻译</strong>：LLM可以利用大量的文本数据进行翻译学习，提高翻译准确度和语音翻译度，同时加速翻译速度，例如谷歌翻译等体验都有明显提升</li>
+<li><strong>情感分析</strong>：LLM技术可以通过对大量数据进行分析，实现对人们在社交媒体上对商品、服务和品牌等的评价，从而帮助企业了解消费者的心态，并根据情感信息来优化其营销策略</li>
+<li><strong>机器学习语音识别</strong>：在语音识别领域，LLM技术可以通过深度学习算法等技术改进，从而在分辨率、声音重叠、噪音和复杂语音语言中实现更好的语音识别效果。同时，在语音交互上，也可以进行一些基于LLM的定制，例如智能音箱、语音接待员和客户服务机器人等</li>
+<li><strong>文本生成</strong>：LLM技术在文本生成方面的应用可以在文本摘要、翻译和自动化写作等方面进行适用。例如，LLM模型可以从短篇小说的背景信息中自动生成描述、对话等内容，同时还可以通过对不同风格的文本进行学习，并从中学习创造性的文本生成</li>
+</ol>
+<h1 id="GPU环境"><a href="#GPU环境" class="headerlink" title="GPU环境"></a>GPU环境</h1><h2 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h2><blockquote>
+<p>购买一台自己的GPU服服务器</p>
+</blockquote>
+<p>购买阿里云服务器可以通过以下步骤进行：</p>
+<ol>
+<li><p>访问<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.aliyun.com/">阿里云官网</a>并注册一个账户</p>
+</li>
+<li><p>登录您的阿里云账户，选择”产品与服务”，然后选择”云服务器 ECS”</p>
+<p>在云服务器ECS页面上，您可以选择不同的实例类型和配置，根据您的需求选择适合的服务器规格。这些规格包括CPU、内存、存储空间等</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云购买gpu.webp" alt="阿里云购买gpu"></p>
+<p>配置网络和安全组，您可以设置网络类型、公网带宽、IP地址等</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云ip分配.webp" alt="阿里云ip分配"></p>
+<p>根据您的需求选择购买时长，可以选择包年包月或按小时计费，这里如果只是为了测试或玩一玩，可以选择最便宜的方式</p>
+</li>
+<li><p>配置系统和软件，您可以选择操作系统和其他软件预装选项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云系统配置.webp" alt="阿里云系统配置"></p>
+</li>
+<li><p>查看订单和价格，确认无误后，点击”立即购买”</p>
+</li>
+<li><p>在支付页面选择合适的支付方式完成购买</p>
+</li>
+<li><p>完成支付后，您将收到购买服务器的确认信息和服务器登录凭证</p>
+</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/crazestone0614/article/details/126923555">端口开放</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云开放端口.webp" alt="阿里云开放端口"></p>
+<blockquote>
+<p>安装基础的python环境</p>
+</blockquote>
+<ol>
+<li><p>首先复制公网ip，使用ssh工具连接自己的服务器，用户名默认是root，密码为自定义密码，登陆进来首先会系统初始化GPU环境，等待完成后会自动重启</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云gpu初始化.webp" alt="阿里云gpu初始化"></p>
+<p>自动重启后，可以用<code>nvidia-smi</code>查看nvidia驱动配置</p>
+</li>
+<li><p>安装git，后面很多项目或者模型下载会用到，包括git lfs</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装git</span></span><br><span class="line">yum install git -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装git lfs（大文件下载）</span></span><br><span class="line">curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash</span><br><span class="line">yum install git-lfs</span><br><span class="line">git lfs install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装anaconda，并创建自己的python环境</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装anaconda环境</span></span><br><span class="line">wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh</span><br><span class="line"><span class="built_in">chmod</span> +x Anaconda3-2023.03-1-Linux-x86_64.sh</span><br><span class="line">./Anaconda3-2023.03-1-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建自己的python环境</span></span><br><span class="line">conda create -n gpt310 python=3.10 anaconda</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装pytorch，这里的cuda选cu117，因为上面的服务器的cuda是11.4的，这里的cu117是可以向下兼容的</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到gpt310</span></span><br><span class="line"><span class="built_in">source</span> activate gpt310</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装gpu版的pytorch, 需要在GPU环境下安装，否则安装是cpu版本</span></span><br><span class="line">pip install torch==2.0.0+cu117 torchvision==0.15.1+cu117 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu117</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Python中导入PyTorch并检查CUDA是否可用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查PyTorch是否使用了CUDA</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CUDA可用&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CUDA不可用&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>还可以使用<code>torch.cuda.get_device_capability()</code>函数来获取计算机上支持的CUDA设备的计算能力。这可以帮助您确定所安装的CUDA版本是否与您的显卡兼容</p>
+</li>
+</ol>
+<blockquote>
+<p>用完机器记得关机，不然会一直扣费</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/阿里云关机.webp" alt="阿里云关机"></p>
+<h2 id="AutoDL"><a href="#AutoDL" class="headerlink" title="AutoDL"></a>AutoDL</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.autodl.com/">AutoDL平台</a>简介</p>
+</blockquote>
+<p><code>AutoDL算力平台</code>是指为自动化深度学习(AutoDL)任务提供计算资源和基础设施的平台。由于深度学习任务通常需要大量的计算资源和存储空间，为了有效地执行AutoDL任务，需要具备相应的算力平台</p>
+<p>一个优秀的AutoDL算力平台通常具备以下特点：</p>
+<ol>
+<li><strong>高性能计算</strong>：提供强大的计算能力，包括高性能的CPU、GPU或专用的AI芯片等。这些计算资源可以支持AutoDL任务的模型训练、超参数搜索和架构搜索等计算密集型任务</li>
+<li><strong>分布式计算</strong>：支持分布式计算和训练，使得AutoDL任务可以在多个计算节点上并行执行，从而加快任务的完成时间。这对于大规模数据和复杂模型的AutoDL任务尤为重要</li>
+<li><strong>数据存储和管理</strong>：提供高效的数据存储和管理系统，以支持大规模数据集的存储和访问。这可以确保AutoDL任务能够快速、可靠地访问所需的训练数据和验证数据</li>
+<li><strong>任务调度和资源管理</strong>：具备任务调度和资源管理功能，可以有效地管理多个AutoDL任务的执行，包括资源分配、优先级管理和任务调度等，以保证任务的顺利进行</li>
+<li><strong>易用性和灵活性</strong>：提供友好的用户界面和工具，使得用户可以方便地配置和管理AutoDL任务。同时，提供灵活的配置选项，以满足不同任务和需求的定制化要求</li>
+</ol>
+<p>AutoDL算力平台的设计和功能旨在提供高效、可扩展和易用的计算资源，以支持AutoDL任务的快速迭代和大规模应用。它们可以帮助研究人员和开发者更加便捷地进行AutoDL实验和模型优化，从而推动自动化深度学习领域的发展</p>
+<blockquote>
+<p>购买算力</p>
+</blockquote>
+<ol>
+<li><p>选择计费方式和显卡</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/AutoDl算力购买步骤1.webp" alt="AutoDl算力购买步骤1"></p>
+</li>
+<li><p>选择是否需要扩展数据盘，以及基础镜像，这里选Miniconda环境</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/AutoDl算力购买步骤2.webp" alt="AutoDl算力购买步骤2"></p>
+</li>
+<li><p>启动机器，进入终端可以看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------------------------------AutoDL--------------------------------------------------------+</span><br><span class="line">目录说明:</span><br><span class="line">╔═════════════════╦════════╦════╦═════════════════════════════════════════════════════════════════════════╗</span><br><span class="line">║目录             ║名称    ║速度║说明                                                                     ║</span><br><span class="line">╠═════════════════╬════════╬════╬═════════════════════════════════════════════════════════════════════════╣</span><br><span class="line">║/                ║系 统 盘║一般║实例关机数据不会丢失，可存放代码等。会随保存镜像一起保存。               ║</span><br><span class="line">║/root/autodl-tmp ║数 据 盘║ 快 ║实例关机数据不会丢失，可存放读写IO要求高的数据。但不会随保存镜像一起保存 ║</span><br><span class="line">╚═════════════════╩════════╩════╩═════════════════════════════════════════════════════════════════════════╝</span><br><span class="line">CPU ：0.5 核心</span><br><span class="line">内存：2 GB</span><br><span class="line">GPU ：No devices were found</span><br><span class="line">存储：</span><br><span class="line">  系 统 盘/               ：46% 12G/25G</span><br><span class="line">  数 据 盘/root/autodl-tmp：65% 33G/50G</span><br><span class="line">+----------------------------------------------------------------------------------------------------------------+</span><br><span class="line"></span><br><span class="line">*注意: </span><br><span class="line">1.系统盘较小请将大的数据存放于数据盘或网盘中，重置系统时数据盘和网盘中的数据不受影响</span><br><span class="line">2.清理系统盘请参考：https://www.autodl.com/docs/qa/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装git-lfs以及ssl等依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash</span><br><span class="line">sudo apt-get install git-lfs</span><br><span class="line">git lfs install</span><br><span class="line"></span><br><span class="line">sudo apt-get install openssl</span><br><span class="line">sudo apt-get install libssl-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装pytorch环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建自己的python环境</span></span><br><span class="line">conda create -n gpt310 python=3.10 anaconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到gpt310</span></span><br><span class="line"><span class="built_in">source</span> activate gpt310</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装gpu版的pytorch, 需要在GPU环境下安装，否则安装是cpu版本</span></span><br><span class="line">pip install torch==2.0.0+cu117 torchvision==0.15.1+cu117 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu117</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Python中导入PyTorch并检查CUDA是否可用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查PyTorch是否使用了CUDA</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CUDA可用&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CUDA不可用&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>其它事项</p>
+</blockquote>
+<ul>
+<li>控制台下容器实例就是租用的机器，自定义服务是将容器内的6006端口映射到公网</li>
+<li><strong>/root/autodl-tmp</strong>可以放一些数据或模型，开关机不会丢失，但不随镜像一起保存</li>
+<li><strong>无卡开机模型</strong>不带GPU，很便宜，一小时0.01元</li>
+</ul>
+<h2 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h2><p>👻没有显卡，🤕伤不起🤕</p>
+<h1 id="Langchain-ChatGLM"><a href="#Langchain-ChatGLM" class="headerlink" title="Langchain-ChatGLM"></a>Langchain-ChatGLM</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/imClumsyPanda/langchain-ChatGLM">github imClumsyPanda/langchain-ChatGLM</a></p>
+</blockquote>
+<p>🤖️ 一种利用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/hwchase17/langchain">langchain</a> 思想实现的基于本地知识库的问答应用，目标期望建立一套对中文场景与开源模型支持友好、可离线运行的知识库问答解决方案</p>
+<p>💡 受 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/GanymedeNil">GanymedeNil</a> 的项目 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/GanymedeNil/document.ai">document.ai</a> 和 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/AlexZhangji">AlexZhangji</a> 创建的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/THUDM/ChatGLM-6B/pull/216">ChatGLM-6B Pull Request</a> 启发，建立了全流程可使用开源模型实现的本地知识库问答应用。现已支持使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/THUDM/ChatGLM-6B">ChatGLM-6B</a> 等大语言模型直接接入，或通过 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/lm-sys/FastChat">fastchat</a> api 形式接入 Vicuna, Alpaca, LLaMA, Koala, RWKV 等模型</p>
+<p>✅ 本项目中 Embedding 默认选用的是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://huggingface.co/GanymedeNil/text2vec-large-chinese/tree/main">GanymedeNil/text2vec-large-chinese</a>，LLM 默认选用的是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/THUDM/ChatGLM-6B">ChatGLM-6B</a>。依托上述模型，本项目可实现全部使用<strong>开源</strong>模型<strong>离线私有部署</strong></p>
+<p>⛓️ 本项目实现原理如下图所示，过程包括加载文件 -&gt; 读取文本 -&gt; 文本分割 -&gt; 文本向量化 -&gt; 问句向量化 -&gt; 在文本向量中匹配出与问句向量最相似的<code>top k</code>个 -&gt; 匹配出的文本作为上下文和问题一起添加到<code>prompt</code>中 -&gt; 提交给<code>LLM</code>生成回答</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/langchain+chatglm.webp" alt="langchain+chatglm"></p>
+<p>从文档处理角度来看，实现流程如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/langchain+chatglm 文档.webp" alt="langchain+chatglm 文档"></p>
+<p>ChatGLM-6B模型硬件需求</p>
+<p>注：如未将模型下载至本地，请执行前检查<code>$HOME/.cache/huggingface/</code>文件夹剩余空间，模型文件下载至本地需要15GB存储空间。注：一些其它的可选启动项见<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/imClumsyPanda/langchain-ChatGLM/blob/master/docs/StartOption.md">项目启动选项</a>模型下载方法可参考<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/imClumsyPanda/langchain-ChatGLM/blob/master/docs/FAQ.md">常见问题</a>中Q8</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>量化等级</strong></th>
+<th><strong>最低 GPU 显存</strong>（推理）</th>
+<th><strong>最低 GPU 显存</strong>（高效参数微调）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP16（无量化）</td>
+<td>13 GB</td>
+<td>14 GB</td>
+</tr>
+<tr>
+<td>INT8</td>
+<td>8 GB</td>
+<td>9 GB</td>
+</tr>
+<tr>
+<td>INT4</td>
+<td>6 GB</td>
+<td>7 GB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<p>项目环境准备</p>
+</blockquote>
+<p>先在<code>/home</code>目录下创建<code>huangyc</code>文件夹，进入<code>huangyc</code>目录下后，拉取项目代码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imClumsyPanda/langchain-ChatGLM.git</span><br></pre></td></tr></table></figure>
+<p>安装必要库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># centos系统下</span></span><br><span class="line">yum install libX11 -y</span><br><span class="line">yum install libXext -y</span><br><span class="line">pip uninstall detectron2</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu系统不需要</span></span><br></pre></td></tr></table></figure>
+<p>进入<code>langchain-ChatGLM</code>文件夹，安装依赖库，AutoDl平台下好像需要加<strong>-i</strong>参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>模型准备</p>
+</blockquote>
+<p>从<a target="_blank" rel="noopener external nofollow noreferrer" href="https://huggingface.co/models">huggingface开放模型</a>下找到自己的需要的模型，用git lfs下载，如果在AutoDl平台，可以把模型下载到<strong>/root/autodl-tmp</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://huggingface.co/THUDM/chatglm-6b-int4.git</span><br></pre></td></tr></table></figure>
+<p>可以用<code>ls -lh .</code>命令查看下载的文件大小是否正常</p>
+<p>下载完的<code>chatglm-6b-int4</code>模型文件夹，放到<code>langchain-ChatGLM</code>项目的<code>model</code>文件夹下，没有<code>model</code>文件夹的话，自己创建下</p>
+<p>如果下载失败的话，可以试下用wget下载，例如</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://huggingface.co/THUDM/chatglm-6b-int4/resolve/main/pytorch_model.bin</span><br></pre></td></tr></table></figure>
+<h2 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h2><h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>打开<code>langchain-ChatGLM/config/model_config.py</code>，修改如下配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># supported LLM models</span></span><br><span class="line"><span class="comment"># llm_model_dict 处理了loader的一些预设行为，如加载位置，模型名称，模型处理器实例</span></span><br><span class="line">llm_model_dict = &#123;</span><br><span class="line">	......</span><br><span class="line">    <span class="string">&quot;chatglm-6b-int4&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;chatglm-6b-int4&quot;</span>,</span><br><span class="line">-        <span class="string">&quot;pretrained_model_name&quot;</span>: <span class="string">&quot;THUDM/chatglm-6b-int4&quot;</span>,</span><br><span class="line">+        <span class="string">&quot;pretrained_model_name&quot;</span>: <span class="string">&quot;model/chatglm-6b-int4&quot;</span>,       </span><br><span class="line">        <span class="string">&quot;local_model_path&quot;</span>: <span class="literal">None</span>,</span><br><span class="line">        <span class="string">&quot;provides&quot;</span>: <span class="string">&quot;ChatGLM&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># LLM 名称</span></span><br><span class="line">LLM_MODEL = <span class="string">&quot;chatglm-6b-int4&quot;</span></span><br><span class="line"><span class="comment"># 如果你需要加载本地的model，指定这个参数  ` --no-remote-model`，或者下方参数修改为 `True`</span></span><br><span class="line">NO_REMOTE_MODEL = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>这样模型会从本地加载</p>
+<p>修改<code>webui.py</code>，用于启动<strong>Web 交互</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(demo</span><br><span class="line"> .queue(concurrency_count=<span class="number">3</span>)</span><br><span class="line">- .launch(server_name=<span class="string">&#x27;0.0.0.0&#x27;</span>,</span><br><span class="line">+ .launch(server_name=<span class="string">&#x27;localhost&#x27;</span>,          </span><br><span class="line">         server_port=<span class="number">7860</span>,  <span class="comment"># AutoDl平台用的是6006</span></span><br><span class="line">         show_api=<span class="literal">False</span>,</span><br><span class="line">-        share=<span class="literal">False</span>,</span><br><span class="line">+        share=<span class="literal">True</span>,          </span><br><span class="line">         inbrowser=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
+<p>阿里云服务器那边需要开放7860端口</p>
+<h3 id="启动web服务"><a href="#启动web服务" class="headerlink" title="启动web服务"></a>启动web服务</h3><p>进入到<code>langchain-ChatGLM</code>项目下，执行<code>webui.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python webui.py</span><br></pre></td></tr></table></figure>
+<p>如果发现端口被占用了，可以用<code>netstat -atunlp | grep 7860</code>命令查看并杀死占用该端口的进程(自己判断)</p>
+<p>打开网页，你的ip:7860，就可以看到如下界面，默认是对话界面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/Langchain-ChatGLM-普通对话.webp" alt="Langchain-ChatGLM-普通对话"></p>
+<p>可以切换到知识库测试，在这里可以上传自己的文档到知识库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/Langchain-ChatGLM-知识库测试.webp" alt="Langchain-ChatGLM-知识库测试"></p>
+<p>后台看下当前显存占用，模型用的是<code>chatglm-6b-int4</code>模型</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/Langchain-ChatGLM-显存占用.webp" alt="Langchain-ChatGLM-显存占用"></p>
+<p>之后测试上传了<code>《流畅的Python》高清官方中文版.pdf</code>，后台一直在更新知识库，等了十几分钟，还没结束，我就切换到普通对话了，又测了十几轮对话，突然爆了显存不够，不知道是不是上传知识库引起的，还是随着对话增加，显存一直没释放</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/LLM模型部署调试推理/Langchain-ChatGLM-显存爆了.webp" alt="Langchain-ChatGLM-显存爆了"></p>
+<h3 id="pycharm远程配置"><a href="#pycharm远程配置" class="headerlink" title="pycharm远程配置"></a>pycharm远程配置</h3><p>PyCharm远程配置解释器和项目提供了以下几个重要的用途和优势：</p>
+<ol>
+<li><strong>远程开发</strong>：您可以在本地使用PyCharm编写代码，并将代码部署和运行在远程服务器上。这意味着您不需要在本地配置和安装与远程服务器环境相同的软件和依赖项。您可以利用服务器上的计算资源和环境来进行开发和测试，减轻了本地机器的负担</li>
+<li><strong>统一开发环境</strong>：通过远程配置解释器和项目，您可以在本地使用PyCharm的功能和工具来开发和调试代码。您可以享受PyCharm提供的智能代码补全、调试器、版本控制集成等功能，无需切换到其他编辑器或远程终端</li>
+<li><strong>协作与团队开发</strong>：远程配置解释器和项目使团队成员可以共享相同的开发环境。无论是在本地还是远程服务器上，团队成员可以使用相同的配置和依赖项来开发和测试代码。这有助于确保代码在不同环境下的一致性，并促进团队协作和开发效率</li>
+<li><strong>远程调试和错误排查</strong>：通过配置远程解释器，您可以在本地使用PyCharm的调试器来调试远程服务器上的代码。这样，您可以逐步执行代码、观察变量和监控程序状态，以便更轻松地进行错误排查和修复</li>
+<li><strong>远程部署和管理</strong>：通过远程配置项目，您可以将本地的代码同步到远程服务器上，并在服务器上运行和管理项目。这简化了部署过程，并使您能够直接在远程服务器上操作项目文件和资源</li>
+</ol>
+<p>PyCharm远程配置解释器和项目提供了一种方便而高效的方式，让您可以在本地使用PyCharm进行开发和调试，同时利用远程服务器的优势来运行和部署代码。这对于需要在远程环境下进行开发和协作的场景非常有用，如远程服务器上的Web开发、数据处理和云计算等任务</p>
+<p>pycharm远程配置参考本站的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://hycbook.com/article/d192a1af.html">Spark集群搭建章节下的配置远程解释器</a></p>
+<h2 id="相关技术"><a href="#相关技术" class="headerlink" title="相关技术"></a>相关技术</h2><ol>
+<li><p>langchain: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://python.langchain.com/en/latest/getting_started/getting_started.html">langchain</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://baijiahao.baidu.com/s?id=1763672432171265694&amp;wfr=spider&amp;for=pc">LangChain：为你定制一个专属的GPT</a></p>
+<p>LangChain是一个用于开发基于语言模型的应用程序开发框架，用户可以利用LangChain的模块来改善大语言模型的使用，通过输入自己的知识库来<strong>定制化</strong>自己的大语言模型</p>
+</li>
+<li><p>faiss: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://faiss.ai/">Faiss Documentation</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/LuohenYJ/article/details/125897842">[python] 向量检索库Faiss使用指北</a></p>
+<p>所谓相似性搜索是指通过比较多维空间中数据之间的相似性来搜索与输入数据最相似的目标数据。例如人脸识别中，通过比较人脸向量之前的距离来识别当前人脸与哪张人脸相似。因此，该技术被广泛应用于信息检索、计算机视觉、数据分析等领域。如果要检索的数据很多时，那么就需要一个向量检索库来加速检索</p>
+<p>Faiss包含多种相似性搜索方法，并提供cpu和gpu版本支持。Faiss的优势在于通过<strong>较小的精度损失</strong>提高向量相似度的<strong>检索速度</strong>和<strong>减少内存使用量</strong></p>
+</li>
+<li><p>ChatGLM-6B: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chatglm.cn/">chatglm</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/THUDM/ChatGLM-6B">github THUDM/ChatGLM-6B</a></p>
+<p><code>ChatGLM-6B</code>是一个开源的、支持中英双语的对话语言模型，基于<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/THUDM/GLM">General Language Model (GLM)</a>架构，具有62亿参数。结合模型量化技术，用户可以在消费级的显卡上进行本地部署(INT4量化级别下最低只需6GB显存)。 ChatGLM-6B使用了和<code>ChatGPT</code>相似的技术，针对中文问答和对话进行了优化。<strong>经过约1T标识符的中英双语训练，辅以监督微调、反馈自助、人类反馈强化学习等技术的加持</strong>，62亿参数的ChatGLM-6B已经能生成相当符合人类偏好的回答</p>
+</li>
+<li><p>Hugging Face: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://huggingface.co/docs">Hugging Face</a></p>
+<p><code>Hugging Face</code>是一个知名的开源社区和公司，专注于自然语言处理(NLP)和机器学习(ML)领域。他们开发了许多流行的开源工具和库，使得构建和应用NLP模型更加便捷</p>
+</li>
+</ol>
+<h1 id="localGPT"><a href="#localGPT" class="headerlink" title="localGPT"></a>localGPT</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/PromtEngineer/localGPT">github PromtEngineer/localGPT</a></p>
+</blockquote>
+<p>等待</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/24897.html">https://study.hycbook.com/article/24897.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/LLM%E6%A8%A1%E5%9E%8B/">LLM模型</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆12.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/57912.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">huggingface基本使用教程</div></div></a></div><div class="next-post pull-right"><a href="/article/59381.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LLM模型微调系列</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/59381.html" title="LLM模型微调系列"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-15</div><div class="title">LLM模型微调系列</div></div></a></div><div><a href="/article/53377.html" title="深度学习模型压缩技术"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆11.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">深度学习模型压缩技术</div></div></a></div><div><a href="/article/35455.html" title="深度学习在图像领域的应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-23</div><div class="title">深度学习在图像领域的应用</div></div></a></div><div><a href="/article/42898.html" title="nlp关键词和摘要提取技术整理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-22</div><div class="title">nlp关键词和摘要提取技术整理</div></div></a></div><div><a href="/article/46832.html" title="深度学习核心之损失函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之损失函数</div></div></a></div><div><a href="/article/22410.html" title="深度学习核心之激活函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆7.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之激活函数</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LLM%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">LLM模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">主要应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPU%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">GPU环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91"><span class="toc-number">2.1.</span> <span class="toc-text">阿里云</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AutoDL"><span class="toc-number">2.2.</span> <span class="toc-text">AutoDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0"><span class="toc-number">2.3.</span> <span class="toc-text">本地</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Langchain-ChatGLM"><span class="toc-number">3.</span> <span class="toc-text">Langchain-ChatGLM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">推理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.1.</span> <span class="toc-text">修改配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8web%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.2.</span> <span class="toc-text">启动web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pycharm%E8%BF%9C%E7%A8%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.3.</span> <span class="toc-text">pycharm远程配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF"><span class="toc-number">3.3.</span> <span class="toc-text">相关技术</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#localGPT"><span class="toc-number">4.</span> <span class="toc-text">localGPT</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>transformer学习 | 兼一书虫</title><meta name="keywords" content="transformer,self attention,bert,nlp"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Transformer Attention Is All You Need 论文解读: Attention is All you need Hugging Face的GitHub代码库    通常而言，绝大部分NLP问题可以归入上图所示的四类任务中   序列标注: 这是最典型的NLP任务，比如中文分词，词性标注，命名实体识别，语义角色标注等都可以归入这一类问题 它的特点是句子中每个单词要求模型根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="transformer学习">
+<meta property="og:url" content="https://study.hycbook.com/article/44700.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="Transformer Attention Is All You Need 论文解读: Attention is All you need Hugging Face的GitHub代码库    通常而言，绝大部分NLP问题可以归入上图所示的四类任务中   序列标注: 这是最典型的NLP任务，比如中文分词，词性标注，命名实体识别，语义角色标注等都可以归入这一类问题 它的特点是句子中每个单词要求模型根">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%860.webp">
+<meta property="article:published_time" content="2023-02-19T09:23:49.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.712Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="transformer">
+<meta property="article:tag" content="self attention">
+<meta property="article:tag" content="bert">
+<meta property="article:tag" content="nlp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%860.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/44700"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'transformer学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆0.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">transformer学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-19T09:23:49.000Z" title="发表于 2023-02-19 17:23:49">2023-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.712Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deep-learning/">deep_learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>29分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="transformer学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/44700.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://arxiv.org/abs/1706.03762v3">Attention Is All You Need</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/46990010">论文解读: Attention is All you need</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/huggingface/transformers/blob/main/README_zh-hans.md">Hugging Face的GitHub代码库</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/Transformer系列.webp" alt="Transformer系列"></p>
+<blockquote>
+<p>通常而言，绝大部分NLP问题可以归入上图所示的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/49271699">四类任务</a>中</p>
+</blockquote>
+<ol>
+<li><p><strong>序列标注</strong>: 这是最典型的NLP任务，比如中文分词，词性标注，命名实体识别，语义角色标注等都可以归入这一类问题</p>
+<p>它的特点是句子中每个单词要求模型根据上下文都要给出一个分类类别</p>
+</li>
+<li><p><strong>分类任务</strong>: 比如我们常见的文本分类，情感计算等都可以归入这一类。它的特点是不管文章有多长，总体给出一个分类类别即可</p>
+</li>
+<li><p><strong>句子关系判断</strong>: 比如Entailment，QA，语义改写，自然语言推理等任务都是这个模式，给定两个句子，模型判断出两个句子是否具备某种语义关系</p>
+</li>
+<li><p><strong>生成式任务</strong>: 比如机器翻译，文本摘要，写诗造句，看图说话等都属于这一类，输入文本内容后，需要自主生成另外一段文字</p>
+</li>
+</ol>
+<blockquote>
+<p>预训练语言模型</p>
+</blockquote>
+<p>目前有两种预训练语言模型用于下游任务的方法：feature-based(以<strong>ELMo</strong>为例)和fine-tuning(以<strong>BERT</strong>、<strong>GPT</strong>为例)</p>
+<p>有专门的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1903.05987v2.pdf">论文(To Tune or Not to Tune? Adapting Pretrained Representations to Diverse Tasks)</a>讨论了这个话题</p>
+<p><code>Feature-based Pre-Training</code>:</p>
+<ul>
+<li><p>在Feature-based Pre-Training中，首先使用大规模的未标记数据集对模型进行预训练</p>
+<p>预训练任务通常是通过自监督学习或其他无监督学习方法来完成，例如预测下一个词语、图像的旋转角度等</p>
+</li>
+<li><p>预训练的目标是学习到具有良好表示能力的特征，能够捕捉数据中的一般性信息</p>
+</li>
+<li><p>预训练模型通常是一个通用的模型，不针对特定的任务。它<strong>学习到的特征表示可以应用于各种不同的任务</strong></p>
+</li>
+<li><p>预训练模型可以作为迁移学习的基础，通过将其特征提取部分应用于具体的任务</p>
+</li>
+</ul>
+<p><code>Fine-tuning</code>:</p>
+<ul>
+<li>Fine-tuning是在预训练模型的基础上，在<strong>特定任务的有标签数据集上进行进一步训练和优化</strong></li>
+<li>Fine-tuning阶段会调整预训练模型的权重和参数，以使其适应目标任务的特定要求</li>
+<li>Fine-tuning过程中，<strong>通常会保持预训练模型的一部分权重固定，只更新部分权重</strong>，以保留预训练阶段学习到的通用特征表示</li>
+<li>Fine-tuning旨在在特定任务的有限标记数据集上优化模型，使其更好地适应该任务的数据和特征</li>
+</ul>
+<p>总结来说，Feature-based Pre-Training是通过在未标记数据上预训练模型来学习<strong>通用的特征表示</strong>，而Fine-tuning是在预训练模型的基础上，在<strong>特定任务的有标签数据</strong>上进行进一步<strong>优化和微调</strong></p>
+<p>Feature-based Pre-Training提供了一种学习通用特征表示的方式，而Fine-tuning则将这些通用特征应用于特定任务，以提升任务性能，<code>一句话概括</code>：</p>
+<ol>
+<li>Feature-based Pre-Training把输入转特征，特征丢给后面的模型(<strong>新模型</strong>)，其他就和它无关了</li>
+<li>Fine-tuning是<strong>同一个网络结构</strong>，换了数据，可以固定或不固定前几层，继续训练</li>
+</ol>
+<h2 id="词向量"><a href="#词向量" class="headerlink" title="词向量"></a>词向量</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cnblogs.com/nickchen121/p/16470569.html">预训练语言模型的前世今生 - 从Word Embedding到BERT</a></p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">年份</th>
+<th style="text-align:left">2013 年</th>
+<th style="text-align:left">2014 年</th>
+<th style="text-align:left">2015 年</th>
+<th style="text-align:left">2016 年</th>
+<th style="text-align:left">2017 年</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">技术</td>
+<td style="text-align:left">word2vec</td>
+<td style="text-align:left">GloVe</td>
+<td style="text-align:left">LSTM/Attention</td>
+<td style="text-align:left">Self-Attention</td>
+<td style="text-align:left">Transformer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">年份</th>
+<th style="text-align:left">2018 年</th>
+<th style="text-align:left">2019 年</th>
+<th style="text-align:left">2020 年</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">技术</td>
+<td style="text-align:left">GPT/ELMo/BERT/GNN</td>
+<td style="text-align:left">XLNet/BoBERTa/GPT-2/ERNIE/T5</td>
+<td style="text-align:left">GPT-3/ELECTRA/ALBERT</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p><strong>One-hot编码</strong>：早期的自然语言处理中，词语通常被表示为离散的one-hot向量。每个词语都被表示为一个维度等于词汇表大小的向量，其中只有一个维度为1，其余维度都为0</p>
+<p><strong>这种表示方法无法捕捉词语之间的语义关系和相似度</strong></p>
+</li>
+<li><p><strong>Word Embedding</strong>：为了克服one-hot编码的局限性，提出了基于分布假设的词向量表示方法，即Word Embedding。Word Embedding使用低维实数向量表示词语，通过训练模型将词语映射到一个连续的向量空间中。其中，每个维度代表一个语义特征。<strong>Word Embedding能够捕捉到词语之间的语义关系和相似度，提供更丰富的表示</strong></p>
+</li>
+<li><p><strong>Word2Vec(静态)</strong>：Word2Vec是一种经典的词向量模型，由Tomas Mikolov等人于2013年提出。它基于神经网络模型，通过训练预测词语周围的上下文或预测目标词语。Word2Vec模型包括两种算法：<code>CBOW(Continuous Bag-of-Words)和</code>Skip-gram`。这两种算法使用浅层的神经网络来学习词向量，具有高效、快速训练的优势。<strong>Word2Vec模型能够生成静态的词向量，但无法捕捉词语的上下文相关特征</strong></p>
+</li>
+<li><p><strong>ELMo(Embeddings from Language Models)(动态)</strong>：ELMo是在Word2Vec之后提出的一种上下文相关的词向量表示方法，由Peters等人于2018年提出。ELMo利用双向语言模型，通过训练正向和逆向的LSTM模型来学习词语的上下文表示。<strong>ELMo能够根据上下文动态地生成词向量，捕捉到词语在不同上下文中的语义特征</strong>。与静态词向量不同，ELMo提供了更丰富、更具语义的词语表示，适用于各种自然语言处理任务</p>
+<p>ELMo(Embeddings from Language Models)模型在训练过程中使用了双向长短期记忆网络（Bi-LSTM）</p>
+</li>
+</ol>
+<p>总的来说，历史发展中，从one-hot编码到Word Embedding，再到Word2Vec和ELMo，词向量表示方法逐渐从离散、静态的表示发展到了连续、上下文相关的表示。这些方法的提出和发展使得自然语言处理模型能够更好地理解和处理文本数据，提高了各种文本相关任务的性能</p>
+<p>Word Embedding、Word2Vec和ELMo关系如下：</p>
+<ul>
+<li><p>Word2Vec是Word Embedding的一种<code>具体实现方式</code>。Word Embedding指的是将词语映射到低维实数向量空间的表示方法，而<strong>Word2Vec则是一种用于训练Word Embedding的算法</strong></p>
+</li>
+<li><p>ELMo和Word2Vec是两种不同的词向量表示方法。ELMo是一种上下文相关的词向量表示方法，通过训练双向语言模型来学习词语在不同上下文中的<code>动态表示</code>。而Word2Vec是一种上下文无关的词向量表示方法，通过训练预测词语的上下文或目标词语来学习<code>静态的词向量</code></p>
+</li>
+</ul>
+<h2 id="模型介绍"><a href="#模型介绍" class="headerlink" title="模型介绍"></a>模型介绍</h2><blockquote>
+<p>介绍Transformer比较好的文章</p>
+</blockquote>
+<ol>
+<li>一个是Jay Alammar可视化地介绍Transformer的博客文章<a target="_blank" rel="noopener external nofollow noreferrer" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a>，非常容易理解整个机制</li>
+<li>哈佛大学NLP研究组写的<a target="_blank" rel="noopener external nofollow noreferrer" href="http://nlp.seas.harvard.edu/2018/04/03/attention.html">The Annotated Transformer</a>，代码原理双管齐下</li>
+</ol>
+<blockquote>
+<p>Attention机制</p>
+</blockquote>
+<p>Attention机制最早在视觉领域提出，2014年Google Mind发表了《Recurrent Models of Visual Attention》，使Attention机制流行起来，这篇论文采用了RNN模型，并加入了Attention机制来进行图像的分类</p>
+<p>2005年，Bahdanau等人在论文《Neural Machine Translation by Jointly Learning to Align and Translate》中，将attention机制首次应用在nlp领域，其采用Seq2Seq+Attention模型来进行机器翻译，并且得到了效果的提升，<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/36131103">Seq2Seq With Attention</a>中进行了介绍</p>
+<p>2017 年，Google 机器翻译团队发表的《Attention is All You Need》中，完全抛弃了RNN和CNN等网络结构，而仅仅采用<code>自注意力</code>(self-attention)机制来学习文本表示来进行<strong>机器翻译</strong>任务，并且取得了很好的效果，注意力机制也成为了大家近期的研究热点</p>
+<p>本文首先介绍常见的Attention机制，然后对论文《Attention is All You Need》进行介绍，该论文发表在NIPS 2017上</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><blockquote>
+<p>模型结构如下</p>
+</blockquote>
+<ul>
+<li><p>输入层</p>
+<ul>
+<li>词嵌入编码层</li>
+<li>位置编码层</li>
+</ul>
+</li>
+<li><p>Encoder</p>
+<ul>
+<li>多头自注意力</li>
+<li>残差连接</li>
+<li>全连接网络</li>
+</ul>
+</li>
+<li><p>Dncoder</p>
+<ul>
+<li>多头自注意力</li>
+<li>多头注意力(不是自注意, 因为QK来自Encoder)</li>
+<li>残差连接</li>
+<li>全连接网络</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>模型整体结构如下所示</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/The_transformer_encoder_decoder_stack.webp" alt="The_transformer_encoder_decoder_stack"></p>
+<p>Transformer是一种基于<code>自注意力机制</code>的<code>序列到序列</code>模型，广泛应用于自然语言处理任务，如<strong>机器翻译</strong>、<strong>文本摘要</strong>和<strong>语言生成</strong>等</p>
+<p><strong>Transformer整体结构由以下几个主要组件组成</strong>：</p>
+<ol>
+<li><code>编码器（Encoder）</code>：编码器负责将输入序列（例如源语言句子）转换为一系列<code>高级特征表示</code>。它由多个相同的层堆叠而成，<strong>每个层都包含两个子层：多头自注意力机制和全连接前馈神经网络</strong>。自注意力机制允许模型对输入序列中的不同位置进行自适应地关注，从而捕捉序列中的上下文信息</li>
+<li><code>解码器（Decoder）</code>：解码器负责从编码器生成的特征表示中生成目标序列（例如目标语言句子）。解码器也由多个相同的层堆叠而成，<strong>每个层包含三个子层：多头自注意力机制、编码器-解码器注意力机制和全连接前馈神经网络</strong>。编码器-解码器注意力机制用于在生成目标序列时，引入对源语言句子的关注</li>
+<li><code>自注意力机制（Self-Attention）</code>：自注意力机制是Transformer的关键组件之一。它允许模型在进行编码或解码时，根据输入序列中不同位置之间的关系，动态地计算注意力权重。通过自适应地关注不同位置的信息，自注意力机制能够捕捉输入序列中的上下文信息，提供更全面的表示</li>
+<li><code>注意力机制（Attention）</code>：除了自注意力机制，Transformer还使用编码器-解码器注意力机制。这种注意力机制允许解码器在生成目标序列时，对编码器输出的特征表示进行关注。它能够帮助解码器对源语言句子中与当前生成位置相关的信息进行处理</li>
+<li><code>前馈神经网络（Feed-Forward Network）</code>：Transformer中的每个子层都包含一个前馈神经网络。该网络由两个全连接层组成，通过应用非线性激活函数（如ReLU）来对特征表示进行映射和变换。前馈神经网络有助于捕捉特征之间的非线性关系</li>
+</ol>
+<p>通过编码器和解码器的组合，Transformer模型能够将输入序列转换为输出序列，实现不同的序列到序列任务</p>
+<p>它的<strong>并行计算</strong>性质和<strong>自注意力机制</strong>的能力使得它在处理长序列和捕捉全局依赖关系方面具有优势，成为自然语言处理领域的重要模型，更详细的模型结构如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/transformer模型框架.webp" alt="transformer模型框架"></p>
+<h2 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a>Embedding</h2><p><strong>Embedding层</strong>是Transformer模型中的一个重要组成部分，用于将离散的输入序列（如单词、字符等）映射到连续的低维向量表示</p>
+<p>它负责将输入的符号型数据转换为密集的实数向量，从而能够在模型中进行有效的学习和处理</p>
+<p>在Transformer中，Embedding层主要有两个作用：</p>
+<ol>
+<li><code>词嵌入（Word Embedding）</code>：对于自然语言处理任务，Embedding层将每个词汇或字符映射到一个低维的连续向量表示，称为词嵌入或字符嵌入。这些嵌入向量捕捉了词汇或字符之间的语义和语法关系，能够编码单词的上下文信息，使得模型能够更好地理解和表示输入数据</li>
+<li><code>位置编码（Positional Encoding）</code>：Transformer模型中没有使用循环神经网络或卷积神经网络，因此无法直接捕捉输入序列中顺序信息。为了引入位置信息，Embedding层会添加位置编码到词嵌入中。位置编码是一种用于表示输入序列位置的向量，它提供了关于词汇在序列中相对位置的信息，帮助模型理解序列中的顺序关系</li>
+</ol>
+<p>在实现上，Embedding层可以使用一个矩阵作为参数来进行词嵌入的查找。每个词汇对应矩阵中的一行，通过查找输入序列中的词汇对应的行向量，得到词嵌入表示</p>
+<p>位置编码通常使用正弦和余弦函数的组合来计算，以获取不同位置的编码向量</p>
+<p>需要注意的是，Embedding层的参数通常是在模型训练的过程中学习得到的，根据任务和数据来调整嵌入向量的表示能力。通过Embedding层，模型能够在低维连续向量空间中对输入序列进行表征和建模，从而更好地处理自然语言处理等任务</p>
+<blockquote>
+<p>导入库</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env Python</span></span><br><span class="line"><span class="comment"># -- coding: utf-8 --</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">@version: v1.0</span></span><br><span class="line"><span class="string">@author: huangyc</span></span><br><span class="line"><span class="string">@file: embedding.py</span></span><br><span class="line"><span class="string">@Description: </span></span><br><span class="line"><span class="string">@time: 2023/2/19 15:00</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> copy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Embedding层定义</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Embeddings</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model: <span class="built_in">int</span>, vocab: <span class="built_in">int</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        构建Embedding类来实现文本嵌入层</span></span><br><span class="line"><span class="string">        :param d_model: 词嵌入的维度</span></span><br><span class="line"><span class="string">        :param vocab: 词表的大小</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(Embeddings, self).__init__()</span><br><span class="line">        <span class="comment"># 定义Embedding层</span></span><br><span class="line">        self.lut = nn.Embedding(vocab, d_model)</span><br><span class="line">        self.d_model = d_model</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> self.lut(x) * math.sqrt(self.d_model)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>PositionalEncoding层</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义位置编码器类, 我们同样把它看做一个层,因此会继承nn.Module</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PositionalEncoding</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model: <span class="built_in">int</span>, dropout: <span class="built_in">float</span>, max_len: <span class="built_in">int</span> = <span class="number">5000</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        位置编码器类的初始化函数, 共有三个参数</span></span><br><span class="line"><span class="string">        :param d_model: 词嵌入维度</span></span><br><span class="line"><span class="string">        :param dropout: 置0比率</span></span><br><span class="line"><span class="string">        :param max_len: 每个句子的最大长度</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(PositionalEncoding, self).__init__()</span><br><span class="line">        <span class="comment"># 实例化nn中预定义的Dropout层, 并将dropout传入其中,获得对象self.dropout</span></span><br><span class="line">        self.dropout = nn.Dropout(p=dropout)</span><br><span class="line">        <span class="comment"># 初始化一个位置编码矩阵,它是一个0阵, 矩阵的大小是max_len * d_model</span></span><br><span class="line">        pe = torch.zeros(max_len, d_model)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化一个绝对位置矩阵, 在我们这里, 词汇的绝对位置就是用它的索引去表示</span></span><br><span class="line">        <span class="comment"># 所以我们首先使用arange方法获得一个连续自然数向量, 然后再使用unsqueeze方法拓展向量维度</span></span><br><span class="line">        <span class="comment"># #又因为参数传的是1, 代表矩阵拓展的位置, 会使向量变成一个max_len * 1的矩阵</span></span><br><span class="line">        position = torch.arange(<span class="number">0</span>, max_len).unsqueeze(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 绝对位置矩阵初始化之后, 接下来就是考虑如何将这些位置信息加入到位置编码矩阵中</span></span><br><span class="line">        <span class="comment"># 最简单思路就是先将max_len * 1的绝对位置矩阵, 变换成max_len * d_model形状, 然后覆盖原来的初始位置编码矩阵即可</span></span><br><span class="line">        <span class="comment"># 要做这种矩阵变换, 就需要一个1 * d_model形状的变换矩阵div_term, 我们对这个变换矩阵的要求除了形状外</span></span><br><span class="line">        <span class="comment"># 还希望它能够将自然数的绝对位置编码缩放成足够小的数字, 有助于在之后的梯度下降过程中更快的收敛</span></span><br><span class="line">        <span class="comment"># 首先使用arange获得一个自然数矩阵, 但是细心的同学们会发现, 我们这里并没有按照预计的一样初始化一个1 * d_model的矩阵</span></span><br><span class="line">        <span class="comment"># 而是有了一个跳跃，只初始化了一半即1*d_mode1/2的矩阵. 为什么是一半呢, 其实这里并不是真正意义上的初始化</span></span><br><span class="line">        <span class="comment"># 我们可以把它看作是初始化了两次, 而每次初始化的变换矩阵会做不同的处理, 第一次初始化的变换矩阵分布在正弦波上, 第二次初始化的变换矩阵分布在余弦波上</span></span><br><span class="line">        <span class="comment"># 并把这两个矩阵分别填充在位置编码矩阵的偶数和奇数位置上, 组成最终的位置编码矩阵</span></span><br><span class="line">        div_term = torch.exp(torch.arange(<span class="number">0</span>, d_model, <span class="number">2</span>) * -(math.log(<span class="number">10000.</span>) / d_model))</span><br><span class="line">        pe[:, <span class="number">0</span>::<span class="number">2</span>] = torch.sin(position * div_term)</span><br><span class="line">        pe[:, <span class="number">1</span>::<span class="number">2</span>] = torch.cos(position * div_term)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 这样我们就得到了位置编码矩阵pe, pe现在还是个二维矩阵，要想和embedding的输出(一个三维张量)相加, 需要扩展维度</span></span><br><span class="line">        pe = pe.unsqueeze(<span class="number">0</span>)</span><br><span class="line">        <span class="comment"># 我们把它认为是对模型效果有帮助的, 但是却不是模型结构中超参数或者参数,不需要随着优化步骤优化</span></span><br><span class="line">        <span class="comment"># 注册之后我们就可以在模型保存后重加载时和模型结构与参数一同被加载</span></span><br><span class="line">        self.register_buffer(<span class="string">&#x27;pe&#x27;</span>, pe)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param x: 文本序列的词嵌入表示</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 根据句子最大长度切割, pe不需要做梯度求解</span></span><br><span class="line">        x = x + Variable(self.pe[:, :x.size(<span class="number">1</span>)], requires_grad=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">return</span> self.dropout(x)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实际测试 + 位置编码可视化</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    p_d_model = <span class="number">512</span></span><br><span class="line">    p_vocab = <span class="number">1000</span></span><br><span class="line">    p_dropout: <span class="built_in">float</span> = <span class="number">0.1</span></span><br><span class="line">    p_max_len = <span class="number">60</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 词嵌入测试</span></span><br><span class="line">    x = Variable(torch.LongTensor([[<span class="number">100</span>, <span class="number">2</span>, <span class="number">421</span>, <span class="number">508</span>], [<span class="number">491</span>, <span class="number">998</span>, <span class="number">1</span>, <span class="number">221</span>]]))</span><br><span class="line">    emb = Embeddings(d_model=p_d_model, vocab=p_vocab)</span><br><span class="line">    embr = emb(x)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;embr&quot;</span>, embr)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;embr size&quot;</span>, embr.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 位置编码测试</span></span><br><span class="line">    pe = PositionalEncoding(d_model=p_d_model, dropout=p_dropout, max_len=p_max_len)</span><br><span class="line">    pe_result = pe(embr)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;pe_result&quot;</span>, pe_result)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;pe_result size&quot;</span>, pe_result.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建一张15x5大小的画布</span></span><br><span class="line">    plt.figure(figsize=(<span class="number">15</span>, <span class="number">5</span>))</span><br><span class="line">    <span class="comment"># 实例化PositionalEncoding类得到pe对象, 输入参数是20和0</span></span><br><span class="line">    pe = PositionalEncoding(<span class="number">20</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 然后向pe传入被Variable封装的tensor, 这样pe会直接执行forward函数,</span></span><br><span class="line">    <span class="comment"># 且这个tensor里的数值都是0, 被处理后相当于位置编码张量</span></span><br><span class="line">    y = pe(Variable(torch.zeros(<span class="number">1</span>, <span class="number">100</span>, <span class="number">20</span>)))</span><br><span class="line">    <span class="comment"># 然后定义画布的横纵坐标, 横坐标到100的长度, 纵坐标是某一个词汇中的某维特征在不同长度下对应的值</span></span><br><span class="line">    <span class="comment"># 因为总共有20维之多, 我们这里只查看4,5,6,7维的值</span></span><br><span class="line">    plt.plot(np.arange(<span class="number">100</span>), y[<span class="number">0</span>, :, <span class="number">4</span>:<span class="number">8</span>].data.numpy())</span><br><span class="line">    <span class="comment"># 在画布上填写维度提示信息</span></span><br><span class="line">    plt.legend([<span class="string">&quot;dim %d&quot;</span> % p <span class="keyword">for</span> p <span class="keyword">in</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]])</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">embr tensor([[[-<span class="number">17</span>.<span class="number">5113</span>,  -<span class="number">6</span>.<span class="number">0699</span>,  <span class="number">11</span>.<span class="number">6839</span>,  ...,  -<span class="number">8</span>.<span class="number">1281</span>,  -<span class="number">7</span>.<span class="number">7986</span>,  <span class="number">35</span>.<span class="number">1275</span>],</span><br><span class="line">         [ -<span class="number">6</span>.<span class="number">3789</span>,  -<span class="number">7</span>.<span class="number">7614</span>,  <span class="number">13</span>.<span class="number">2975</span>,  ...,  <span class="number">16</span>.<span class="number">8397</span>, -<span class="number">31</span>.<span class="number">3230</span>, -<span class="number">68</span>.<span class="number">4385</span>],</span><br><span class="line">         [ -<span class="number">4</span>.<span class="number">1841</span>,   <span class="number">8</span>.<span class="number">4322</span>,  <span class="number">34</span>.<span class="number">6418</span>,  ...,  <span class="number">38</span>.<span class="number">4747</span>,  -<span class="number">4</span>.<span class="number">9060</span>,  <span class="number">25</span>.<span class="number">4163</span>],</span><br><span class="line">         [-<span class="number">23</span>.<span class="number">4562</span>, -<span class="number">28</span>.<span class="number">9742</span>,  <span class="number">18</span>.<span class="number">1234</span>,  ...,  <span class="number">38</span>.<span class="number">6039</span>,  <span class="number">15</span>.<span class="number">0049</span>,  -<span class="number">2</span>.<span class="number">8916</span>]],</span><br><span class="line"></span><br><span class="line">        [[-<span class="number">21</span>.<span class="number">7485</span>,   <span class="number">0</span>.<span class="number">3263</span>,  <span class="number">54</span>.<span class="number">4449</span>,  ..., -<span class="number">18</span>.<span class="number">3120</span>, -<span class="number">15</span>.<span class="number">5987</span>, -<span class="number">11</span>.<span class="number">4275</span>],</span><br><span class="line">         [ -<span class="number">0</span>.<span class="number">6414</span>,   <span class="number">2</span>.<span class="number">9492</span>, -<span class="number">32</span>.<span class="number">3063</span>,  ..., -<span class="number">21</span>.<span class="number">9781</span>, -<span class="number">16</span>.<span class="number">3307</span>, -<span class="number">15</span>.<span class="number">4014</span>],</span><br><span class="line">         [-<span class="number">16</span>.<span class="number">1775</span>,  <span class="number">20</span>.<span class="number">8547</span>, -<span class="number">21</span>.<span class="number">0333</span>,  ..., -<span class="number">11</span>.<span class="number">7583</span>,  -<span class="number">7</span>.<span class="number">2429</span>,   <span class="number">5</span>.<span class="number">8607</span>],</span><br><span class="line">         [ -<span class="number">4</span>.<span class="number">7708</span>, -<span class="number">51</span>.<span class="number">9955</span>,  <span class="number">14</span>.<span class="number">8529</span>,  ...,  <span class="number">21</span>.<span class="number">0973</span>,  <span class="number">13</span>.<span class="number">4664</span>, -<span class="number">10</span>.<span class="number">8492</span>]]],</span><br><span class="line">       grad_fn=&lt;MulBackward0&gt;)</span><br><span class="line">embr size torch.Size([<span class="number">2</span>, <span class="number">4</span>, <span class="number">512</span>])</span><br><span class="line"></span><br><span class="line">pe_result tensor([[[-<span class="number">19</span>.<span class="number">4569</span>,  -<span class="number">5</span>.<span class="number">6332</span>,  <span class="number">12</span>.<span class="number">9821</span>,  ...,  -<span class="number">7</span>.<span class="number">9201</span>,  -<span class="number">0</span>.<span class="number">0000</span>,   <span class="number">0</span>.<span class="number">0000</span>],</span><br><span class="line">         [ -<span class="number">6</span>.<span class="number">1526</span>,  -<span class="number">8</span>.<span class="number">0235</span>,  <span class="number">15</span>.<span class="number">6882</span>,  ...,  <span class="number">19</span>.<span class="number">8219</span>, -<span class="number">34</span>.<span class="number">8032</span>, -<span class="number">74</span>.<span class="number">9317</span>],</span><br><span class="line">         [ -<span class="number">3</span>.<span class="number">6387</span>,   <span class="number">8</span>.<span class="number">9068</span>,  <span class="number">39</span>.<span class="number">5314</span>,  ...,  <span class="number">43</span>.<span class="number">8608</span>,  -<span class="number">5</span>.<span class="number">4509</span>,  <span class="number">29</span>.<span class="number">3514</span>],</span><br><span class="line">         [-<span class="number">25</span>.<span class="number">9057</span>, -<span class="number">33</span>.<span class="number">2935</span>,  <span class="number">20</span>.<span class="number">4094</span>,  ...,  <span class="number">44</span>.<span class="number">0043</span>,  <span class="number">16</span>.<span class="number">6725</span>,  -<span class="number">2</span>.<span class="number">1017</span>]],</span><br><span class="line"></span><br><span class="line">        [[-<span class="number">24</span>.<span class="number">1650</span>,   <span class="number">1</span>.<span class="number">4736</span>,   <span class="number">0</span>.<span class="number">0000</span>,  ..., -<span class="number">19</span>.<span class="number">2356</span>, -<span class="number">17</span>.<span class="number">3319</span>, -<span class="number">11</span>.<span class="number">5861</span>],</span><br><span class="line">         [  <span class="number">0</span>.<span class="number">2223</span>,   <span class="number">3</span>.<span class="number">8772</span>, -<span class="number">34</span>.<span class="number">9827</span>,  ..., -<span class="number">23</span>.<span class="number">3090</span>, -<span class="number">18</span>.<span class="number">1452</span>, -<span class="number">16</span>.<span class="number">0015</span>],</span><br><span class="line">         [-<span class="number">16</span>.<span class="number">9647</span>,  <span class="number">22</span>.<span class="number">7095</span>, -<span class="number">22</span>.<span class="number">3299</span>,  ..., -<span class="number">11</span>.<span class="number">9537</span>,  -<span class="number">8</span>.<span class="number">0475</span>,   <span class="number">7</span>.<span class="number">6230</span>],</span><br><span class="line">         [ -<span class="number">0</span>.<span class="number">0000</span>, -<span class="number">58</span>.<span class="number">8727</span>,   <span class="number">0</span>.<span class="number">0000</span>,  ...,  <span class="number">24</span>.<span class="number">5526</span>,  <span class="number">14</span>.<span class="number">9630</span>,  -<span class="number">0</span>.<span class="number">0000</span>]]],</span><br><span class="line">       grad_fn=&lt;MulBackward0&gt;)</span><br><span class="line">pe_result size torch.Size([<span class="number">2</span>, <span class="number">4</span>, <span class="number">512</span>])</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/位置编码可视化.webp" alt="位置编码可视化"></p>
+<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&amp;mid=2247579430&amp;idx=1&amp;sn=3c63a42410e2107f1f91f861dc25c3cb&amp;scene=21#wechat_redirect">超详细图解Self-Attention的那些事儿</a></p>
+</blockquote>
+<p>除了Scaled Dot-Product Attention，Transformer模型中还有几种常见的注意力机制</p>
+<ol>
+<li><strong>点积注意力(Dot-Product Attention)</strong>：它是Scaled Dot-Product Attention的简化版本，直接计算查询（Q）和键（K）之间的点积，然后通过softmax函数将结果转化为注意力权重。点积注意力相比于Scaled Dot-Product Attention没有进行缩放操作</li>
+<li><strong>加性注意力(Additive Attention)</strong>：加性注意力使用了一个额外的前馈神经网络来计算注意力权重。它通过将查询（Q）和键（K）映射到相同的低维空间，然后计算它们的相似度得分，最后将相似度得分通过softmax函数进行归一化。加性注意力在一些场景中能够更好地捕捉输入序列之间的非线性关系</li>
+<li>缩放点积注意力(Scaled Dot-Product Attention)：它是Transformer中最常用的注意力机制。在计算注意力权重时，对点积注意力进行了缩放操作，通过除以特征维度的平方根，以减小注意力权重的大小变化。这有助于防止梯度消失或梯度爆炸，并使得模型更稳定</li>
+<li><strong>按位置加权注意力(Relative Positional Attention)</strong>：这种注意力机制考虑了位置信息对注意力计算的影响。它引入了位置编码，通过计算相对位置的差异，对注意力权重进行调整。这种注意力机制在处理序列任务时能够更好地建模长距离依赖关系</li>
+</ol>
+<p>在Transformer中使用的Attention是<code>Scaled Dot-Product Attention</code>，是归一化的点乘Attention，假设输入的query <script type="math/tex">q</script> 、key维度、value维度为<script type="math/tex">d_{k}</script>，那么就计算query和每个key 的点乘操作，并除以<script type="math/tex">\sqrt{d_{k}}</script>，然后应用Softmax函数计算权重</p>
+<script type="math/tex; mode=display">
+\operatorname{Attention}\left(Q_{i}, K_{i}, V_{i}\right)=\operatorname{softmax}\left(\frac{Q_{i} K_{i}^{T}}{\sqrt{d_{k}}}\right) V_{i}</script><p>在实践中，将query和keys、values分别处理为矩阵$Q, K, V$，那么计算输出矩阵为:</p>
+<script type="math/tex; mode=display">
+\operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q K^{T}}{\sqrt{d_{k}}}\right) V</script><p>其中<script type="math/tex">Q \in R^{m \times d_{k}}</script>, <script type="math/tex">K \in R^{m \times d_{k}}</script>, <script type="math/tex">V \in R^{m \times d_{k}}</script>，输出矩阵维度为<script type="math/tex">R^{m \times d_{k}}</script>，其中<script type="math/tex">m</script>为句子长度，<script type="math/tex">d_k</script>为Embedding后的特征长度</p>
+<p>其中$QK$的维度为$m \times m$，表示句子中每个字之间的关注度(<code>self-attention</code>)，</p>
+<p>而$(QK)V$的维度为$m \times d_k$，表示attention下的句子特征向量，$QKV$如下所示</p>
+<script type="math/tex; mode=display">
+Q=K=V=\left[ \begin{matrix} 
+d_{11} & d_{12} & \cdots & d_{1 d_k} \\ 
+d_{21} & d_{22} & \cdots & d_{2 d_k} \\ 
+\cdots & \cdots & \cdots & \cdots \\
+d_{m1} & d_{m2} & \cdots & d_{m d_k} \\ 
+\end{matrix} \right] _{m \times d_k}</script><blockquote>
+<p>attention代码如下: 其中qkv是x经过线性变换之后的结果</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">attention</span>(<span class="params">query, key, value, mask=<span class="literal">None</span>, dropout=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;Compute &#x27;Scaled Dot Product Attention&#x27;&quot;</span></span><br><span class="line">    d_k = query.size(-<span class="number">1</span>)</span><br><span class="line">    scores = torch.matmul(query, key.transpose(-<span class="number">2</span>, -<span class="number">1</span>)) / math.sqrt(d_k)</span><br><span class="line">    <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        scores = scores.masked_fill(mask == <span class="number">0</span>, -<span class="number">1e9</span>)</span><br><span class="line">    p_attn = F.softmax(scores, dim = -<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> dropout <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        p_attn = dropout(p_attn)</span><br><span class="line">    <span class="keyword">return</span> torch.matmul(p_attn, value), p_attn</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>矩阵与其转置的乘积</p>
+</blockquote>
+<div class="note success modern"><p>向量数量积的几何意义：一个向量在另一个向量上的投影</p>
+</div>
+<p>向量的相似性是用两者的角度余弦来度量，余弦值越大则两者越相似</p>
+<script type="math/tex; mode=display">
+cos \theta = \frac {x^Ty}{||x|| \cdot ||y||}</script><p>而余弦值等于两者内积与两者模长积的比，当两个向量模长固定的情形下，内积大小则反映了两者相似性的大小</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">mat_a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">8</span>])</span><br><span class="line">np.matmul(mat_a,mat_a.T)</span><br><span class="line"></span><br><span class="line">Out[<span class="number">5</span>]: </span><br><span class="line">array([[  <span class="number">9</span>,  <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">30</span>, <span class="number">105</span>]])</span><br></pre></td></tr></table></figure>
+<p>那么Scaled Dot-Product Attention的示意图如下所示，Mask是可选的，如果是能够获取到所有时刻的输入$(K, V)$，那么就不使用Mask；如果是不能获取到，那么就需要使用Mask</p>
+<p>使用了Mask的Transformer模型也被称为<code>Transformer Decoder</code>，不使用Mask的Transformer模型也被称为<code>Transformer Encoder</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/scaled-dot-product-and-multi-head-attention.webp" alt="scaled-dot-product-and-multi-head-attention"></p>
+<blockquote>
+<p>如果只对Q、K、V做一次这样的权重操作是不够的，这里提出了Multi-Head Attention操作，包括：</p>
+</blockquote>
+<ol>
+<li>首先对<script type="math/tex">Q, \mathrm{~K}, \mathrm{~V}</script>做一次线性映射，将输入维度均为<script type="math/tex">d_{\text {model }}</script>的<script type="math/tex">Q, K, V</script>矩阵映射到<script type="math/tex">Q \in R^{m \times d_{k}}, K \in R^{m \times d_{k}}, V \in R^{m \times d_{v}}</script></li>
+<li>然后再采用Scaled Dot-Product Attention算出结果</li>
+<li>多次进行上述两步操作，然后将得到的结果进行合并</li>
+<li>将合并的结果进行线性变换</li>
+</ol>
+<p><strong>多头注意力的引入有以下几个目的</strong>：</p>
+<ol>
+<li><strong>平行计算</strong>：通过使用多个注意力头，可以并行地计算注意力权重和加权求和，从而加快模型的计算速度。每个注意力头都专注于不同的表示子空间，因此可以独立地计算和处理信息，提高模型的效率。</li>
+<li><strong>多样性表达</strong>：每个注意力头学习到的表示子空间不同，通过多个注意力头的组合，可以获得更丰富、多样性的表示。这有助于模型更好地捕捉输入序列中的不同特征和关系，提高模型的表达能力。</li>
+<li><strong>组合注意力</strong>：多头注意力允许模型在不同的表示子空间上进行多次注意力计算，并将这些计算的结果进行组合。这种组合能够从不同的关注角度和视角来处理输入序列，帮助模型更全面地理解序列中的信息。</li>
+</ol>
+<p>通过这些方式，多头注意力可以提供更灵活、更强大的建模能力，增强模型对序列中的长距离依赖关系、全局上下文和特征之间复杂关系的建模能力</p>
+<p>它是Transformer模型在处理自然语言处理任务时取得成功的重要组成部分，总结来说公式如下所示</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\operatorname{Attention}(Q, K, V)=\text { Concat }\left(\text {head}_{1}, \text {head}_{2}, \cdots, \text {head}_{h}\right) W^{O} 
+
+\\
+where \quad
+{head}_{i}=\operatorname{Attention}\left(Q W_{i}^{Q}, K W_{i}^{K}, V W_{i}^{V}\right) \\
+\end{array}</script><p>其中第1步的线性变换参数为<script type="math/tex">W_{i}^{Q} \in R^{d_{\text {model }} \times d_{k}}, W_{i}^{K} \in R^{d_{\text {model }} \times d_{k}}, W_{i}^{V} \in R^{d_{\text {model }} \times d_{v}}</script>，第4 步的线性变化参数为<script type="math/tex">W^{O} \in R^{h d_{v} \times d_{\text {model }}}</script>，而第三步计算的次数是<script type="math/tex">h</script></p>
+<p>在论文中取 <script type="math/tex">d_{\text {model }}=512</script>，表示每个时刻的输入维度和输出维度，<script type="math/tex">h=8</script> 表示8次Attention操作，<script type="math/tex">d_{k}=d_{v}=\frac{d_{\text {model }}}{h}=64</script> 表示经过线性变换之后、进行Attention操作之前的维度</p>
+<p>进行一次Attention之后输出的矩阵维度是<script type="math/tex">R^{m \times d_{v}}=R^{m \times 64}</script>，然后进行<script type="math/tex">\mathrm{h}=8</script>次操作合并之后输出的结果是<script type="math/tex">R^{m \times\left(h \times d_{v}\right)}=R^{m \times 512}</script>，因此输入和输出的矩阵维度相同</p>
+<p>这样输出的矩阵$R^{m \times 512}$，每行的向量都是对$V$向量中每一行$v_{i}$的加权，示意图如上所示</p>
+<blockquote>
+<p>多头注意力代码实现</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MultiHeadedAttention</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, h, d_model, dropout=<span class="number">0.1</span></span>):</span><br><span class="line">        <span class="string">&quot;Take in model size and number of heads.&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(MultiHeadedAttention, self).__init__()</span><br><span class="line">        <span class="keyword">assert</span> d_model % h == <span class="number">0</span></span><br><span class="line">        <span class="comment"># We assume d_v always equals d_k</span></span><br><span class="line">        self.d_k = d_model // h</span><br><span class="line">        self.h = h</span><br><span class="line">        <span class="comment"># 多头在这里体现</span></span><br><span class="line">        self.linears = clones(nn.Linear(d_model, d_model), <span class="number">4</span>)</span><br><span class="line">        self.attn = <span class="literal">None</span></span><br><span class="line">        self.dropout = nn.Dropout(p=dropout)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, query, key, value, mask=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># Same mask applied to all h heads.</span></span><br><span class="line">            mask = mask.unsqueeze(<span class="number">1</span>)</span><br><span class="line">        nbatches = query.size(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 1) Do all the linear projections in batch from d_model =&gt; h x d_k </span></span><br><span class="line">        query, key, value = \</span><br><span class="line">            [l(x).view(nbatches, -<span class="number">1</span>, self.h, self.d_k).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">             <span class="keyword">for</span> l, x <span class="keyword">in</span> <span class="built_in">zip</span>(self.linears, (query, key, value))]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 2) Apply attention on all the projected vectors in batch. </span></span><br><span class="line">        x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 3) &quot;Concat&quot; using a view and apply a final linear. </span></span><br><span class="line">        x = x.transpose(<span class="number">1</span>, <span class="number">2</span>).contiguous().view(nbatches, -<span class="number">1</span>, self.h * self.d_k)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 4) 线性变换投影回原始表示维度</span></span><br><span class="line">        <span class="keyword">return</span> self.linears[-<span class="number">1</span>](x)</span><br></pre></td></tr></table></figure>
+<p>如果不好理解可以看下这部分代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">multihead_attention</span>(<span class="params">Q, K, V, num_heads</span>):</span><br><span class="line">    <span class="comment"># 线性变换得到查询、键和值的表示</span></span><br><span class="line">    Q_transformed = linear_transform(Q)</span><br><span class="line">    K_transformed = linear_transform(K)</span><br><span class="line">    V_transformed = linear_transform(V)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分割头</span></span><br><span class="line">    Q_heads = split_heads(Q_transformed, num_heads)</span><br><span class="line">    K_heads = split_heads(K_transformed, num_heads)</span><br><span class="line">    V_heads = split_heads(V_transformed, num_heads)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每个头的注意力计算</span></span><br><span class="line">    attention_heads = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_heads):</span><br><span class="line">        attention_head = scaled_dot_product_attention(Q_heads[i], K_heads[i], V_heads[i])</span><br><span class="line">        attention_heads.append(attention_head)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 拼接注意力头</span></span><br><span class="line">    concatenated_attention = concatenate_heads(attention_heads)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 线性变换投影回原始表示维度</span></span><br><span class="line">    output = linear_transform(concatenated_attention)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>编码器和解码器如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/Transformer_encoder_decoder.webp" alt="Transformer_encoder_decoder"></p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><p>在encoder部分中的self-attention是不需要mask的，而decoder部分的self-attention是需要mask的，因为正是有了mask遮挡后面的信息，才能将transformer用来做推理</p>
+<p>编码器和解码器如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/Transformer_encoder_decoder.webp" alt="Transformer_encoder_decoder"></p>
+<p>编码器把最后一层的KV喂给了编码器，此时<strong>Q来源解码器，K=V来源于编码器</strong>，是为了让解码器能够在生成输出时使用编码器的信息</p>
+<p><strong>通过给解码器提供编码器的键和值矩阵，可以实现以下两个目的</strong>：</p>
+<ol>
+<li><strong>上下文信息传递</strong>：编码器中的自注意力机制能够捕捉到输入序列中的局部和全局关系，生成对应的键和值。将这些键和值传递给解码器，可以将编码器的上下文信息传递给解码器，以帮助解码器在生成输出时了解输入序列的相关内容。</li>
+<li>对齐和信息提取：解码器可以通过注意力机制对编码器的键和值进行加权汇总，以获取与当前解码位置相关的信息。通过计算解码器当前位置与编码器中每个位置之间的注意力分数，可以实现对齐和信息提取，使解码器能够专注于与当前位置相关的输入信息。</li>
+</ol>
+<p>总结来说，通过将编码器的键和值矩阵提供给解码器，可以实现上下文信息传递和对齐机制，帮助解码器在生成输出时利用编码器的信息，从而改善模型的性能和输出质量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/transformer_decoding.gif" alt="编码器到解码器"></p>
+<blockquote>
+<p>mask</p>
+</blockquote>
+<ul>
+<li><strong>Attention Mask</strong></li>
+</ul>
+<ul>
+<li><strong>Padding Mask</strong></li>
+</ul>
+<h1 id="Bert"><a href="#Bert" class="headerlink" title="Bert"></a>Bert</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://jalammar.github.io/illustrated-bert/">The Illustrated BERT, ELMo, and co. (How NLP Cracked Transfer Learning)</a></p>
+<p>ELMo、GPT 和 BERT 三者的区别</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/BERT-GPT-比较.webp" alt="BERT-GPT-比较"></p>
+<ul>
+<li><strong>GPT</strong>：GPT 使用Transformer <strong>Decoder</strong>作为特征提取器，<strong>实现了单向编码</strong>、具有良好的<strong>文本生成能力</strong>，然而当前词的语义只能由其前序词决定，并且在语义理解上不足</li>
+<li><strong>BERT</strong>：使用了Transformer <strong>Encoder</strong>作为特征提取器，为<strong>双向编码器</strong>，并使用了与其配套的掩码训练方法。虽然使用双向编码让BERT不再具有文本生成能力，但是BERT的语义信息<code>提取能力更强</code></li>
+<li><strong>ELMo</strong>: 使用自左向右编码和自右向左编码的两个LSTM网络，分别以$P\left(w<em>{i} \mid w</em>{1}, \cdots, w<em>{i-1}\right)$和$P\left(w</em>{i} \mid w<em>{i+1}, \cdots, w</em>{n}\right)$为目标函数独立训练，<strong>将训练得到的特征向量以拼接的形式实现双向编码，本质上还是单向编码，只不过是两个方向上的单向编码的拼接而成的双向编码</strong></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/transformer/从GPT和EMLO及Word2Vec到Bert.webp" alt="从GPT和EMLO及Word2Vec到Bert"></p>
+<p>bert是自编码模型，而gpt是自回归模型</p>
+<h2 id="bert概况"><a href="#bert概况" class="headerlink" title="bert概况"></a>bert概况</h2><p><code>BERT(Bidirectional Encoder Representations from Transformers)</code>模型的编码器由多个Transformer编码器层组成，通常使用了多个重复的编码器来形成深层的表示</p>
+<p>每个BERT编码器层包含了以下组件：</p>
+<ol>
+<li>多头自注意力（Multi-Head Self-Attention）：该层使用多头自注意力机制来对输入序列进行建模。自注意力允许模型在处理序列时关注不同位置之间的相关性，有助于捕捉上下文信息</li>
+<li>前馈神经网络（Feed-Forward Neural Network）：在自注意力层后面是一个前馈神经网络。该网络通常由两个线性层和激活函数（如ReLU）组成，用于对自注意力输出进行非线性变换和特征提取</li>
+<li>残差连接（Residual Connections）和层归一化（Layer Normalization）：在每个子层（自注意力和前馈神经网络）之后都应用了残差连接和层归一化操作。这些操作有助于缓解梯度消失问题，并提供更稳定和高效的训练</li>
+</ol>
+<p>BERT模型中通常会堆叠多个编码器层来形成深层表示。每个编码器层的输出会作为下一层的输入，通过多次重复这个过程，可以逐渐丰富输入序列的表示能力</p>
+<p>值得注意的是，BERT模型还在编码器输入的开头添加了<strong>特殊的标记</strong>，如[CLS]（用于分类任务）和[SEP]（用于分隔输入）。这些特殊标记有助于模型在处理不同任务时进行序列级别的操作和分类</p>
+<p>总结起来，BERT的编码器由多个Transformer编码器层组成，每个编码器层由多头自注意力、前馈神经网络和残差连接/层归一化组成。通过堆叠多个编码器层，BERT模型可以获得深层、高质量的语言表示</p>
+<h2 id="Architecture-1"><a href="#Architecture-1" class="headerlink" title="Architecture"></a>Architecture</h2><blockquote>
+<p>输入</p>
+<p>训练方式</p>
+</blockquote>
+<p>由于无法使用标准语言模型的训练模式，<strong>BERT借鉴完形填空任务和CBOW的思想</strong>，使用语言掩码模型(MLM)方法训练模型</p>
+<blockquote>
+<p>训练中的mask</p>
+</blockquote>
+<p>MLM方法也就是随机去掉句子中的部分token(单词)，然后模型来预测被去掉的token是什么。<strong>这样实际上已经不是传统的神经网络语言模型(类似于生成模型)了，而是单纯作为分类问题</strong>，根据这个时刻的hidden state来预测这个时刻的token应该是什么，而不是预测下一个时刻的词的概率分布了</p>
+<p>随机去掉的token被称作<code>掩码词</code>，在训练中，掩码词将以15%的概率被替换成[MASK]，也就是说随机mask语料中15%的token，这个操作则称为<code>掩码操作</code></p>
+<p>在选择15%的词作为掩码词后这些掩码词有三类替换选项：</p>
+<ol>
+<li>80% 练样本中：将选中的词用 [MASK] 来代替</li>
+<li>10% 的训练样本中：选中的词不发生变化，<strong>该做法是为了缓解训练文本和预测文本的偏差带来的性能损失</strong></li>
+<li>10% 的训练样本中：将选中的词用任意的词来进行代替，<strong>该做法是为了让 BERT 学会根据上下文信息自动纠错</strong></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/44700.html">https://study.hycbook.com/article/44700.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/transformer/">transformer</a><a class="post-meta__tags" href="/tags/self-attention/">self attention</a><a class="post-meta__tags" href="/tags/bert/">bert</a><a class="post-meta__tags" href="/tags/nlp/">nlp</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/56968.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/post_cover/蕾姆6.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">图论算法</div></div></a></div><div class="next-post pull-right"><a href="/article/35455.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">深度学习在图像领域的应用</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Transformer"><span class="toc-number">1.</span> <span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%8D%E5%90%91%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">词向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">模型介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture"><span class="toc-number">1.3.</span> <span class="toc-text">Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Embedding"><span class="toc-number">1.4.</span> <span class="toc-text">Embedding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention"><span class="toc-number">1.5.</span> <span class="toc-text">Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encoder"><span class="toc-number">1.6.</span> <span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Decoder"><span class="toc-number">1.7.</span> <span class="toc-text">Decoder</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bert"><span class="toc-number">2.</span> <span class="toc-text">Bert</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bert%E6%A6%82%E5%86%B5"><span class="toc-number">2.1.</span> <span class="toc-text">bert概况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-1"><span class="toc-number">2.2.</span> <span class="toc-text">Architecture</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

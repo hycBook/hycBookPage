@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>深度学习核心之损失函数 | 兼一书虫</title><meta name="keywords" content="深度学习,神经网络,损失函数"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习核心之损失函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习核心之损失函数">
+<meta property="og:url" content="https://study.hycbook.com/article/46832.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="深度学习核心之损失函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%868.webp">
+<meta property="article:published_time" content="2023-05-26T08:25:15.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.712Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="损失函数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%868.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/46832"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习核心之损失函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆8.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">深度学习核心之损失函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-26T08:25:15.000Z" title="发表于 2023-05-26 16:25:15">2023-05-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.712Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deep-learning/">deep_learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="深度学习核心之损失函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/46832.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cvmart.net/community/detail/4879">一文看尽深度学习中的各种损失函数</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/caip12999203000/article/details/127307395">常用的损失函数合集</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzU0MDQ1NjAzNg==&amp;mid=2247530581&amp;idx=3&amp;sn=08304b4b0f161a0a81538e1bfea27a2c&amp;chksm=fb3add5ecc4d5448881026bd45798c60c6e2094899043a95830809996cc0611b6a2c70c53200&amp;scene=27">深度学习常用损失函数的基本形式、原理及特点</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://calvinfeng.gitbook.io/machine-learning-notebook/supervised-learning/basic-overview/loss_function_overview">Loss Functions</a></p>
+</blockquote>
+<p><code>损失函数(Loss Function)</code>是用来衡量模型预测值与真实值之间差异的函数，它是深度学习中的一个重要组成部分，用于评估模型的性能并指导模型的优化过程</p>
+<div class="note info modern"><p>损失函数、代价函数、目标函数的关系</p>
+</div>
+<ul>
+<li><strong>损失函数(Loss Function)</strong>：损失函数是用来衡量模型在<strong>单个样本上的预测结果与真实标签之间的差异</strong>。它是一个标量值，表示模型预测的误差或损失程度。损失函数通常是针对单个样本计算的，例如均方误差(MSE)、交叉熵损失等。在训练过程中，通过最小化损失函数来优化模型参数，使模型的预测结果与真实标签更接近</li>
+<li><strong>代价函数(Cost Function)</strong>：代价函数是指<strong>整个训练集上的平均损失或误差函数</strong>。代价函数是损失函数的求和或平均，用于衡量模型在整个训练集上的预测结果与真实标签之间的总体差异。代价函数通常是在训练过程中使用的，用于计算梯度并更新模型参数</li>
+<li><strong>目标函数(Objective Function)</strong>：<strong>目标函数是在训练过程中要最小化或最大化的函数，可以是损失函数或代价函数</strong>。目标函数是模型训练的目标，通过优化目标函数来调整模型参数，使得模型在训练集上的性能达到最优</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>定义</th>
+<th>损失函数(Loss Function)</th>
+<th>代价函数(Cost Function)</th>
+<th>目标函数(Objective Function)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据集</td>
+<td>单个样本</td>
+<td>整个训练集</td>
+<td>训练要优化函数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在实际应用中，损失函数、代价函数和目标函数这些术语有时会被混用，但它们都涉及到衡量模型的预测结果与真实标签之间的差异，并在训练过程中用于优化模型</p>
+<p><strong>损失函数大致可分为两种</strong>：<code>回归损失</code>(针对<strong>连续型</strong>变量)和<code>分类损失</code>(针对<strong>离散型</strong>变量)</p>
+<p>具体使用哪个术语取决于上下文和个人偏好，但它们都指向类似的概念</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/损失函数结构图.svg" alt="损失函数结构图"></p>
+<h1 id="回归损失函数"><a href="#回归损失函数" class="headerlink" title="回归损失函数"></a>回归损失函数</h1><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mp.weixin.qq.com/s?__biz=MzU0MDQ1NjAzNg==&amp;mid=2247528906&amp;idx=2&amp;sn=7bdd966af599e2b8a336560d5dc3fdea&amp;chksm=fb3ad4c1cc4d5dd7bc868de3c75a7d52d91d98c6561462757f2a68fe04d497f4b7b6e79ac620&amp;scene=27">深度学习常用损失函数总览：基本形式、原理、特点</a></p>
+</blockquote>
+<h2 id="L1-Loss"><a href="#L1-Loss" class="headerlink" title="L1 Loss"></a>L1 Loss</h2><p><code>L1 Loss</code>也称为<code>Mean Absolute Error</code>，即<strong>平均绝对误差(MAE)</strong>，公式定义为</p>
+<script type="math/tex; mode=display">
+J_{M A E}=\frac{1}{N} \sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right|</script><p><strong>优点</strong>: 对离群点(<strong>Outliers</strong>)或者异常值更具有鲁棒性</p>
+<p><strong>缺点</strong>: 由图可知其在0点处的导数不连续，使得求解效率低下，导致收敛速度慢；对于较小的损失值，其梯度也同其他区间损失值的梯度一样大，所以不利于网络的学习</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/MAE损失函数.webp" alt="MAE损失函数"></p>
+<blockquote>
+<p><strong>模型预测与真实值之间的误差服从拉普拉斯分布Laplace distribution</strong></p>
+</blockquote>
+<p>可以在一定的假设下通过最大化似然可以得到MAE损失的形式，假设模型预测与真实值之间的误差服从<code>拉普拉斯分布</code>Laplace distribution $(\mu=0, b=1)$，则给定一个输入<script type="math/tex">x_{i}</script>，模型输出真实值<script type="math/tex">y_{i}</script>的概率为</p>
+<script type="math/tex; mode=display">
+p\left(y_{i} \mid x_{i}\right)=\frac{1}{2} \exp \left(-\left|y_{i}-\hat{y}_{i}\right|\right)</script><p>对其求对数可以得到的负对数似然实际上就是MAE损失的形式</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+
+L(x, y)=\prod_{i=1}^{N} \frac{1}{2} \exp \left(-\left|y_{i}-\hat{y}_{i}\right|\right) \\ \\
+
+L L(x, y)=-\frac{N}{2}-\sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right| \\ \\
+
+N L L(x, y)=\sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right|
+
+\end{array}</script><h2 id="L2-Loss"><a href="#L2-Loss" class="headerlink" title="L2 Loss"></a>L2 Loss</h2><p><code>L2 Loss</code>也称为<code>Mean Squred Error</code>，即<strong>均方差(MSE)</strong>，它衡量的是预测值与真实值之间距离的平方和</p>
+<script type="math/tex; mode=display">
+J_{M S E}=\frac{1}{N} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}</script><p><strong>优点</strong>: 收敛速度快，能够对梯度给予合适的惩罚权重，而<strong>不是一视同仁</strong>，使梯度更新的方向可以更加精确</p>
+<p><strong>缺点</strong>: 对异常值十分敏感，梯度更新的方向很容易受离群点所主导，不具备鲁棒性，假如我们训练数据中存在较大的异常值，此时我们将会有一个巨大的权重更新，这有可能会使模型失去平衡</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/MSE损失函数.webp" alt="MSE损失函数"></p>
+<blockquote>
+<p><strong>在模型输出与真实值的误差服从高斯分布的假设下，最小化均方差损失函数与极大似然估计本质上是一致的</strong></p>
+</blockquote>
+<p>MSE假设了误差服从<code>高斯分布</code>，在高斯分布假设下，可以使用最大化似然得到均方差损失的形式，假设模型预测与真实值之间的误差服从标准高斯分布$(\mu=0, \sigma=1)$，则给定一个输入<script type="math/tex">x_{i}</script>，模型输出真实值<script type="math/tex">y_{i}</script>的概率为</p>
+<script type="math/tex; mode=display">
+p\left(y_{i} \mid x_{i}\right) 
+
+= \frac{1}{\sigma \sqrt{2 \pi}} \exp \left[-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right] 
+
+=\frac{1}{\sqrt{2 \pi}} \exp \left(-\frac{\left(y_{i}-\hat{y}_{i}\right)^{2}}{2}\right)</script><p>进一步我们假设数据集中$\mathrm{N}$个样本点之间相互独立，则给定所有$x$输出所有真实值$y$的概率，即似然Likelihood为所有<script type="math/tex">p\left(y_{i} \mid x_{i}\right)</script>的累乘</p>
+<script type="math/tex; mode=display">
+L(x, y)=\prod_{i=1}^{N} \frac{1}{\sqrt{2 \pi}} \exp \left(-\frac{\left(y_{i}-\hat{y}_{i}\right)^{2}}{2}\right)</script><p>通常为了计算方便，我们通常最大化对数似然Log-Likelihood</p>
+<script type="math/tex; mode=display">
+L L(x, y)=\log (L(x, y))=-\frac{N}{2} \log 2 \pi-\frac{1}{2} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}</script><p>去掉与$\hat{y}_{i}$无关的第一项，然后转化为最小化负对数似然Negative Log-Likelihood</p>
+<script type="math/tex; mode=display">
+N L L(x, y)=\frac{1}{2} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}</script><p>可以看到这个实际上就是均方差损失的形式，也就是说在模型输出与真实值的<strong>误差服从高斯分布的假设下，最小化均方差损失函数与极大似然估计本质上是一致的</strong></p>
+<div class="note info modern"><p>因此在这个假设能被满足的场景中(比如回归)，均方差损失是一个很好的损失函数选择</p>
+<p>当这个假设没能被满足的场景中(比如分类)，均方差损失不是一个好的选择</p>
+</div>
+<blockquote>
+<p>MAE和MSE作为损失函数的主要区别是</p>
+</blockquote>
+<ol>
+<li><p>MSE损失相比MAE通常可以更快地收敛</p>
+<p>当使用梯度下降算法时，MSE的梯度为<script type="math/tex">-\hat{y_{i}}</script>，而MAE损失的梯度为<script type="math/tex">\pm 1</script>，即MSE的梯度的scale会随误差大小变化，而MAE的梯度的scale则一直保持为1，即便在绝对误差<script type="math/tex">\left|y_{i}-\hat{y_{i}}\right|</script>很小的时候，MAE的梯度scale也同样为1，这实际上是非常不利于模型的训练的</p>
+<p>当然你可以通过在训练过程中动态调整学习率缓解这个问题，但是总的来说，损失函数梯度之间的差异导致了MSE在大部分时候比MAE收敛地更快，这也是MSE更为流行的原因</p>
+</li>
+<li><p>MAE损失对于outlier更加健壮，即更加不易受到outlier影响，当误差非常大的时候，MSE损失会远远大于MAE损失</p>
+</li>
+<li><p>MSE假设了误差服从<code>高斯分布</code>，MAE假设了误差服从<code>拉普拉斯分布</code>，拉普拉斯分布本身对于outlier更加robust</p>
+</li>
+</ol>
+<blockquote>
+<p>适用场景</p>
+</blockquote>
+<h2 id="Smooth-L1-Loss"><a href="#Smooth-L1-Loss" class="headerlink" title="Smooth L1 Loss"></a>Smooth L1 Loss</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pytorch.org/docs/stable/generated/torch.nn.SmoothL1Loss.html#torch.nn.SmoothL1Loss">pytorch SMOOTHL LOSS</a></p>
+</blockquote>
+<p><code>Smooth L1 Loss</code>即<code>平滑的L1损失(SLL)</code>，出自<a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/abs/1504.08083">Fast RCNN</a>，也称为SLL，Smooth L1 loss也具备了L1 loss和L2 loss各自的优点，本质就是L1和L2的组合</p>
+<script type="math/tex; mode=display">
+J_{SLL} =\left\{
+
+\begin{array}{ll}0.5\left(y_{i}-\hat{y}_{i}\right)^{2} / \beta , & \text { if }\left|y_{i}-\hat{y}_{i}\right|< \beta \\ 
+
+\left|y_{i}-\hat{y}_{i}\right|-0.5 * \beta,  & \text { otherwise }
+
+\end{array}\right.</script><h2 id="Huber-Loss"><a href="#Huber-Loss" class="headerlink" title="Huber Loss"></a>Huber Loss</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html#torch.nn.HuberLoss">pytorch Huber LOSS</a></p>
+</blockquote>
+<p><code>Huber Loss</code>是一种类似于Smooth L1 Loss的损失函数，它也能够<strong>平衡L2范数和L1范数之间的权衡</strong></p>
+<p>Huber loss和Smooth L1 loss具有相同的曲线走势，当Huber loss中的δ等于1时，Huber loss等价于Smooth L1 loss</p>
+<script type="math/tex; mode=display">
+J_{HL} =\left\{
+
+\begin{array}{ll}0.5\left(y_{i}-\hat{y}_{i}\right)^{2}  , & \text { if }\left|y_{i}-\hat{y}_{i}\right|< \delta \\ 
+
+\delta * \left|y_{i}-\hat{y}_{i}\right|-0.5 * \delta,  & \text { otherwise }
+
+\end{array}\right.</script><p>对于Huber损失来说，$\delta$的选择十分重要，它决定了模型处理局外点的行为。当残差大于$\delta$时使用L1损失，很小时则使用更为合适的L2损失来进行优化</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/Huber损失函数.webp" alt="Huber损失函数"></p>
+<blockquote>
+<p>优点</p>
+</blockquote>
+<ul>
+<li><p><strong>零点导数连续</strong>: Huber损失函数克服了MAE和MSE的缺点，不仅可以保持损失函数具有<strong>连续的导数</strong></p>
+</li>
+<li><p><strong>解决离群点梯度爆炸的问题</strong>: 利用MSE梯度随误差减小的特性来得到更精确的最小值，也对局外点具有<strong>更好的鲁棒性</strong></p>
+</li>
+</ul>
+<p>但Huber损失函数的良好表现得益于精心训练的超参数$\delta$，当$\delta$趋向于0时它就退化成了MAE，而当$\delta$趋向于无穷时则退化为了MSE</p>
+<h2 id="Quantile-Loss"><a href="#Quantile-Loss" class="headerlink" title="Quantile Loss"></a>Quantile Loss</h2><p><code>分位数回归Quantile Regression</code>是一类在实际应用中非常有用的回归算法，通常的回归算法是拟合目标值的期望或者中位数，而分位数回归可以通过给定不同的分位点，拟合目标值的不同分位数</p>
+<h2 id="IoU-Loss"><a href="#IoU-Loss" class="headerlink" title="IoU Loss"></a>IoU Loss</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1608.01471.pdf">UnitBox: An Advanced Object Detection Network 2016</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/IOU loss公式可视化.webp" alt="IOU loss公式可视化"></p>
+<h1 id="分类损失函数"><a href="#分类损失函数" class="headerlink" title="分类损失函数"></a>分类损失函数</h1><h2 id="Binary-Cross-Entropy"><a href="#Binary-Cross-Entropy" class="headerlink" title="Binary Cross Entropy"></a>Binary Cross Entropy</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.scholat.com/teamwork/showPostMessage.html?id=8939&amp;teamId=1263">简单的交叉熵损失函数，你真的懂了吗</a></p>
+</blockquote>
+<p>对于分类问题，最常用的损失函数是交叉熵损失函数<code>Cross Entropy Loss</code></p>
+<p>考虑二分类，在二分类中我们通常使用Sigmoid函数将模型的输出压缩到$(0,1)$区间内<script type="math/tex">\hat{y_{i}} \in(0,1)</script>，用来代表给定输入<script type="math/tex">x_{i}</script>，模型判断为正类的概率</p>
+<p>由于只有正负两类， 因此同时也得到了负类的概率</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+
+p\left(y_{i}=1 \mid x_{i}\right)=\hat{y_{i}} \\
+
+p\left(y_{i}=0 \mid x_{i}\right)=1-\hat{y_{i}}
+
+\end{array}</script><p>将两条式子合并成一条</p>
+<script type="math/tex; mode=display">
+p\left(y_{i} \mid x_{i}\right)=\left(\hat{y}_{i}\right)^{y_{i}}\left(1-\hat{y}_{i}\right)^{1-y_{i}}</script><p>假设数据点之间<strong>独立同分布</strong>，则似然可以表示为</p>
+<script type="math/tex; mode=display">
+L(x, y)=\prod_{i=1}^{N}\left(\hat{y}_{i}\right)^{y_{i}}\left(1-\hat{y}_{i}\right)^{1-y_{i}}</script><p>对似然取对数，然后加负号变成最小化负对数似然，即为交叉熵损失函数的形式</p>
+<script type="math/tex; mode=display">
+N L L(x, y)=J_{C E}=-\sum_{i=1}^{N}\left(y_{i} \log \left(\hat{y}_{i}\right)+\left(1-y_{i}\right) \log \left(1-\hat{y_{i}}\right)\right)</script><blockquote>
+<p>可视化</p>
+</blockquote>
+<p>下图是对二分类的交叉熵损失函数的可视化，蓝线是目标值为0时输出不同输出的损失，黄线是目标值为1时的损失</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/二分类的交叉熵损失函数的可视化.webp" alt="二分类的交叉熵损失函数的可视化"></p>
+<p>可以看到约接近目标值损失越小，随着误差变差，损失呈指数增长</p>
+<p>图中<code>蓝线</code>是$y_i=0$的图线，此时损失函数变为</p>
+<script type="math/tex; mode=display">
+J_{CE} = -log(1-\hat{y_{i}})</script><p>图中<code>黄线</code>是$y_i=1$的图线，此时损失函数变为</p>
+<script type="math/tex; mode=display">
+J_{CE} = -log (\hat{y_{i}})</script><p><strong>从图形中我们可以发现</strong>：预测输出与$y$差得越多，$J_{CE}$的值越大，也就是说对当前模型的<strong>惩罚</strong>越大，而且是<strong>非线性增大</strong>，是一种类似指数增长的级别</p>
+<p>这是由log函数本身的特性所决定的，这样的好处是模型会倾向于让预测输出更接近真实样本标签$y$</p>
+<h2 id="Cross-Entropy-Loss"><a href="#Cross-Entropy-Loss" class="headerlink" title="Cross Entropy Loss"></a>Cross Entropy Loss</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/518626935">交叉熵损失函数（CrossEntropy Loss）</a></p>
+</blockquote>
+<p>在多分类的任务中，交叉樀损失函数的推导思路和二分类是一样的，变化的地方主要有两个</p>
+<ol>
+<li><strong>维度变化</strong>: 真实值$y_{i}$现在是一个one-hot向量</li>
+<li><strong>激活函数</strong>: 模型输出的最后的激活函数由原来的<strong>Sigmoid函数</strong>换成<strong>Softmax函数</strong></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/Cross Entropy Loss损失函数.webp" alt="Cross Entropy Loss损失函数"></p>
+<blockquote>
+<p>为什么分类用交叉熵损失，而不是均方差损失</p>
+</blockquote>
+<p>均方差损失实际上均方差损失<strong>假设了误差服从高斯分布</strong>，在分类任务下这个假设没办法被满足，因此效果会很差</p>
+<p>为什么是交叉熵损失呢? 有两个角度可以解释这个事情，一个角度从<code>最大似然</code>的角度，另一个角度是可以用<code>信息论</code>来解释交叉熵损失</p>
+<h3 id="最大似然角度"><a href="#最大似然角度" class="headerlink" title="最大似然角度"></a>最大似然角度</h3><p>Softmax函数将每个维度的输出范围都限定在$(0,1)$之间，同时所有维度的输出和为1，用于表示一个概率分布</p>
+<script type="math/tex; mode=display">
+p\left(y_{i} \mid x_{i}\right)=\prod_{k=1}^{K}\left(y_{i}^{k}\right)^{y_{i}^{k}}</script><p>其中$k \in K$表示$\mathrm{K}$个类别中的一类，同样的假设数据点之间独立同分布，可得到负对数似然为</p>
+<script type="math/tex; mode=display">
+N L L(x, y)=J_{C E}=-\sum_{i=1}^{N} \sum_{k=1}^{K} y_{i}^{k} \log \left(y_{i}^{k}\right)</script><p>由于$y_{i}$是一个<strong>one-hot向量</strong>，除了目标类为1之外<strong>其他类别上的输出都为0</strong>，因此上式也可以写为</p>
+<script type="math/tex; mode=display">
+J_{C E}=-\sum_{i=1}^{N} y_{i}^{c_{i}} \log \left(y_{i}^{\hat{c}_{i}}\right)</script><p>其中<script type="math/tex">c_{i}</script>是样本<script type="math/tex">x_{i}</script>的目标类。通常这个应用于多分类的交叉樀损失函数也被称为<code>Softmax Loss</code>或者<code>Categorical Cross Entropy Loss</code></p>
+<h3 id="信息论角度"><a href="#信息论角度" class="headerlink" title="信息论角度"></a>信息论角度</h3><p>假设对于样本<script type="math/tex">x_{i}</script>存在一个最优分布<script type="math/tex">y_{i}^{\star}</script>真实地表明了这个样本属于各个类别的概率，那么我们希望模型的输出<script type="math/tex">\hat{y}_{i}</script>尽可能地逼近这个最优分布</p>
+<p>在信息论中，我们可以使用<code>KL散度(Kullback-Leibler Divergence)</code>来衡量两个分布的相似性</p>
+<p>给定分布$p$和分布$q$，两者的KL散度公式如下</p>
+<script type="math/tex; mode=display">
+K L(p, q)=\sum_{k=1}^{K} p^{k} \log \left(p^{k}\right)-\sum_{k=1}^{K} p^{k} \log \left(q^{k}\right)</script><p>其中第一项为分布<script type="math/tex">p</script>的信息熵，第二项为分布<script type="math/tex">p</script>和<script type="math/tex">q</script>的交叉熵。将最优分布<script type="math/tex">y_{i}^{\star}</script>和输出分布<script type="math/tex">\hat{y}_{i}</script>带入<script type="math/tex">p</script>和<script type="math/tex">q</script>得到</p>
+<script type="math/tex; mode=display">
+K L\left(y_{i}^{\star}, \hat{y_{i}}\right)=\sum_{k=1}^{K} y_{i}^{\star k} \log \left(y_{i}^{\star k}\right)-\sum_{k=1}^{K} y_{i}^{\star k} \log \left(y_{i}^{\hat{k}}\right)</script><p>由于我们希望两个分布尽量相近，因此我们<strong>最小化KL散度</strong>。同时由于上式第一项信息熵仅与最优分布本身相关，因此我们在最小化的过程中可以忽略掉，变成最小化</p>
+<script type="math/tex; mode=display">
+-\sum_{k=1}^{K} y_{i}^{\star k} \log \left(y_{i}^{\hat{k}}\right)</script><p>我们并不知道最优分布<script type="math/tex">y_{i}^{\star}</script>，但训练数据里面的目标值<script type="math/tex">y_{i}</script>可以看做是<script type="math/tex">y_{i}^{\star}</script>的一个近似分布</p>
+<script type="math/tex; mode=display">
+-\sum_{k=1}^{K} y_{i}^{k} \log \left(y_{i}^{\hat{k}}\right)</script><p>这个是针对单个训练样本的损失函数，如果考虑整个数据集，则</p>
+<script type="math/tex; mode=display">
+J_{K L}=-\sum_{i=1}^{N} \sum_{k=1}^{K} y_{i}^{k} \log \left(y_{i}^{\hat{k}}\right)=-\sum_{i=1}^{N} y_{i}^{c_{i}} \log \left(y_{i}^{\hat{c}_{i}}\right)</script><p>可以看到通过<strong>最小化交叉嫡</strong>的角度推导出来的结果和使用最大化似然得到的结果是一致的</p>
+<h2 id="Hinge-Loss"><a href="#Hinge-Loss" class="headerlink" title="Hinge Loss"></a>Hinge Loss</h2><p><code>合页损失Hinge Loss</code>是另外一种二分类损失函数，适用于maximum-margin的分类，支持向量机Support Vector Machine (SVM)模型的损失函数本质上就是Hinge Loss + L2正则化</p>
+<script type="math/tex; mode=display">
+J_{\text {hinge }}=\sum_{i=1}^{N} \max \left(0,1-\operatorname{sgn}\left(y_{i}\right) \hat{y_{i}}\right)</script><p>下图是$y$为正类，即$sgn(y)=1$时，不同输出的合页损失示意图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/Hinge Loss损失函数.webp" alt="Hinge Loss损失函数"></p>
+<p>可以看到当$y$为正类时，模型输出负值会有较大的惩罚，当模型输出为正值且在区间时还会有一个较小的惩罚</p>
+<p><strong>即合页损失不仅惩罚预测错的，并且对于预测对了但是置信度不高的也会给一个惩罚，只有置信度高的才会有零损失</strong></p>
+<p>使用合页损失直觉上理解是要找到一个决策边界，使得所有数据点被这个边界正确地、高置信地被分类</p>
+<h2 id="Focal-Loss"><a href="#Focal-Loss" class="headerlink" title="Focal Loss"></a>Focal Loss</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://arxiv.org/pdf/1708.02002.pdf">Focal Loss for Dense Object Detection 2018</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.csc.kth.se/cvap/cvg/rg/materials/louise_001_slides.pdf">ppt: Focal Loss for Dense Object Detection</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/BIgHAo1/article/details/121783011">Focal Loss损失函数(超级详细的解读)</a></p>
+</blockquote>
+<p><code>Focal loss</code>损失函数是为了解决<strong>one-stage</strong>目标检测中<strong>正负样本极度不平衡的问题</strong>，由<strong>何恺明</strong>(Kaiming He)团队提出</p>
+<p>Focal loss是基于<strong>BCE(二分类交叉熵)</strong>的。它是一个动态缩放的交叉熵损失，通过一个动态缩放因子，可以动态降低训练过程中易区分样本的权重，从而将重心快速<strong>聚焦在那些难区分的样本</strong>(有可能是正样本，也有可能是负样本，但都是对训练网络有帮助的样本)</p>
+<blockquote>
+<p>正负样本不平衡(Class Imbalance)</p>
+</blockquote>
+<p>在一张图像中能够匹配到目标的候选框(正样本)个数一般只有十几个或几十个，而没有匹配到的候选框(负样本)则有10000~100000个</p>
+<p>这么多的负样本不仅对训练网络起不到什么作用，反而会淹没掉少量但有助于训练的样本</p>
+<blockquote>
+<p>Focal loss是为了解决一阶段目标检测模型，那为什么二阶段不用解决</p>
+</blockquote>
+<p>在<strong>two-stage</strong>中分了两步，第一步时同样也会生成许多的负样本以及很少的正样本，但到第二步时，它会在第一步的基础上选取特定数量的正负样本去检测，所以正负样本并不会特别不平衡，二阶段模型还可以采用更复杂的<code>采样策略</code>和<code>hard negative mining (难例挖掘)</code>等方法来处理样本不平衡和难易样本的问题，因此对于二阶段目标检测模型来说，Focal Loss的优势可能相对较小</p>
+<blockquote>
+<p>引出Focal loss</p>
+</blockquote>
+<p>为了方便接下来的描述，这里先定义$p_t$为</p>
+<script type="math/tex; mode=display">
+p_{\mathrm{t}}=\left\{\begin{array}{ll}p & \text { if } y=1 \\ 1-p & \text { otherwise }\end{array}\right.</script><p>此时cross entropy可以定义为</p>
+<script type="math/tex; mode=display">
+J_{FL}(p, y)=\left\{\begin{array}{ll}-\log (p) & \text { if } y=1 \\ -\log (1-p) & \text { otherwise }\end{array}\right.
+
+ \longrightarrow
+
+J_{FL}(p, y)=J_{FL}\left(p_{\mathrm{t}}\right)=-\log \left(p_{\mathrm{t}}\right)</script><p>解决类别不平衡的常见方法是为类别1引入一个权重因子$ \alpha \in [0, 1]$，而对于类别非1引入权重因子$1-\alpha$，这里引出<code>Balanced Cross Entropy(平衡交叉熵)</code></p>
+<script type="math/tex; mode=display">
+J_{FL}\left(p_{\mathrm{t}}\right)=-\alpha_{\mathrm{t}} \log \left(p_{\mathrm{t}}\right)</script><p>在论文实验中显示，密集检测器训练过程中遇到的类别不平衡问题使得交叉熵损失失去了效果，<strong>易于分类的负样本占据了大部分损失并主导了梯度</strong></p>
+<p>虽然$\alpha$平衡了正样本和负样本的重要性，但它<code>无法区分易于和困难的样本</code></p>
+<p>因此，论文提出了新的损失函数以减小易于样本的权重，从而将训练的重点放在困难的负样本上，更具体地说，论文提出在交叉熵损失中添加一个<code>调制因子</code>$\left(1-p_{\mathrm{t}}\right)^{\gamma}$，其中$\gamma$是可调的<code>Focal参数</code>。我们将这个损失函数称为<code>Focal loss</code>，定义Focal Loss公式如下</p>
+<script type="math/tex; mode=display">
+J_{FL}\left(p_{\mathrm{t}}\right) = - \alpha_{t} \left(1-p_{\mathrm{t}}\right)^{\gamma} \log \left(p_{\mathrm{t}}\right)</script><p>其中$\gamma$作用是调节难易，较小的$\gamma$值会使得易样本的损失权重下降更慢，而较大的$\gamma$值则会加速易样本的损失权重下降</p>
+<p>$\alpha$作用是平衡正负样(正负样本数量不均衡)，当$\alpha$接近0时，负样本的损失贡献被放大，从而平衡了正负样本之间的重要性</p>
+<div class="note info modern"><p>通过调整$\alpha$和$\gamma$的值，可以根据具体情况调节模型对不同样本的关注程度，提高模型对难样本的学习和训练效果</p>
+</div>
+<blockquote>
+<p>可视化</p>
+</blockquote>
+<p>下图可视化了$\gamma \in[0,5]$的值，可以观察到</p>
+<ol>
+<li>增加了<strong>分类不准确样本</strong>在损失函数中的权重</li>
+<li>增加了<strong>难分样本</strong>在损失函数的权重，使得损失函数倾向于难分的样本，有助于提高难分样本的准确度</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/deep_learning/深度学习核心之损失函数/Focal Loss在不同Upsilon下的损失曲线.webp" alt="Focal Loss在不同Upsilon下的损失曲线"></p>
+<p>$\gamma$作用是调节难易样本对于总loss的权重(正负样本中都有难易，都进行了调节)</p>
+<p>$\gamma$调节简单样本权重降低的速率，当$\gamma=0$时即为交叉熵损失函数，当$\gamma$增加时，调整因子的影响也在增加。实验发现$\gamma=2$是最优</p>
+<h1 id="基于概率的损失"><a href="#基于概率的损失" class="headerlink" title="基于概率的损失"></a>基于概率的损失</h1><h2 id="KL散度"><a href="#KL散度" class="headerlink" title="KL散度"></a>KL散度</h2><p>KL-散度损失函数的定义如下</p>
+<script type="math/tex; mode=display">
+J_{KL} = -\sum_{i=0}^{C} y_{i} \log \left(\hat{y}_{i}\right)-y_{i} \log \left(y_{i}\right)=\sum_{i=0}^{C} y_{i}\left(\frac{y_{i}}{\hat{y}_{i}}\right)</script><p><strong>优点：</strong></p>
+<ul>
+<li>适用于近似复杂的目标分布，如图像</li>
+</ul>
+<p>如上所示，KL散度损失是从我们网络预测的交叉熵分布与目标分布的熵之间的差异。它告诉我们模型离期望的分布有多远</p>
+<blockquote>
+<p>那么我们什么情况下使用它</p>
+</blockquote>
+<p>如果我们的任务是生成图像，那么目标分布要复杂得多，在这种情况下，使用KL散度损失的效果最好</p>
+<h1 id="正则化技术"><a href="#正则化技术" class="headerlink" title="正则化技术"></a>正则化技术</h1><h2 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h2><p>在损失函数中添加模型参数的 L1 范数作为正则项。它促使模型参数稀疏化，即将一些参数压缩为零，从而实现特征选择和模型简化</p>
+<h2 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h2><p>在损失函数中添加模型参数的 L2 范数作为正则项。它对模型参数进行平滑约束，使模型参数值趋向于较小的值，有助于防止过拟合</p>
+<h2 id="弹性网正则化"><a href="#弹性网正则化" class="headerlink" title="弹性网正则化"></a>弹性网正则化</h2><p>弹性网正则化是 L1 正则化和 L2 正则化的一种结合。它同时对模型参数使用 L1 和 L2 正则化，从而综合考虑了<code>稀疏性</code>和<code>平滑性</code>的影响</p>
+<h2 id="其他正则"><a href="#其他正则" class="headerlink" title="其他正则"></a>其他正则</h2><p>Dropout：Dropout 是一种在训练过程中随机丢弃部分神经元的技术。它可以防止神经网络过拟合，并提高模型的泛化能力。通过在训练过程中以一定概率将部分神经元置零，Dropout 可以强制模型在没有完整神经网络的情况下进行学习</p>
+<p>数据增强(Data Augmentation)：数据增强是一种通过对训练数据进行随机变换来扩充数据集的技术。常见的数据增强操作包括随机裁剪、旋转、翻转、平移、缩放等。数据增强可以增加训练数据的多样性，提高模型的泛化能力和鲁棒性</p>
+<p>图像增强技术：了解常见的图像增强方法，如对比度调整、亮度调整、色彩平衡、直方图均衡化等，以及它们在图像处理和计算机视觉中的应用</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/46832.html">https://study.hycbook.com/article/46832.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">损失函数</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆8.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/22410.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆7.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">深度学习核心之激活函数</div></div></a></div><div class="next-post pull-right"><a href="/article/36065.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆9.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">深度学习核心之优化器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/22410.html" title="深度学习核心之激活函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆7.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之激活函数</div></div></a></div><div><a href="/article/36065.html" title="深度学习核心之优化器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆9.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">深度学习核心之优化器</div></div></a></div><div><a href="/article/451.html" title="图像分类算法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆5.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-18</div><div class="title">图像分类算法</div></div></a></div><div><a href="/article/6384.html" title="深度学习核心基础知识点"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆6.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-20</div><div class="title">深度学习核心基础知识点</div></div></a></div><div><a href="/article/53377.html" title="深度学习模型压缩技术"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆11.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">深度学习模型压缩技术</div></div></a></div><div><a href="/article/35455.html" title="深度学习在图像领域的应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-23</div><div class="title">深度学习在图像领域的应用</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">回归损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#L1-Loss"><span class="toc-number">2.1.</span> <span class="toc-text">L1 Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#L2-Loss"><span class="toc-number">2.2.</span> <span class="toc-text">L2 Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Smooth-L1-Loss"><span class="toc-number">2.3.</span> <span class="toc-text">Smooth L1 Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Huber-Loss"><span class="toc-number">2.4.</span> <span class="toc-text">Huber Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quantile-Loss"><span class="toc-number">2.5.</span> <span class="toc-text">Quantile Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IoU-Loss"><span class="toc-number">2.6.</span> <span class="toc-text">IoU Loss</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">分类损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Cross-Entropy"><span class="toc-number">3.1.</span> <span class="toc-text">Binary Cross Entropy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cross-Entropy-Loss"><span class="toc-number">3.2.</span> <span class="toc-text">Cross Entropy Loss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E8%A7%92%E5%BA%A6"><span class="toc-number">3.2.1.</span> <span class="toc-text">最大似然角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E8%AE%BA%E8%A7%92%E5%BA%A6"><span class="toc-number">3.2.2.</span> <span class="toc-text">信息论角度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hinge-Loss"><span class="toc-number">3.3.</span> <span class="toc-text">Hinge Loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Focal-Loss"><span class="toc-number">3.4.</span> <span class="toc-text">Focal Loss</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E7%9A%84%E6%8D%9F%E5%A4%B1"><span class="toc-number">4.</span> <span class="toc-text">基于概率的损失</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#KL%E6%95%A3%E5%BA%A6"><span class="toc-number">4.1.</span> <span class="toc-text">KL散度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">正则化技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#L1%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">5.1.</span> <span class="toc-text">L1正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#L2%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">5.2.</span> <span class="toc-text">L2正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%BD%91%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">5.3.</span> <span class="toc-text">弹性网正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%AD%A3%E5%88%99"><span class="toc-number">5.4.</span> <span class="toc-text">其他正则</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

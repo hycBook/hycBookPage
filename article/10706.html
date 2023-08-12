@@ -1,0 +1,1768 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>机器学习_一元函数微积分 | 兼一书虫</title><meta name="keywords" content="python,机器学习数学,微积分,定积分,常微分,极限和连续,导数微分"><meta name="author" content="narutohyc"><meta name="copyright" content="narutohyc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="机器学习的数学基础入门知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习_一元函数微积分">
+<meta property="og:url" content="https://study.hycbook.com/article/10706.html">
+<meta property="og:site_name" content="兼一书虫">
+<meta property="og:description" content="机器学习的数学基础入门知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%860.webp">
+<meta property="article:published_time" content="2022-09-10T12:46:25.000Z">
+<meta property="article:modified_time" content="2023-08-12T11:55:54.720Z">
+<meta property="article:author" content="narutohyc">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="机器学习数学">
+<meta property="article:tag" content="微积分">
+<meta property="article:tag" content="定积分">
+<meta property="article:tag" content="常微分">
+<meta property="article:tag" content="极限和连续">
+<meta property="article:tag" content="导数微分">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.hycbook.com/i/hexo/post_cover/%E8%95%BE%E5%A7%860.webp"><link rel="shortcut icon" href="https://pic.hycbook.com/i//hexo/config_imgs/网站图标.webp"><link rel="canonical" href="https://study.hycbook.com/article/10706"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#c6ff7a"/><link rel="apple-touch-icon" sizes="180x180" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/favicon-16x16.png"/><link rel="mask-icon" href="https://pic.hycbook.com/i//hexo/source/img/siteicon/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?68340394dfd808cea9826e8a57f87aa6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":120,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: narutohyc","link":"链接: ","source":"来源: 兼一书虫","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器学习_一元函数微积分',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-12 19:55:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/hyc_udf.css"><link rel="stylesheet" href="/css/udf_css.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/404/404.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="兼一书虫" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/person_img/兼一头像.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">114</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">168</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.hycbook.com/i/hexo/post_imgs/蕾姆0.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">兼一书虫</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwu"></use></svg><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wenzhang1">             </use></svg><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 归档</span></a></li><li><a class="site-page child" href="/categories"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fenlei">                   </use></svg><span> 分类</span></a></li><li><a class="site-page child" href="/tags"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-biaoqian">                   </use></svg><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xuegao">             </use></svg><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yinle">                   </use></svg><span> 音乐</span></a></li><li><a class="site-page child" href="/bangumis"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wodezhuifan">                   </use></svg><span> 追番</span></a></li><li><a class="site-page child" href="/gallery"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangce">                   </use></svg><span> 相册</span></a></li><li><a class="site-page child" href="/video"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-shipin">                   </use></svg><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/charts"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xigua"></use></svg><span> 统计图</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-suannai">             </use></svg><span> 网盘</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-guidang">                   </use></svg><span> 私月盘</span></a></li><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://share.hycbook.com/"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifengche">                   </use></svg><span> 共享盘</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhifeiji">             </use></svg><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/comments"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-TIFFANYSROOM_huaban">                   </use></svg><span> 留言板</span></a></li><li><a class="site-page child" href="/link"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-changyonglianjie">                   </use></svg><span> 友链</span></a></li><li><a class="site-page child" href="/about"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aixin">                   </use></svg><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习_一元函数微积分</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-10T12:46:25.000Z" title="发表于 2022-09-10 20:46:25">2022-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-12T11:55:54.720Z" title="更新于 2023-08-12 19:55:54">2023-08-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/math/">math</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="机器学习_一元函数微积分"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/article/10706.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<blockquote>
+<p>写在前面，本系列主要是对下面这本书做的学习笔记</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic1.zhimg.com/80/v2-1a36e4e5fb49fe46e99ea3dfddaa9e54_720w.webp" alt=""></p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.mohu.org/info/symbols/symbols.htm">常用数学符号的 LaTeX 表示方法</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_38253837/article/details/109923758">Markdown 常用数学符号和公式</a></p>
+</blockquote>
+<h1 id="极限与连续"><a href="#极限与连续" class="headerlink" title="极限与连续"></a>极限与连续</h1><blockquote>
+<p>极限是微积分中最基本的概念，也是理解导数与积分等概念的基础。</p>
+</blockquote>
+<h2 id="可数集和不可数集"><a href="#可数集和不可数集" class="headerlink" title="可数集和不可数集"></a>可数集和不可数集</h2><blockquote>
+<p>初等数学已经对元素数有限的集合进行的系统系统阐述，对无限集有些概念和规则不再适用，即使是常用的自然数集<script type="math/tex">\mathbb {N}</script>和实数集<script type="math/tex">\mathbb {R}</script>其性质，也需要重新定义</p>
+<p>基数或势</p>
+</blockquote>
+<p><strong>集合<script type="math/tex">A</script>的元素数量称为其<code>基数或势</code>，记为<script type="math/tex">|A|</script>，对于集合<script type="math/tex">A=\{1,3,5,7\}</script>，其基数为<script type="math/tex">|A|=4</script></strong></p>
+<p>基数为有限值的集合称为<code>有限集</code>；基数为无限值的集合称为<code>无限集</code></p>
+<p>对于两个有限集，如果集合<script type="math/tex">A</script>是集合<script type="math/tex">B</script>的真子集，即<script type="math/tex">A \subset B</script>，则有<script type="math/tex">|A| < |B|</script>，而无限集的基数为<script type="math/tex">+\infty</script>，因此不能直接使用这个规则进行基数比较</p>
+<p>考虑正整数集<script type="math/tex">\mathbb {N}^+</script>，令集合<script type="math/tex">A_1</script>为所有正奇数组成的集合，集合<script type="math/tex">A_2</script>为所有正偶数组成的集合。因此有</p>
+<script type="math/tex; mode=display">
+\mathbb {N}^+=A_1 \cup A_2 \\
+A_1 \subset \mathbb {N}^+ \\
+A_2 \subset \mathbb {N}^+</script><p>但这并不意味着<script type="math/tex">|A_2| < \mathbb {N}^+</script></p>
+<blockquote>
+<p>双射函数</p>
+</blockquote>
+<p><strong>对于集合<script type="math/tex">A</script>和<script type="math/tex">B</script>，如果集合<script type="math/tex">A</script>的任意元素<script type="math/tex">a</script>，在集合<script type="math/tex">B</script>都有唯一的元素<script type="math/tex">b</script>通过某种映射关系与之对应，即存在如下的<code>双射函数</code>(一对一映射函数) </strong></p>
+<script type="math/tex; mode=display">
+b=f(a) \qquad a \in A, b \in B</script><p><strong>则称这两个集合的基数相等</strong></p>
+<p>【1】正整数集与正偶数集的基数相等，因为它们的元素之间存在如下的双射关系</p>
+<script type="math/tex; mode=display">
+i \rightarrow 2i \qquad i \in \mathbb {N}, 2i \in A_2</script><p>【2】集合<script type="math/tex">A_1</script>和集合<script type="math/tex">A_2</script>的基数也相等，因为</p>
+<script type="math/tex; mode=display">
+i \rightarrow i+1 \qquad i \in A_1, i+1 \in A_2</script><p>【3】集合<script type="math/tex">A=(0,1)</script>与整个实数集合<script type="math/tex">\mathbb {R}</script>等势，因为集合<script type="math/tex">D</script>实数集合<script type="math/tex">\mathbb {R}</script>的元素间存在如下的双射函数</p>
+<script type="math/tex; mode=display">
+f(x)=tan(\pi(x-\frac{1}{2}))</script><p>此函数可以将区间<script type="math/tex">(0,1)</script>拉升至<script type="math/tex">(-\infty,+\infty)</script>，且存在反函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/集合A到实数集的映射.svg" alt="集合A到实数集的映射"></p>
+<center>图 集合A到实数集的映射</center>
+
+<p>【4】区间<script type="math/tex">[0,\frac{\pi}{2}]</script>与区间<script type="math/tex">[0,1]</script>是等价的，因为存在双射函数</p>
+<script type="math/tex; mode=display">
+f=sin(x) \qquad x \in [0, \frac{\pi}{2}]</script><p>反过来实数<script type="math/tex">\mathbb {R}</script>与区间<script type="math/tex">(0,1)</script>也是等价的，因为存在双射函数</p>
+<script type="math/tex; mode=display">
+f=\frac{1}{1+e^{-x}} \qquad x \in \mathbb {R}</script><p>此函数称为<strong>logistic函数</strong>或<strong>sigmoid函数</strong>，有着优良的性质，在机器学习与深度学习中被广泛使用。</p>
+<blockquote>
+<p>可数集和不可数集</p>
+</blockquote>
+<p><code>无限集</code>，可进一步分为<code>可数集</code>与<code>不可数集</code>，可数集中的每个元素可以用正整数进行编号，即与正整数等势</p>
+<p>正整数是可数集，它的每个元素可以写成<script type="math/tex">a_n=2n,n=1,\dots,+\infty</script></p>
+<p><code>可数集定义</code>：如果存在从正整数集<script type="math/tex">\mathbb {N}</script>到集合$A$的双射关系<script type="math/tex">f:\mathbb {N}^{+} \rightarrow A</script>，则集合<script type="math/tex">A</script>是可数的</p>
+<ol>
+<li><p>整数集是可数的，因为存在双射函数<script type="math/tex">abs(x)</script>，将其映射到正整数集</p>
+</li>
+<li><p>有理数集也是可数集，因为所有的有理数都可以写成两个整数相除的形式<script type="math/tex">\frac{p}{q}(q \neq 0)</script></p>
+</li>
+</ol>
+<p>整数集和有理数集，这里的离散和可数等价，任何可数集在数轴上的”长度”为0。</p>
+<p><code>不可数集</code>：无理数、实数集<script type="math/tex">\mathbb {R}</script>和长度不为0的实数区间都是不可数的，其中的元素是连续的，它们在数轴上是稠密的或者说连续的，如<script type="math/tex">\sqrt {2}</script>，圆周率<script type="math/tex">\pi</script>以及以自然对数底数<script type="math/tex">e</script>都是无理数，不可数集在数轴上的”长度”不为0。</p>
+<p>可数和不可数的概念将用于定积分中函数的可积性，以及概率论中的离散型和连续型随机变量等概念中</p>
+<h2 id="数列的极限"><a href="#数列的极限" class="headerlink" title="数列的极限"></a>数列的极限</h2><h3 id="极限概念与定义"><a href="#极限概念与定义" class="headerlink" title="极限概念与定义"></a>极限概念与定义</h3><blockquote>
+<p>数列极限</p>
+</blockquote>
+<p>数列的极限反映了当数列元素下标趋向于<script type="math/tex">+\infty</script>时数列项取值的趋势</p>
+<p><code>数列极限定义</code>: 对于数列<script type="math/tex">\{ a_n \}</script>以及某一实数<script type="math/tex">a</script>，如果对于任意给定的<script type="math/tex">\epsilon</script>都存在正整数<script type="math/tex">N</script>，使得对于任意满足<script type="math/tex">n \gt N</script>的<script type="math/tex">n</script>都有下面的不等式成立</p>
+<script type="math/tex; mode=display">
+|a_n - a| \lt \epsilon \tag{1}</script><p>则称此数列<script type="math/tex">{a_n}</script>的极限为<script type="math/tex">a</script>，或称其收敛于<script type="math/tex">a</script>，数列的极限记为<script type="math/tex">\lim _{n \rightarrow +\infty }{a_n}</script></p>
+<p><code>直观解释</code>: 当<script type="math/tex">n</script>增加时数列的值<script type="math/tex">a_n</script>无限趋近于<script type="math/tex">a</script>，可接近到任意指定的程度，由<script type="math/tex">\epsilon</script>控制，当数列的极限不存在，则称该数列发散，如果数列的极限存在，则其值必唯一</p>
+<blockquote>
+<p>证明数列极限存在且为某一值的方法是证明公式(1)成立</p>
+</blockquote>
+<p>并非所有的数列都存在极限</p>
+<ol>
+<li>数列<script type="math/tex">\{sin(n \pi + \frac{\pi}{2})\}</script>，当<script type="math/tex">n \rightarrow + \infty</script>时，数列的值在-1与1之间振荡</li>
+<li>数列<script type="math/tex">\{n\}</script>，当<script type="math/tex">n \rightarrow + \infty</script>时，数列的值趋向于<script type="math/tex">+ \infty</script>，极限也不存在</li>
+</ol>
+<blockquote>
+<p>数列极限的四则运算</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\lim_{n \rightarrow + \infty}{a_n \pm b_n} = \lim_{n \rightarrow + \infty}{a_n} \pm \lim_{n \rightarrow + \infty}{b_n} \\
+\lim_{n \rightarrow + \infty}{a_n . b_n} = \lim_{n \rightarrow + \infty}{a_n} . \lim_{n \rightarrow + \infty}{b_n} \\
+\lim_{n \rightarrow + \infty}{\frac {a_n}{b_n}} = \frac {\lim_{n \rightarrow + \infty}}{\lim_{n \rightarrow + \infty}}</script><p>计算极限<script type="math/tex">\lim_{n \rightarrow + \infty}{(1 + \frac {1}{n})(2 + \frac {1}{n^2})}</script>，根据数列极限的四则运算有</p>
+<script type="math/tex; mode=display">
+\lim_{n \rightarrow + \infty}{(1 + \frac {1}{n})(2 + \frac {1}{n^2})} = \lim_{n \rightarrow + \infty}{(1 + \frac {1}{n})} . \lim_{n \rightarrow + \infty}{(2 + \frac {1}{n^2})} = 1  \times 2 = 2</script><h3 id="极限存在判定法则"><a href="#极限存在判定法则" class="headerlink" title="极限存在判定法则"></a>极限存在判定法则</h3><div class="tabs" id="极限存在判定法则"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#极限存在判定法则-1">单调收敛定理</button></li><li class="tab"><button type="button" data-href="#极限存在判定法则-2">夹逼定理</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="极限存在判定法则-1"><blockquote>
+<p>数列上界和下界</p>
+</blockquote>
+<ul>
+<li><strong>上界</strong>: 对于数列<script type="math/tex">a_n</script>，如果它的任意元素都满足<script type="math/tex">a_n \leq U</script>，则称<script type="math/tex">U</script>为数列的上界，上界不唯一</li>
+<li><strong>下界</strong>: 对于数列<script type="math/tex">a_n</script>，如果它的任意元素都满足<script type="math/tex">a_n \geq U</script>，则称<script type="math/tex">U</script>为数列的下界</li>
+</ul>
+<p><code>单调收敛定理</code>: 如果数列单调递增且存在上界，则极限存在，如果数列单调递减且有下界，则极限存在，即<strong>单调有界的数列收敛</strong></p>
+<p>根据单调收敛定理，可以得到微积分中一个重要极限，对于数列<script type="math/tex">a_n=\{ {(1+ \frac{1}{n})}^{n} \}</script>的极限为</p>
+<script type="math/tex; mode=display">
+\lim _{n \rightarrow + \infty}{(1+ \frac{1}{n})}^{n} = e</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/单调有界的数列收敛.svg" alt="单调有界的数列收敛"></p>
+<center>图 单调有界的数列收敛</center>
+
+<p>其中<script type="math/tex">e</script>为自然对数的底数，约为<script type="math/tex">2.71828</script>，是数学中最重要的常数之一</p>
+<p><code>证明</code>: 证明数列有界和单调递增，收敛于<script type="math/tex">e</script></p>
+<p>数列<script type="math/tex">\{ (1- \frac{1}{n})^{n} \}</script>的极限为<script type="math/tex">\lim _{n \rightarrow +\infty}{(1- \frac{1}{n})^{n}}= \lim _{n \rightarrow +\infty}{\frac{1}{(1+ \frac{1}{n})^{n}}} \times \lim _{n \rightarrow +\infty}\frac{1}{1+ \frac{1}{n-1}}= \frac{1}{e}</script></p>
+<p>这个极限可以用来表示对<script type="math/tex">n</script>个样本进行<script type="math/tex">n</script>次有放回等概率抽样，当样本量趋于无穷大时，每个样本一次都没被抽中的概率</p>
+<p><strong>单调有界是数列收敛的充分条件而非必要条件</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/不满足单调有界条件但收敛的数列.svg" alt="不满足单调有界条件但收敛的数列"></p>
+<center>图 不满足单调有界条件但收敛的数列</center><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="极限存在判定法则-2"><p><code>夹逼定理</code>: 如果对于<script type="math/tex">\forall n \in \mathbb {N}</script>有<script type="math/tex">b_n \leq a_n \leq c_n</script>且<script type="math/tex">\lim _{n \rightarrow +\infty}{b_n}=\lim _{n \rightarrow +\infty}{c_n}=c</script>，则有<script type="math/tex">\lim _{n \rightarrow +\infty}{a_n}=c</script>，这一结论称为夹逼定理</p>
+<p>如果数列无界，则必定发散，<strong>有界是数列收敛的必要条件而非充分条件</strong>，如数列<script type="math/tex">\{ (-1)^{n} \}</script>有界但不收敛</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<h2 id="函数的极限"><a href="#函数的极限" class="headerlink" title="函数的极限"></a>函数的极限</h2><blockquote>
+<p>函数极限的严格定义由法国数学家柯西给出: 即当前广泛使用的$\epsilon \mbox{-} s $定义</p>
+</blockquote>
+<p><code>领域</code>: 点<script type="math/tex">x_0</script>的<script type="math/tex">\delta</script>领域是指满足不等式<script type="math/tex">|x-x_0| \lt \delta</script>的所有<script type="math/tex">x</script>构成的集合，即区间<script type="math/tex">(x_0 - \delta,x_0 + \delta)</script>，<script type="math/tex">\delta</script>称为领域的<code>半径</code></p>
+<p><code>去心领域</code>: 去心<script type="math/tex">\delta</script>领域是指满足上式且去掉点<script type="math/tex">x_0</script>的点构成的集合<script type="math/tex">(x_0 - \delta,x_0) \cup (x_0,x_0 + \delta)</script></p>
+<p><code>函数极限</code>: 对于函数<script type="math/tex">f(x)</script>，如果对于任意的<script type="math/tex">\epsilon \gt 0</script>，均存在<script type="math/tex">x_0</script>的<script type="math/tex">\delta</script>去心领域，使得去心领域内所有的<script type="math/tex">x</script>都有</p>
+<script type="math/tex; mode=display">
+|f(x)-a| \lt \epsilon \tag{1}</script><p>则称函数在<script type="math/tex">x_0</script>点处的极限为<script type="math/tex">a</script>，函数在<script type="math/tex">x_0</script>点处的极限记为</p>
+<script type="math/tex; mode=display">
+\lim {x \rightarrow +\infty}{f(x)}</script><p><code>直观解释</code>: 当自变量<script type="math/tex">x</script>的值无限接近于<script type="math/tex">x_0</script>时，函数值<script type="math/tex">f(x)</script>无限接近于<script type="math/tex">a</script></p>
+<ul>
+<li>即在<script type="math/tex">(x_0 - \delta,x_0) \cup (x_0,x_0 + \delta)</script>内的函数值都在<script type="math/tex">(a- \epsilon, a+ \epsilon)</script>区间内</li>
+</ul>
+<blockquote>
+<p>证明函数极限的方法和数列类似，核心是证明在区新领域内使得公式(1)<script type="math/tex">|f(x)-a| \lt \epsilon</script>成立</p>
+<p>左右极限</p>
+</blockquote>
+<p>一维数轴上有两个方向，变量<script type="math/tex">x</script>可以从左侧趋近于<script type="math/tex">x_0</script>，也可以从右侧趋近于<script type="math/tex">x_0</script><br>因此函数的极限分为左极限和右极限，左极限和右极限分别记为</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow x_0^{-}}{f(x)}=a \qquad \qquad \qquad
+\lim _{x \rightarrow x_0^{+}}{f(x)}=a</script><blockquote>
+<p>夹逼定理</p>
+</blockquote>
+<p>假设<script type="math/tex">I</script>是包含点<script type="math/tex">a</script>的区间，<script type="math/tex">f</script>、<script type="math/tex">g</script>、<script type="math/tex">h</script>为定义在该区间上的函数，如果对所有属于<script type="math/tex">I</script>但不等于点<script type="math/tex">a</script>的点<script type="math/tex">x</script>都有<script type="math/tex">g(x) \leq f(x) \leq h(x)</script>，且</p>
+<script type="math/tex; mode=display">\lim _{x \rightarrow a}{g(x)} = \lim _{x \rightarrow a}{h(x)} = a</script><p>则有<script type="math/tex">\lim _{x \rightarrow a}{f(x)} = a</script>，这一结论称为<code>夹逼定理</code></p>
+<blockquote>
+<p>几个重要极限</p>
+</blockquote>
+<ul>
+<li><script type="math/tex; mode=display">\lim _{x \rightarrow 0}{\frac{sin(x)}{x}}=1</script></li>
+<li><script type="math/tex; mode=display">\lim _{x \rightarrow +\infty}{(\frac{1}{1+x})^{x}}=e</script></li>
+<li><script type="math/tex; mode=display">\lim _{x \rightarrow +\infty}{xln(1+\frac{1}{x})}=1</script></li>
+<li><script type="math/tex; mode=display">\lim _{x \rightarrow 0}{\frac{e^x-1}{x}}=1</script><ul>
+<li>令<script type="math/tex">e^x-1=t</script>，则<script type="math/tex">x=ln(1+t)</script>，因此有<script type="math/tex; mode=display">
+\lim _{x \rightarrow 0}{\frac{e^x-1}{x}}=\lim _{t \rightarrow 0}{\frac{t}{ln(1+t)}}=1</script>因为有<script type="math/tex; mode=display">
+\lim_{x \rightarrow 0}{\frac{(1+x)^a-1}{x}} = \lim_{x \rightarrow 0}{\frac{e^{aln(1+x)}-1}{x}} = \lim_{x \rightarrow 0}{\frac{e^{an(1+x)}-1}{aln(1+x)} . \frac{alx(1+x)}{x}} = a</script>最后可以得到<script type="math/tex; mode=display">
+\lim_{x \rightarrow 0}{\frac{(1+x)^a-1}{x}} = a</script></li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h2 id="函数的连续性与间断点"><a href="#函数的连续性与间断点" class="headerlink" title="函数的连续性与间断点"></a>函数的连续性与间断点</h2><h3 id="连续性"><a href="#连续性" class="headerlink" title="连续性"></a>连续性</h3><p><code>函数的连续型</code>通过极限定义，是最基本的性质之一</p>
+<p><code>函数连续的直观表现</code>: 如果自变量的改变很小，则因变量的改变也非常小，函数值不会突然发生跳跃</p>
+<blockquote>
+<p>函数连续的定义</p>
+</blockquote>
+<p>如果函数<script type="math/tex">f(x)</script>满足<script type="math/tex">\lim _{x \rightarrow a}{f(x)} = f(a)</script>，则称它在<script type="math/tex">a</script>点处连续</p>
+<blockquote>
+<p>几何解释</p>
+</blockquote>
+<p>函数连续在该点处的函数曲线没有”断”</p>
+<blockquote>
+<p>连续的重要性质</p>
+</blockquote>
+<ol>
+<li>基本初等函数在其定义域内是连续的，包括多项式函数、有理分式函数、指数函数、对数函数、三角函数、反三角函数</li>
+<li>绝对值函数在其定义域内也是连续的</li>
+<li>由基本初等函数经过有限次四则运算和复合而形成的函数，在其定义域内连续，这样的函数被称为<code>初等函数</code></li>
+<li>如果函数<script type="math/tex">f(x)</script>和<script type="math/tex">g(x)</script>在定义域内连续，则复合函数<script type="math/tex">f(g(x))</script>在定义域内连续</li>
+</ol>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">第一类间断点</button></li><li class="tab"><button type="button" data-href="#充分条件-2">第二类间断点</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><blockquote>
+<p>跳跃间断点</p>
+</blockquote>
+<p><code>跳跃间断点</code>: 函数在<script type="math/tex">x_0</script>处的左极限和右极限都<strong>存在，但不相等</strong></p>
+<script type="math/tex; mode=display">
+f(x_{0}^{-}) \neq f(x_{0}^{+})</script><p><code>例子</code>:  其中<script type="math/tex">x=1</script>为<code>跳跃间断点</code></p>
+<script type="math/tex; mode=display">
+f(x) = \left \{
+  \begin{aligned}
+  x^2, \qquad x \neq 1 \\
+  x^2+1, \qquad x=1
+
+  \end{aligned}
+\right.</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/跳跃间断点.svg" alt="跳跃间断点"></p>
+<center>图 跳跃间断点</center>
+
+<blockquote>
+<p>可去间断点</p>
+</blockquote>
+<p><code>可去间断点</code>: 或者左右极限<strong>相等</strong>，但不等于该点处的函数值</p>
+<script type="math/tex; mode=display">
+f(x_{0}^{-}) = f(x_{0}^{+}) = f(x_{0})</script><p><code>例子</code>:  其中<script type="math/tex">x=1</script>为<code>可去间断点</code></p>
+<script type="math/tex; mode=display">
+f(x) = \left \{
+  \begin{aligned}
+  x^2, \qquad x \neq 1 \\
+  2, \qquad x=1
+
+  \end{aligned}
+\right.</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><blockquote>
+<p>函数在<script type="math/tex">x_0</script>点处的左极限和右极限至少有一个不存在</p>
+</blockquote>
+<p><code>例子</code>: 正切函数<script type="math/tex">f(x)=tan(x)</script>，在<script type="math/tex">x=\frac{k \pi}{2},k=1,2,3, \dots</script>处极限值不存在，为<code>第二类间断点</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/正切函数的第二类间断点.svg" alt="正切函数的第二类间断点"></p>
+<center>图 正切函数的第二类间断点</center>
+
+<p><code>例子</code>: 反比例函数<script type="math/tex">f(x)=\frac{1}{x}</script>，<script type="math/tex">x=0</script>为函数的第二类间断点，在该点处函数的极限不存在</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/反比例函数的第二类间断点.svg" alt="反比例函数的第二类间断点"></p>
+<center>图 反比例函数的第二类间断点</center><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<h3 id="连续函数的性质"><a href="#连续函数的性质" class="headerlink" title="连续函数的性质"></a>连续函数的性质</h3><blockquote>
+<p>连续函数具有很多优良的性质</p>
+</blockquote>
+<ol>
+<li>闭区间<script type="math/tex">[a,b]</script>上的连续函数<script type="math/tex">f(x)</script>一定存在极大值<script type="math/tex">M</script>和极小值<script type="math/tex">m</script>，使得对于该区间任意的<script type="math/tex">x</script>有<script type="math/tex">m \leq f(x) \leq M</script></li>
+<li>开区间上的连续函数则不能保证存在极大值和极小值，如反比例函数</li>
+</ol>
+<blockquote>
+<p>介值定理</p>
+</blockquote>
+<p><code>介值定理</code>： 如果函数<script type="math/tex">f(x)</script>在闭区间<script type="math/tex">[a,b]</script>内连续，<script type="math/tex">c</script>是介于<script type="math/tex">f(a)</script>和<script type="math/tex">f(b)</script>之间的一个数，则存在<script type="math/tex">[a,b]</script>中的某个点<script type="math/tex">x</script>，使得<script type="math/tex">f(x)=c</script>，考虑下图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/介值定理.svg" alt="介值定理"></p>
+<center>图  介值定理</center>
+
+<ol>
+<li><p>对于区间<script type="math/tex">[-4,4]</script>，在左右端点处的函数值分别为<script type="math/tex">-64</script>和<script type="math/tex">64</script>，对于任意的<script type="math/tex">-64 \leq c \leq 64</script>，均存在至少一个点<script type="math/tex">x \in [-4,4]</script>，使得<script type="math/tex">f(x)=c</script></p>
+</li>
+<li><p>如果<script type="math/tex">c=0</script>，则曲线必然存在一点<script type="math/tex">x</script>使得<script type="math/tex">f(x)=0</script>，这就是方程的根，事实上，<script type="math/tex">x=0</script>满足此条件</p>
+</li>
+</ol>
+<blockquote>
+<p>介值定理几何意义</p>
+</blockquote>
+<p>函数<script type="math/tex">f(x)</script>在区间<script type="math/tex">[a,b]</script>内一定与直线<script type="math/tex">y=c</script>至少有一个交点，其中<script type="math/tex">c</script>介于<script type="math/tex">f(a)</script>和<script type="math/tex">f(b)</script>之间<br>介值定理保证至少存在一点使得<script type="math/tex">f(x)=c</script>，满足此条件的<script type="math/tex">x</script>可能有多个</p>
+<blockquote>
+<p>连续性假设</p>
+</blockquote>
+<p>机器学习与深度学习算法所使用的绝大多数模型，假设函数<script type="math/tex">h(c)</script>是连续函数，以保证输入变化小的变化不至于导致预测值的突变，这称为<code>连续性假设</code>，连续性通常能够保证机器学习算法有更好的泛化性能</p>
+<h2 id="上确界与下确界"><a href="#上确界与下确界" class="headerlink" title="上确界与下确界"></a>上确界与下确界</h2><p>上确界与下确界可看作是集合最大值与最小值的推广</p>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">上确界</button></li><li class="tab"><button type="button" data-href="#充分条件-2">下确界</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><p><code>上确界</code>也称为<strong>最小上界</strong>，对于<script type="math/tex">\mathbb {R}</script>的非空子集<script type="math/tex">S</script>，如果该集合中的任意元素<script type="math/tex">s</script>均有<script type="math/tex">s \leq t</script>，即<script type="math/tex">t</script>是集合的一个上界，且<script type="math/tex">t</script>满足吃不等是此不等式条件的最小值，则<script type="math/tex">t</script>为集合<script type="math/tex">S</script>的上确界，记为<script type="math/tex">sup(S)</script></p>
+<p>如果满足此条件的<script type="math/tex">t</script>不存在，则称为集合的上确界为<script type="math/tex">+\infty</script>，如果集合的上确界<code>存在，则必定唯一</code></p>
+<p>如果集合<script type="math/tex">S</script>的元素存在最大值，则最大值为其上确界，如闭区间<script type="math/tex">[0,1]</script>的上确界为1</p>
+<p>集合可能不存在最大值，如开区间<script type="math/tex">(0,1)</script>，其上确界为<script type="math/tex">1</script>，但不是集合的最大值</p>
+<p><code>例子</code>: </p>
+<ol>
+<li>集合<script type="math/tex">\{1,2,3,4\}</script>是有限集，其上确界为集合元素的最大值，其值为<script type="math/tex">4</script></li>
+<li>集合<script type="math/tex">\frac{n}{n+1}</script>是无限可数集，并且该数列单调递增，其上确界为数列的极限<script type="math/tex">\lim _{n \rightarrow +\infty}{\frac{n}{n+1}} = 1</script></li>
+<li>集合<script type="math/tex">\{sin(x),x \in \mathbb {R}\}</script>是无限不可数集，其上确界为该函数的极大值<script type="math/tex">1</script></li>
+</ol>
+<blockquote>
+<p>充分必要条件</p>
+</blockquote>
+<p>集合存在上确界的充分必要条件是集合有上界，实数集<script type="math/tex">\mathbb {R}</script>的任意非空有界子集<script type="math/tex">D</script>均存在上确界</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p><code>下确界</code>: 下确界也称为最大下界，<script type="math/tex">t</script>是集合<script type="math/tex">S</script>的一个下界，即对<script type="math/tex">S</script>中的任意元素<script type="math/tex">s</script>，均有<script type="math/tex">s \geq t</script>，且<script type="math/tex">t</script>是最大的下界，则称<script type="math/tex">t</script>为<script type="math/tex">S</script>的下确界，记住$inf(S)$</p>
+<p>对于闭区间<script type="math/tex">[0,1]</script>，下确界为<script type="math/tex">0</script>，对于开区间<script type="math/tex">(0,1)</script>，其下确界也为<script type="math/tex">0</script></p>
+<p><code>例子</code>:</p>
+<ol>
+<li>集合<script type="math/tex">\frac{n}{n+1}</script>的下确界为<script type="math/tex">\frac{1}{2}</script>，在<script type="math/tex">n=1</script>时取得</li>
+<li>集合<script type="math/tex">\{sin(x),x \in \mathbb {R}\}</script>的下确界为<script type="math/tex">-1</script>，是函数的最小值</li>
+</ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<h2 id="李普希茨连续"><a href="#李普希茨连续" class="headerlink" title="李普希茨连续"></a>李普希茨连续</h2><blockquote>
+<p>李普希茨连续</p>
+</blockquote>
+<p><code>李普希茨连续</code>是比连续更强的条件，不但保证了函数值不间断，而且限定了函数的变化速度</p>
+<p>给定函数<script type="math/tex">f(x)</script>，如果对于区间<script type="math/tex">D</script>任意两点<script type="math/tex">a</script>、<script type="math/tex">b</script>都存在常数<script type="math/tex">K</script>使得下面的不等式成立</p>
+<script type="math/tex; mode=display">
+|f(a)-f(b)| \leq K|a-b| \tag{1}</script><p>则称函数<script type="math/tex">f(x)</script>在区间<script type="math/tex">D</script>内满足<code>李普希茨条件</code>，也称为<code>李普希茨连续</code></p>
+<p>使得公式(1)成立的最小<script type="math/tex">K</script>值称为<code>李普希茨常数</code>，其值与具体的函数有关</p>
+<p>如果<script type="math/tex">K < 1</script>，则称函数<script type="math/tex">f(x)</script>为<code>压缩映射</code></p>
+<blockquote>
+<p>几何意义</p>
+</blockquote>
+<p>在任意两点<script type="math/tex">(x_1,f(x_1))</script>，<script type="math/tex">(x_2,f(x_2))</script>处函数割线斜率的绝对值<script type="math/tex">|\frac{f(x_2)-f(x_1)}{x_2-x_1}|</script>均不大于<script type="math/tex">K</script></p>
+<p>在任一点<script type="math/tex">x_0</script>处，曲线<script type="math/tex">f(x)</script>均夹在直线<script type="math/tex">y-f(x_0)=K(x-x_0)</script>与<script type="math/tex">y-f(x_0)=-K(x-x_0)</script>之间，如图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/李普希茨连续性.svg" alt="李普希茨连续性"></p>
+<center>图 李普希茨连续性</center>
+
+<p>向右上倾斜的直线与想做上倾斜的直线分别为<script type="math/tex">y=K(x-x_0)+f(x_0)</script>与<script type="math/tex">y=-K(x-x_0)+f(x_0)</script></p>
+<p><code>例子</code></p>
+<ol>
+<li><p>一次函数<script type="math/tex">f(x)=x</script>在<script type="math/tex">\mathbb {R}</script>内是李普希茨连续，因为对于任意的<script type="math/tex">a</script>和<script type="math/tex">b</script>都有</p>
+<script type="math/tex; mode=display">
+|f(a)-f(b)|=|a-b| \leq 1 \times |a-b|</script><p>因此该函数李普希茨连续且李普希茨常数为<script type="math/tex">1</script></p>
+</li>
+<li><p>二次函数<script type="math/tex">f(x)=x^2</script>在<script type="math/tex">\mathbb {R}</script>内不是李普希茨连续，因为对于<script type="math/tex">\mathbb {R}</script>内任意的<script type="math/tex">a</script>和<script type="math/tex">b</script>都有</p>
+<script type="math/tex; mode=display">
+|f(a)-f(b)|=|a^2 - b^2| \leq |a-b| \times |a-b|</script><p>显然不存在常数<script type="math/tex">K</script>使得任意<script type="math/tex">a</script>和<script type="math/tex">b</script>都满足<script type="math/tex">|a+b| \leq K</script>，因此该函数不是李普希茨连续</p>
+</li>
+<li><p>函数<script type="math/tex">f(x)=\sqrt{x}</script>在区间<script type="math/tex">[1,+\infty)</script>内李普希茨连续</p>
+<ul>
+<li><p>对于区间<script type="math/tex">[1,+\infty)</script>内任意的<script type="math/tex">a</script>和<script type="math/tex">b</script>都有</p>
+<script type="math/tex; mode=display">
+|f(a) - f(b)| = |\sqrt(a) - \sqrt(b)| = \frac{1}{\sqrt(a) + \sqrt(b)} \times |a-b| \leq \frac{1}{2}|a-b|</script></li>
+<li><p>区间<script type="math/tex">[0,1]</script>内<script type="math/tex">f(x)=\sqrt{x}</script>不是李普希茨连续，对于该区间内任意的<script type="math/tex">a</script>和<script type="math/tex">b</script>都有</p>
+<script type="math/tex; mode=display">
+|f(a) - f(b)| = |\sqrt(a) - \sqrt(b)| = \frac{1}{\sqrt(a) + \sqrt(b)} \times |a-b|</script><p>当<script type="math/tex">0 <a, b<1</script>时，不存在常数<script type="math/tex">K</script>满足<script type="math/tex">\frac{1}{|\sqrt(a) + \sqrt(b)|} \leq K</script></p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>机器学习中的意义</p>
+</blockquote>
+<p>李普希茨连续要求函数在区间上不能有超过线性的变化速度，对于分析和确保机器学习算法的稳定性有重要的作用</p>
+<h2 id="无穷小量"><a href="#无穷小量" class="headerlink" title="无穷小量"></a>无穷小量</h2><blockquote>
+<p>考虑函数极限值为<script type="math/tex">0</script>的情况</p>
+</blockquote>
+<p><code>定义</code>: 如果函数<script type="math/tex">f(x)</script>在<script type="math/tex">x_0</script>的某去心领域内，有定义且</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow x_0}{f(x)} = 0</script><p>则称<script type="math/tex">f(x)</script>为<script type="math/tex">x \rightarrow x_0</script>的<code>无穷小量</code></p>
+<blockquote>
+<p>虽然它们的极值均为0，但它们之间比值的极限却有几种情况</p>
+</blockquote>
+<ol>
+<li><p><code>高阶无穷小</code>: <script type="math/tex">\lim _{x \rightarrow x_0}{\frac{f(x)}{g(x)}} = 0</script>，该比值也是无穷小量，例如</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow x_0}{\frac{x^2}{x}} =\lim _{x \rightarrow x_0}{x} = 0</script></li>
+<li><p><code>同阶无穷小</code>(<code>等价无穷小</code>): <script type="math/tex">\lim _{x \rightarrow x_0}{\frac{f(x)}{g(x)}} = c, c \neq 0</script>，比值的极限为非$0$的有界变量，例如</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow x_0}{\frac{sin(x)}{x}} = 1 \qquad \qquad \qquad
+\lim _{x \rightarrow x_0}{\frac{ln(1+x)}{x}} = 1</script></li>
+<li><p><code>低阶无穷小</code>: <script type="math/tex">\lim _{x \rightarrow x_0}{\frac{f(x)}{g(x)}} = \infty</script>，比值的极限为无界变量(称为<code>无穷大量</code>)，例如</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow x_0}{\frac{x}{x^2}} =\lim _{x \rightarrow x_0}{\frac{1}{x}} = \infty</script></li>
+<li></li>
+</ol>
+<p>其中<code>高阶无穷小</code>记为<script type="math/tex">o(.)</script>，<code>等价无穷小</code>记为<script type="math/tex">f(x) \sim g(x)</script></p>
+<p><strong>直观来看这些比值反映了无穷小接近于0时的变化速度快慢</strong></p>
+<blockquote>
+<p>典型的等价无穷小(<script type="math/tex">x \rightarrow 0</script>)</p>
+</blockquote>
+<script type="math/tex; mode=display">
+sin(x) \sim x \qquad \qquad
+arcsin(x) \sim x \qquad \qquad
+tan(x) \sim x \qquad
+ln(1+x) \sim x \\\\
+e^x-1 \sim x \qquad
+1-cos(x) \sim \frac{x^2}{2} \qquad
+\sqrt[n]{1+x}-1 \sim \frac{x}{n} \qquad
+a^x-1 \sim xlna</script><p>等价无穷小在计算极限时起着重要的作用</p>
+<h1 id="导数与微分"><a href="#导数与微分" class="headerlink" title="导数与微分"></a>导数与微分</h1><p>导数是微分学中的核心概念，它决定了可导函数的基本性质，包括<strong>单调性</strong>、<strong>极值</strong>与<strong>凹凸性</strong>。</p>
+<p>在机器学习中，绝大多数算法可以归纳为求解最优化的问题，对于连续型优化问题在求解时一般需要使用导数</p>
+<h2 id="一阶导数"><a href="#一阶导数" class="headerlink" title="一阶导数"></a>一阶导数</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
+<p>导数定义</p>
+</blockquote>
+<p>函数的自变量变化值趋向于<script type="math/tex">0</script>时，函数值的变化量与自变量变化量比值的极限，在<script type="math/tex">x</script>点处的<code>导数</code>为</p>
+<script type="math/tex; mode=display">
+f'(x) = \lim_{\Delta \rightarrow 0}{\frac{f(x+\Delta x)-f(x)}{\Delta x}} \tag{1}</script><p>如果式(1)的极限存在，则称函数在点$x$处可导</p>
+<p>除了用<script type="math/tex">f'(x)</script>表示之外，导数也可写成<script type="math/tex">\frac{dy}{dx}</script>，即上面的定义也可以写成另一种形式</p>
+<script type="math/tex; mode=display">
+f'(x)=\lim_{x \rightarrow x_0}{\frac{f(x)-f(x_0)}{x-x_0}} \tag{2}</script><blockquote>
+<p>左右导数</p>
+</blockquote>
+<p>类似于极限，导数也可分为<code>左导数</code>和<code>右导数</code></p>
+<p>左导数是从左侧趋向于<script type="math/tex">x</script>时的极限</p>
+<script type="math/tex; mode=display">
+f'_{-}{x} = \lim_{\Delta \rightarrow 0_-}{\frac{f(x+\Delta x)-f(x)}{\Delta x}} \tag{1}</script><p>右导数为自变量从右侧趋向于<script type="math/tex">x</script>时的极限</p>
+<script type="math/tex; mode=display">
+f'_{+}{x} = \lim_{\Delta \rightarrow 0_+}{\frac{f(x+\Delta x)-f(x)}{\Delta x}} \tag{1}</script><blockquote>
+<p>函数可导的<code>充分必要</code>条件是左右导数均存在且相等，其<code>必要</code>条件是函数连续</p>
+</blockquote>
+<p>如果导数不存在，则称函数<strong>不可导</strong></p>
+<h3 id="几何和物理意义"><a href="#几何和物理意义" class="headerlink" title="几何和物理意义"></a>几何和物理意义</h3><blockquote>
+<p>几何意义</p>
+</blockquote>
+<p>函数在定义域 内所有点处的导数值构成的函数称为<code>导函数</code>，简称<code>函数</code></p>
+<p>导数的几何意义是函数在点<script type="math/tex">(x,f(x))</script>处切线的斜率，反映了函数值在此点处变化的快慢</p>
+<p>函数<script type="math/tex">f(x)=-(x-1)^2</script>在<script type="math/tex">x=0.5</script>处，根据导数的定义有</p>
+<script type="math/tex; mode=display">
+f'(0.5) = \lim _{\Delta x \rightarrow 0}{\frac {f(0.5+\Delta x)-f(0.5)}{\Delta x}} 
+= \lim _{\Delta x \rightarrow 0}{\frac {-(0.5+\Delta x -1)^2+(0.5-1)^2}{\Delta x}} \\
+= \lim _{\Delta x \rightarrow 0}{\frac {-\Delta x^2 +\Delta x -0.25 +0.25 }{\Delta x}} 
+= \lim _{\Delta x \rightarrow 0}{(-\Delta x +1)} = 1</script><p>因此在该点处的切线斜率为<script type="math/tex">1</script>，由于切线经过<script type="math/tex">(0.5,-0.25)</script>，因此切线的方程为<script type="math/tex">y+0.25 = 1 \times (x-0.5)</script>，即<script type="math/tex">y=x-0.75</script>，下图为该曲线和对应的切线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/定积分的几何意义.svg" alt="定积分的几何意义"></p>
+<center>图  导数的几何意义</center>
+
+<blockquote>
+<p>物理意义</p>
+</blockquote>
+<p>导数典型的<code>物理意义</code>是瞬时速度</p>
+<h3 id="差分公式"><a href="#差分公式" class="headerlink" title="差分公式"></a>差分公式</h3><blockquote>
+<p>单侧差分公式</p>
+</blockquote>
+<p>如果<script type="math/tex">\Delta x</script>的值接近于<script type="math/tex">0</script>，则在点<script type="math/tex">x</script>处的导数可以用下面的公式近似计算</p>
+<script type="math/tex; mode=display">
+f'(x) \approx \frac {f(x+\Delta x)}{\Delta x}</script><p>称为<code>单侧差分公式</code></p>
+<blockquote>
+<p>中心差分公式</p>
+</blockquote>
+<p>根据导数的定义有</p>
+<script type="math/tex; mode=display">
+\lim _{\Delta x \rightarrow 0} {\frac {f(x+\Delta x)+f(x-\Delta x)}{2 \Delta x}} = 
+\lim _{\Delta x \rightarrow 0} {\frac {f(x+\Delta x)+ -f(x) +f(x) - f(x-\Delta x)}{2 \Delta x}} \\
+= \lim _{\Delta x \rightarrow 0} {\frac {f(x+\Delta x)-f(x)}{2 \Delta x}} + \lim _{\Delta x \rightarrow 0} {\frac {f(x-\Delta x)-f(x)}{-2 \Delta x}} 
+= \frac {1}{2}f'(x)+\frac {1}{2}f'(x) = f'(x)</script><p>其中<script type="math/tex">\Delta x</script>为接近于<script type="math/tex">0</script>的正数，这称为<code>中心差分公式</code>，用于数值计算导数值，因此可用下面的公式近似计算<script type="math/tex">x</script>点处的一阶导数值</p>
+<script type="math/tex; mode=display">
+f'(x) =\lim _{\Delta x \rightarrow 0} {\frac {f(x+\Delta x)+f(x-\Delta x)}{2 \Delta x}}</script><h3 id="基本函数的求导"><a href="#基本函数的求导" class="headerlink" title="基本函数的求导"></a>基本函数的求导</h3><p>下表)列出了各种基本初等函数的求导公式</p>
+<center>表 基本函数的求导公式</center>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>基本函数</th>
+<th>求导公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>幂函数</td>
+<td><script type="math/tex">(x^a)' = ax^{a-1}</script></td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td><script type="math/tex">(e^x)' = e^x</script></td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td><script type="math/tex">(a^x)' = a^x ln(a)</script></td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td><script type="math/tex">(sin \, x)' = cos \, x</script></td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td><script type="math/tex">(cos \, x)' = -sin \, x</script></td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td><script type="math/tex">(tan \, x)' = sec^{2} \, x</script></td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td><script type="math/tex">(cot \, x)' = -csc^{2} \, x</script></td>
+</tr>
+<tr>
+<td>对数函数</td>
+<td><script type="math/tex">(ln \, x)' = \frac{1}{x}</script></td>
+</tr>
+<tr>
+<td>反三角函数</td>
+<td><script type="math/tex">(arcsin \, x)' = \frac{1}{\sqrt{1-x^2}}</script></td>
+</tr>
+<tr>
+<td>反三角函数</td>
+<td><script type="math/tex">(arccos \, x)' = -\frac{1}{\sqrt{1-x^2}}</script></td>
+</tr>
+<tr>
+<td>反三角函数</td>
+<td><script type="math/tex">(arctan \, x)' = \frac{1}{1+x^2}</script></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>证明<script type="math/tex">(sin \, x)'</script></p>
+<h3 id="四则运算的求导公式"><a href="#四则运算的求导公式" class="headerlink" title="四则运算的求导公式"></a>四则运算的求导公式</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>基本运算</th>
+<th>求导公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加法</td>
+<td><script type="math/tex">(f(x)+g(x))' = f'(x)+g'(x)</script></td>
+</tr>
+<tr>
+<td>减法</td>
+<td><script type="math/tex">(f(x)-g(x))' = f'(x)-g'(x)</script></td>
+</tr>
+<tr>
+<td>数乘</td>
+<td><script type="math/tex">(cf(x))'=cf'(x)</script></td>
+</tr>
+<tr>
+<td>乘法</td>
+<td><script type="math/tex">(f(x)g(x))'=f'(x)g(x)+f(x)g'(x)</script></td>
+</tr>
+<tr>
+<td>除法</td>
+<td><script type="math/tex">(\frac {f(x)}{g(x)})'=\frac {f'(x)g(x)-f(x)g'(x)}{g^{2}{(x)}}</script></td>
+</tr>
+<tr>
+<td>倒数</td>
+<td><script type="math/tex">(\frac {1}{f(x)}) ' = - \frac {f'(x)}{f^{2}{(x)}}</script></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="机器学习中常用的函数"><a href="#机器学习中常用的函数" class="headerlink" title="机器学习中常用的函数"></a>机器学习中常用的函数</h2><blockquote>
+<p>logistic函数可用作神经网络的激活函数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f(x) = ln(1+e^x)</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/logistic函数的曲线.svg" alt="logistic函数的曲线"></p>
+<blockquote>
+<p>softplus函数，可看作是函数Relu即$max(0,x)$的光滑近似，该函数的导数为logistic函数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f(x) = ln(1+e^x)</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/softplus函数.svg" alt="softplus函数"></p>
+<p>函数的导数为：</p>
+<script type="math/tex; mode=display">
+f'(x) = \frac{1}{1+e^x}(1+e^x)' = \frac{e^x}{1+e^x}=\frac{1}{1+e^{-x}}</script><blockquote>
+<p>Relu函数可用作神经网络的激活函数，在$0$处该函数不可导，在该点处左导数为0，右导数为1</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f(x) = \left \{
+  \begin{aligned}
+  x, \qquad x \gt 0 \\
+  0, \qquad x \lt 0
+  \end{aligned}
+\right.</script><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/Relu函数的曲线.svg" alt="Relu函数的曲线"></p>
+<p>去掉0点，该函数的导数为：</p>
+<script type="math/tex; mode=display">
+f'(x) = \left \{
+  \begin{aligned}
+  1, \qquad x \gt 0 \\
+  0, \qquad x \lt 0
+  \end{aligned}
+\right.</script><blockquote>
+<p>绝对值函数，在$0$点处改函数不可导，左导数为-1，右导数为1，去掉该点，此函数的导数为</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f(x) = |x|  = \left \{
+  \begin{aligned}
+  x, \qquad x \geq 0 \\
+  -x, \qquad x \lt 0
+  \end{aligned}
+\right.</script><p>绝对值函数常用于构造机器学习算法训练目标函数的<code>正则化项</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/绝对值函数.svg" alt="绝对值函数"></p>
+<blockquote>
+<p>sgn符号函数，在$0$点处不连续，因此不可导，去掉该点，此函数在所有点处的导数均为0</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f(x) = \left \{
+  \begin{aligned}
+  1, \qquad x \geq 0 \\
+  -1, \qquad x \lt 0
+  \end{aligned}
+\right.</script><p>符号函数常用于分类器的预测函数，表示二值化的分类结果，在支持向量机、logstic回归中都被使用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/符号函数.svg" alt="符号函数"></p>
+<p>如果一个函数所有不可导点的集合为有限集或无限可数集，则称该函数几乎处处可导，本节中的绝对值函数、Relu函数、符号函数均是几乎处处可导的函数，<strong>处处可导保证了在训练时能够使用梯度下降法求解函数的极值</strong></p>
+<h2 id="高阶导数"><a href="#高阶导数" class="headerlink" title="高阶导数"></a>高阶导数</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p>对导数连续求导可以得到高阶导数，二阶导数的是一阶导数的导数，记为</p>
+<script type="math/tex; mode=display">
+f''(x) = \frac{d^2{y}}{dx^{2}}</script><p>n阶导数记为</p>
+<script type="math/tex; mode=display">
+f(n)(x) = \frac{d^n{y}}{dx^{n}}</script><blockquote>
+<p>计算$f(x) = x^{m}$的n阶导数</p>
+</blockquote>
+<p>其一阶导数为$f’(x) = mx^{m-1}$，二阶导数为$f’’(x) = m(m-1)x^{m-2}$，以此类推，n阶导数为</p>
+<script type="math/tex; mode=display">
+f^{(n)}{(x)} = m \cdot (m-1) \cdots (m-n+1)x^{m-n}</script><p>如果$m=n$，则$f^{(n)}(x) = n!$</p>
+<blockquote>
+<p>计算$f(x) = \frac {1}{1-x}$的n阶导数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f^{(n)}(x) = n!(1-x)^{-(n+1)}</script><blockquote>
+<p>计算$f(x) = ln(1+x)$的n阶导数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f^{(n)}(x) = (-1)(-2) \cdots (-(n-1))(1+x)^{-n} = (-1)^{(n-1)}(n-1)!(1+x)^{(-n)}</script><blockquote>
+<p>计算$f(x) = e^x$的n阶导数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f^{(n)}(x) = e^x</script><blockquote>
+<p>计算f(x)= sin(x)的n阶导数</p>
+</blockquote>
+<script type="math/tex; mode=display">
+f'(x)=cos(x) \qquad f''(x)=sin(x) \qquad f^{(3)}(x)=-cos(x) \qquad f^{(4)}(x)=sin(x)</script><p>根据此规律有</p>
+<script type="math/tex; mode=display">
+f^{(n)}(x) = sin{(x + \frac {2 \pi}{n})}</script><p>类似地，对于余弦函数$f(x)=cos(x)$有</p>
+<script type="math/tex; mode=display">
+f^{(n)}(x) = cos{(x + \frac {2 \pi}{n})}</script><p><code>二阶导数的物理意义是加速度</code>，如果$f(t)$为位移函数，其二阶导数为$t$时刻的加速度</p>
+<script type="math/tex; mode=display">
+a(t) = f''(t) = v'(t)</script><p>其中$a(t)$为$t$时刻的加速度，$v(t)$为$t$时刻的速度</p>
+<p>在python语言中，<code>sympy</code>库提供了求导的功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line">x = symbols(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">r = diff(cos(x), x)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt; -sin(x)</span><br></pre></td></tr></table></figure>
+<h2 id="微分"><a href="#微分" class="headerlink" title="微分"></a>微分</h2><p>函数$y=f(x)$在某一区间上有定义，对于区间内的点$x_0$，当$x$变为$x_0 + \Delta x$时，如果函数的增量$\Delta y = f(x_0 + \Delta)-f(x_0)$可以表示成</p>
+<script type="math/tex; mode=display">
+\Delta y = A \Delta x + o(\Delta x)</script><p>其中$A$是不依赖于$\Delta x$的常数，$o(\Delta x)$是$\Delta x$的<code>高阶无穷小</code>，则称函数在$x_0$处可微</p>
+<p>$A \Delta x$称为函数在$x_0$处的微分，记为$dy$，即$dy = A \Delta x$，$dy$为$\Delta y$的<code>线性主部</code></p>
+<p>通常把$\Delta x$称为自变量的微分，记为$dx$，如果函数可微，则导数和微分的关系为$dy = f(x)dx$</p>
+<blockquote>
+<p>微分的几何意义是在点$(x_0, f(x_0))$处自变量增加$\Delta x$时切线函数$y = f’(x_0)(x-x_0)+f(x_0)$</p>
+<p>举例说明微分的计算，对于函数$y=sin(x^2)$</p>
+</blockquote>
+<p>其导数为$y’ = 2x \cdot cos(x^2)$，于是可以得到其微分为$dy = 2x \cdot cos(x^2) dx$</p>
+<blockquote>
+<p>考虑下复合函数的微分，对于复合函数$z = f(y), y=g(x)$</p>
+</blockquote>
+<p>根据复合函数求导公式有$\frac{dz}{dx}=f’(y)g’(x)$，因此其微分为$dz = f’(y)g’(x)dx$</p>
+<p>由于有$dy = g’(x)dx$，因为也可以写成$dz = f’(y)dy$</p>
+<h2 id="导数与函数的单调性"><a href="#导数与函数的单调性" class="headerlink" title="导数与函数的单调性"></a>导数与函数的单调性</h2><p>导数决定了可导函数的重要性质，包括单调性与极值，是研究函数性质的有力工具，由于导数是函数变化率的极限</p>
+<p>因此如果在$x$点处它的值为正，则在该点处自变量增大时函数值也增大，如果为负，则自变量增大时函数值减小</p>
+<p>假设函数$f(x)$在区间$[a,b]$内连续，在区间$(a,b)$内可导。如果在$(a,b)$内$f’(x) \gt 0$，则函数在$[a,b]$内单调递增；如果在$(a,b)$内$f’(x) \t 0$，则函数在$[a,b]$内单调递减，可以通过拉格朗日中值定理证明</p>
+<blockquote>
+<p>对于函数$f(x) = x^3 + 4x^2 -10x +1$</p>
+</blockquote>
+<p>其一阶导数为$f’(x) = 3x^2 +8x -10$，方程$f’(x)=0$的根为$x = \frac{-8 \pm \sqrt{64+120}}{6} = \frac{-4 \pm \sqrt{46}}{3}$</p>
+<ul>
+<li>在区间$(- \infty , \frac{-4-\sqrt{46}}{3} )$内$f’(x) \gt 0$，函数单调递增</li>
+<li>在区间$(\frac{-4-\sqrt{46}}{3} , \frac{-4+\sqrt{46}}{3} )$内$f’(x) \lt 0$，函数单调递减</li>
+<li>在区间$(\frac{-4+\sqrt{46}}{3} , +\infty )$内$f’(x) \gt 0$，函数单调递增</li>
+</ul>
+<p>因此在$x= \frac{-4-\sqrt{46}}{3}$处函数有极大值，在$ x = \frac{-4+\sqrt{46}}{3}$处函数有极小值，函数的曲线为</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/极大值和极小值演示函数.svg" alt="极大值和极小值演示函数"></p>
+<p>利用导数可以证明某些不等式，其思路是证明函数在某一区间内单调，因此在区间的端点处取得极值</p>
+<blockquote>
+<p>证明当$x&gt;0$时不等式$ln(x) \le x-1 $成立</p>
+</blockquote>
+<p>构造函数$f(x) = x-1-ln(x)$，其导数为$f’(x) = 1- \frac{1}{x}$</p>
+<ul>
+<li>当$x \lt 1$时有$f’(x) \lt 0$，函数单调递减</li>
+<li>当$x \gt 1$时有$f’(x) \gt 0$，函数单调递增</li>
+</ul>
+<p>1是函数的极小值点，且$f(1)=0$，因此不等式成立</p>
+<h2 id="极值判别法则"><a href="#极值判别法则" class="headerlink" title="极值判别法则"></a>极值判别法则</h2><blockquote>
+<p>极值定义，这里指的是局部极值</p>
+</blockquote>
+<p>函数$f(x)$在区间$I$内有定义，$x_0$是该区间内的一个点</p>
+<ul>
+<li>如果存在$x_0$的一个$\delta $领域，对于该领域内任意一点$x$都有$f(x_0) \ge f(x)$，则称$x_0$是该函数的<code>极大值</code></li>
+<li>如果领域内任意一点$x$都有$f(x_0) \le f(x)$，则称$x_0$是该函数的<code>极小值</code></li>
+</ul>
+<p>极大值和极小值统称为<code>极值</code></p>
+<ul>
+<li>如果存在$x_0$的一个$\delta $领域，对于该领域内任意一点$x$都有$f(x_0) \gt f(x)$，则称$x_0$是该函数的<code>严格极大值</code></li>
+<li>如果领域内任意一点$x$都有$f(x_0) \lt f(x)$，则称$x_0$是该函数的<code>严格极小值</code></li>
+</ul>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">费马定理下的充分条件</button></li><li class="tab"><button type="button" data-href="#充分条件-2">二阶导数下的充分条件</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><blockquote>
+<p>费马定理</p>
+</blockquote>
+<p>假设函数$f(x)$在$x_0$点处可导，如果在$x_0$点处取得极值，则定有$f’(x) = 0$，这一结论称为费马定理，它给出了可导函数取极值的一阶必要条件</p>
+<p>导数等于0的点称为函数的<code>驻点</code>(Stationary Point)</p>
+<p>最优化算法一般通过寻找函数的驻点而求解函数的极值问题，导数为0是函数取得极值的<strong>必要条件而非充分条件</strong></p>
+<p>下面给出在费马定理下的函数取极值的<strong>充分条件</strong>，假设函数$f(x)$在$x_0$点的一个领域内可导，且有$f’(x) = 0$，考察在$x_0$去心领域内的函数值符号，有三种情况</p>
+<ol>
+<li>在$x_0$的左侧$f’(x) \gt 0$，在$x_0$的右侧$f’(x) \lt 0$，则函数在$x_0$取严格极大值</li>
+<li>在$x_0$的左侧$f’(x) \lt 0$，在$x_0$的右侧$f’(x) \gt 0$，则函数在$x_0$取严格极小值</li>
+<li>在$x_0$的左侧和右侧$f’(x)$同号，则$x_0$不是极值点</li>
+</ol>
+<p>对于第一种情况，函数在$x_0$的左侧单调增，在右侧单递减，因此$x_0$是极大值点；对于第二种情况，函数在$x_0$的左侧单递减，在右侧单递增，因此$x_0$是极小值点；对于第三种情况，函数在$x_0$的两侧均单调增或者单调减，因此$x_0$不是极值点</p>
+<p>根据此结论，求函数的极值点的方法首先是求解方程$f’(x)=0$得到函数的所有驻点，然后判断驻点两侧一阶导数值的符号</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p>利用二阶导数的信息给出函数极值的充分条件，假设$x_0$为函数的驻点，且在该点处二阶可导，对于驻点处二阶导数的符号，可分为三种情况</p>
+<ol>
+<li>$f’’(x) \gt 0$，则$x_0$为函数$f(x)$的严格极小值点</li>
+<li>$f’’(x) \lt 0$，则$x_0$为函数$f(x)$的严格极大值点</li>
+<li>$f’’(x) = 0$，则不定，$x_0$可能是极值点也可能不是极值点，需进一步讨论</li>
+</ol>
+<p>情况一：如果n是偶数，则$x_0$是极值点，当$f^{(n)}{x_0} \gt 0$是$f(x)$de 严格极小值点，当$f^{(n)}{x_0} \lt 0$是$f(x)$de 严格极大值点</p>
+<p>情况二：如果n是技术，则$x_0$不是$f(x)$的极值点</p>
+<p>该充分条件可以用泰勒公式证明</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<blockquote>
+<p>例子</p>
+</blockquote>
+<ul>
+<li><p>考虑函数$f(x)=x^2$</p>
+<p>其一阶导数为$f’(x)=2x$，令$f’(x)=0$可以解得其驻点为$x=0$，由于$f’’(x)=2 \gt 0$，该点是函数的极小值点</p>
+</li>
+<li><p>对于函数$f(x) = -x^2$</p>
+<p>其一阶导数为$f’(x) = -2x $，令$f’(x)=0$可以解得其驻点为$x=0$，由于$f’’(x)=-2 \lt 0$，该点是函数的极大值点</p>
+</li>
+<li><p>对于函数$f(x)=x^3$</p>
+<p>其一阶导数为$f’(x)=3x^2$，令$f’(x)=0$可以解得其驻点为$x=0$</p>
+<p>其二阶导数为$f’’(x)=6x$</p>
+<p>其三阶导数为$f^{(3)}(x)=6$</p>
+<p>由于$f’’(0)=0$，$f^{(3)}(0)=6$，因此该点不是极值点</p>
+</li>
+</ul>
+<p>最后一种情况称为<code>鞍点</code>，会导致数值优化算法，如梯度下降无法找到真正的极值点</p>
+<h2 id="导数与函数的凹凸性"><a href="#导数与函数的凹凸性" class="headerlink" title="导数与函数的凹凸性"></a>导数与函数的凹凸性</h2><div class="note primary modern"><p>凹凸性是函数的另一个重要性质，它与单调性共同决定了函数曲线的形状</p>
+</div>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">凸函数定义</button></li><li class="tab"><button type="button" data-href="#充分条件-2">凹函数定义</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><p>对于函数$f(x)$在它的定义域内有两点$x$、$y$，如果对于任意的实数$ 0 \le \theta \le 1$都满足如下不等式</p>
+<script type="math/tex; mode=display">
+f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y)</script><p>即函数为<code>凸函数</code>，从图像上看，如果函数为凸函数，那么它是向下凸的，用直线连接函数上任何两点(即两点的割线)，线段上的点都在函数曲线的上方，如图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/凸函数示例.svg" alt="凸函数示例"></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p>如果满足不等式</p>
+<script type="math/tex; mode=display">
+f(\theta x + (1-\theta)y) \ge \theta f(x) + (1-\theta)f(y)</script><p>则称为<code>凹函数</code>，需要强调的是，这里遵循的是欧美国家的定义，与国内某些高等数学教材定义刚好相反</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<blockquote>
+<p>证明凸函数定义</p>
+</blockquote>
+<p>对于$ \forall x,y $以及$ 0 \le \theta \le 1$有</p>
+<script type="math/tex; mode=display">
+f(\theta x + (1-\theta)y) = (\theta x + (1-\theta)y)^2  \\
+\theta f(x) + (1-\theta)f(y) = \theta x^2 + (1-\theta)y^2</script><p>显然有</p>
+<script type="math/tex; mode=display">
+\theta x^2 + (1-\theta)y^2-(\theta x + (1-\theta)y)^2 = \theta(x^2-y^2)+y^2 - (\theta x+(1-\theta)y)^2 \\
+= \theta(x+y)(x-y)+(y+\theta x + (1-\theta )y)(y-\theta x - (1-\theta)y) \\
+= \theta(x+y)(x-y)+(\theta x+(2-\theta)y)(-\theta x+\theta y) \\
+= \theta(x-y)(x+y-\theta x -(2-\theta)y) = \theta(1-\theta)(x-y)(x-y) \ge 0</script><p>因此有</p>
+<script type="math/tex; mode=display">
+f(\theta x+(1-\theta)y) \le \theta f(x)+(1-\theta)f(y)</script><p>如果把式中的等号去掉，则称函数式<code>严格凸函数</code>，类似的可以定义<code>严格凹函数</code></p>
+<blockquote>
+<p>二阶可导函数是凸函数和凹函数的充分必要条件</p>
+</blockquote>
+<p>假设$f(x)$在区间$[a,b]$内连续，在区间$(a,b)$内一阶导数和二阶导数均存在</p>
+<ul>
+<li>如果在$(a,b)$内$f’’(x) \ge 0$，则称函数在$[a,b]$内为凸函数</li>
+<li>如果在$(a,b)$内$f’’(x) \le 0$，则称函数在$[a,b]$内为凹函数</li>
+<li>如果在$(a,b)$内$f’’(x) &gt; 0$，则称函数在$[a,b]$内为严格凸函数</li>
+<li>如果在$(a,b)$内$f’’(x) &lt; 0$，则称函数在$[a,b]$内为严格凹函数</li>
+</ul>
+<blockquote>
+<p>拐点</p>
+</blockquote>
+<p>函数凹凸性的分界点称为<code>拐点</code>，如果函数二阶可导，则在拐点处有$f’’(x)=0$，且在拐点处两侧二阶导数值异号</p>
+<p>对于函数$f(x)=x^3$，其二阶导数为$6x$，$0$点处二阶导数值为$0$，且在$0$点两侧的二阶导数值异号，因此$0$为其拐点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/凸函数拐点.svg" alt="凸函数拐点"></p>
+<p>凸函数有良好的的性质，可以保证优化算法找到函数的极小值点</p>
+<h1 id="微分中值定理"><a href="#微分中值定理" class="headerlink" title="微分中值定理"></a>微分中值定理</h1><div class="note primary modern"><p>微分中值定理建立了导数与函数值之间的关系</p>
+</div>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">罗尔中值定理</button></li><li class="tab"><button type="button" data-href="#充分条件-2">拉格朗日中值定理</button></li><li class="tab"><button type="button" data-href="#充分条件-3">柯西中值定理</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><blockquote>
+<p>定义</p>
+</blockquote>
+<p>罗尔中值定理(Rolle Mean Value Theorem)是指如果函数$f(x)$在闭区间$[a,b]$内连续，在开区间$(a,b)$内可导，且在区间的两个端点处的值相等，即$f(a)=f(b)$，则在区间$[a,b]$内至少存在一点$\xi$使得$f’(\xi)=0$</p>
+<p>举一个罗尔中值定理的示例: $f(x)=sin(x)$，考虑间$[0,\pi]$，有$f(0)=f(\pi)=0$，函数在$x=\frac{\pi}{2}$处有极大值，显然在该点处导数值为$0$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/罗尔中值定理示例.svg" alt="罗尔中值定理示例"></p>
+<blockquote>
+<p>用费马定理证明罗尔中值定理</p>
+</blockquote>
+<p>如果$f(x)$在闭区间$[a,b]$内是常数，则在该区间内任一点处都有$f’(x)=0$</p>
+<p>如果不为常数，则必定存在极大值点和极小值点，根据连续函数的性质，极大值和极小值中至少有一个区间$(a,b)$内取得，在该点处有$f’(x)=0$</p>
+<blockquote>
+<p>几何意义</p>
+</blockquote>
+<p>对于区间两个端点处的函数值相等的函数，在区间内至少存在一点的导数值为$0$，该点处的切线与$x$轴平行</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><blockquote>
+<p>定义</p>
+</blockquote>
+<p>拉格朗日中值定理(Lagrange Mean Value Theorem)是指如果函数$f(x)$在闭区间$[a,b]$内连续，在开区间$(a,b)$内可导，则在区间$(a,b)$内至少存在一点$\xi$使得</p>
+<script type="math/tex; mode=display">
+f'(\xi) = \frac{f(b)-f(a)}{b-a}</script><p>这是罗尔中值定理的推广</p>
+<blockquote>
+<p>证明</p>
+</blockquote>
+<p>构造辅助函数$g(x)=f(x)-\frac{f(b)-f(a)}{b-a}(x-a)$，显然有</p>
+<script type="math/tex; mode=display">
+g(a)=f(a)-\frac{f(b)-f(a)}{b-a}(a-a)=f(a) \\
+g(b)=f(b)-\frac{f(b)-f(a)}{b-a}(b-a)=f(a)</script><p>且$g’(x)=f’(x)-\frac{f(b)-f(a)}{b-a}$，$g(x)$满足罗尔中值定理</p>
+<p>因此在$(a,b)$内至少存在一点$\xi$使得$g’(\xi)=f’(\xi)-\frac{f(b)-f(a)}{b-a}=0$</p>
+<p>其直观解释是将函数减掉一个线性函数，构造出两个端点的值相等的函数，以满足罗尔中值定理的条件</p>
+<blockquote>
+<p>几何意义</p>
+</blockquote>
+<p>区间$(a,b)$内至少存在一个点$\xi$，在$(\xi,f(\xi))$处的切线与两点之间的割线平行，即斜率相等</p>
+<p>考虑函数$f(x)=x^2$，它经过$(0,0)$与$(1,1)$这两个点，因此在区间$(0,1)$内至少存在某一点$\xi$，使得$f’(\xi)=\frac{f(1)-f(0)}{1-0}$，在这里$\xi=0.5$，在该点处切线与经过$(0,0)$与$(1,1)$这两个点的割线平行，如图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/拉格朗日中值定理示例.svg" alt="拉格朗日中值定理示例"></p>
+<blockquote>
+<p>用拉格朗日中值定理证明函数的一阶导数与其单调性的关系</p>
+</blockquote>
+<p>假设函数$f(x)$在$[a,b]$内连续，在$(a,b)$内可导。如果在$(a,b)$内所有的点处均有$f’(x)&gt;0$，则函数在$[a,b]$内单调递增</p>
+<p>对于区间内任一的点$x_1$，$x_2$，存在一点$x_1 &lt; \xi &lt; x_2$，使得$f(x_2)-f(x_1)=f’(\xi)(x_2-x_1)$</p>
+<p>这里$f’(\xi)&gt;0$，由于$x_1<x_2$，因此$f(x_2)-f(x_1)>0$函数单调递增</p>
+<p>对于单调递减的情况可以用相同的方法证明</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-3"><blockquote>
+<p>定义</p>
+</blockquote>
+<p>函数$f(x)$和$g(x)$在$[a,b]$内连续，在$(a,b)$内可导，且对$\forall x \in (a,b)$有$g’(x) \neq 0$，则存在$\xi \in (a,b)$使得</p>
+<script type="math/tex; mode=display">
+\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}</script><blockquote>
+<p>借助罗尔中值定理证明</p>
+</blockquote>
+<p>构造辅助函数$F(x)=f(x)-f(a)-\frac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a))$，显然有$F(a)=F(b)=0$</p>
+<p>且$F’(x)=f’(x)-\frac{f(b)-f(a)}{g(b)-g(a)}(g’(x))$，根据罗尔中值定理，存在$\xi \in (a,b)$使得$F’(\xi)=f’(\xi)-\frac{f(b)-f(a)}{g(b)-g(a)}g’(\xi)=0$</p>
+<p>因此柯西中值定理成立</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<h1 id="泰勒公式"><a href="#泰勒公式" class="headerlink" title="泰勒公式"></a>泰勒公式</h1><blockquote>
+<p>定义</p>
+</blockquote>
+<p>如果一个函数足够光滑且在某点出各阶导数均存在，泰勒公式(Taylor’s Formula)以该点处的各阶导数作为系数，构造出多项式来近似函数在该点领域中任意点处的函数值，此多项式称为<code>泰勒公式</code></p>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">带皮亚诺(Peano)余项的泰勒公式</button></li><li class="tab"><button type="button" data-href="#充分条件-2">带拉格朗日余项的泰勒公式</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><p>根据微分的定义，如果$f(x)$在点$a$处可导，可用一次函数近似代替函数$f(x)$，误差是$x-a$的高阶无穷小</p>
+<script type="math/tex; mode=display">
+f(x) = f(a)+f'(a)(x-a)+o(x-a)</script><p>下面将一次函数推广到更高次的多项式，如果函数$n$阶可导，则可以建立一个如下形式的多项式近似代替$f(x)$</p>
+<script type="math/tex; mode=display">
+p(x) = A_0+A_1(x-a)+\cdots+A_n(x-a)^n</script><p>满足$f(x)=A_0+A_1(x-a)+\cdots+A_n(x-a)^n+o((x-a)^n)$，误差项是$(x-a)^n$的高阶无穷小</p>
+<p>下面确定多项式的系数，首先令$x=a$，含有$x-a$各项的值均为$0$，可以解得$A_0=f(a)$</p>
+<p>接下来对$f(x)$两边同时求导得$f’(x)=A_1+2A_2(x-a)+\cdots +nA_n(x-a)^{n-1}+o((x-a)^{n-1})$</p>
+<p>令$x=a$，可以解得$A_1=f’(a)$</p>
+<p>以此类推，对$f(x)$两边同时求$m$阶导数，并令$x=a$，可以解得$A_m = f’(a)$</p>
+<p>因此我们要找的多项式为</p>
+<script type="math/tex; mode=display">
+p(x)=f(a)+\frac{f'(a)}{1!}(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots + \frac{f^{n}(a)}{n!}(x-a)^n</script><p>称为<strong>泰勒多项式(Taylor polynomial)</strong>，由此得到<code>带皮亚诺(Peano)余项的泰勒公式</code></p>
+<script type="math/tex; mode=display">
+f(x)=f(a)+\frac{f'(a)}{1!}(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots + \frac{f^{n}(a)}{n!}(x-a)^n+o((x-a)^n)</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p>如果令$\Delta x=x-a$，泰勒公式可以写成</p>
+<script type="math/tex; mode=display">
+f(a+\Delta x)=f(a)+\frac{f'(a)}{1!}\Delta x+\frac{f''(a)}{2!}\Delta x^2+\cdots +\frac{f^{n}(a)}{n!}\Delta x^n+o(\Delta x^n)</script><p>如果函数$n+1$阶可导，借助<code>柯西中值定理</code>可以证明泰勒公式的另一种形式，称为<code>带拉格朗日余项的泰勒公式</code></p>
+<script type="math/tex; mode=display">
+f(x)=f(a)+\frac{f'(a)}{1!}(x-a)+\frac{f''(a)}{2!}(x-a)^2+ \cdots + \frac{f^{n}(a)}{n!}(x-a)^{n}+\frac{f^{n+1}(a)}{(n+1)!}(x-a)^{n+1}</script><p>其中$\theta \in (a,x)$，两种泰勒公式可以统一写成</p>
+<script type="math/tex; mode=display">
+f(x)=f(a)+\frac{f'(a)}{1!}(x-a)+\frac{f''(a)}{2!}(x-a)^2+ \cdots + \frac{f^{n}(a)}{n!}(x-a)^{n}+R_n(x)</script><p>其中$R_n(x)$称为<code>余项</code>，是$(x-a)^n$的高阶无穷小</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<blockquote>
+<p>麦克劳林(Maclaurin)公式</p>
+</blockquote>
+<p>函数在$x=0$点处的泰勒公式称为<code>麦克劳林(Maclaurin)公式</code>，为如下形式</p>
+<script type="math/tex; mode=display">
+f(x)=f(0)+\frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+ \cdots + \frac{f^{n}(0)}{n!}x^{n}+R_n(x)</script><p>下面列出经典的麦克劳林公式</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>麦克劳林公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\frac {1}{1-x}$</td>
+<td>$1+x+x^2+ \cdots + x^n + o(x^n)$</td>
+</tr>
+<tr>
+<td>$e^x$</td>
+<td>$1+x+\frac {x^2}{2!}+\cdots +\frac {x^n}{n!}+o(x^n)$</td>
+</tr>
+<tr>
+<td>$sin(x)$</td>
+<td>$x-\frac {x^3}{3!}+ \cdots + \frac {(-1)^{n-1}}{(2n-1)!}x^{2n-1}+o(x^{2n-1})$</td>
+</tr>
+<tr>
+<td>$cos(x)$</td>
+<td>$1-\frac {x^2}{2!}+\frac {x^4}{4!}- \cdots +\frac {(-1)^n}{(2n)!}x^{2n}+o(x^{2n})$</td>
+</tr>
+<tr>
+<td>$ln(1+x)$</td>
+<td>$x-\frac {x^2}{2}+\frac {x^3}{3}- \cdots + \frac {(-1)^{n+1}}{n}x^n+o(x^n)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>泰勒公式建立了可导函数与其各阶导数之间的联系，同时用多项式对函数进行逼近</p>
+<p>它被用于对函数的分析与计算，包括梯度下降法、牛顿法、拟牛顿法等</p>
+<blockquote>
+<p>利用泰勒公式可以证明极值判别法则</p>
+</blockquote>
+<p>将$f(x)$在$x_0$点处做泰勒展开，如果$f^{(i)}(x_0)=0,i=1,\cdots, n-1$，同时$f^{(n)}(x_0) \neq 0$，则泰勒展开的结果为</p>
+<script type="math/tex; mode=display">
+f(x)=f(x_0)+\frac{f^n(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)</script><p>如果$n$为偶数，则在$x_0$的去心领域内忽略高阶无穷小，有$f(x)-f(x_0)=\frac{f^n(x)(x_0)}{n!}(x-x_0)^n$</p>
+<p>由于$(x-x_0)^n &gt; 0$，所以$\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$与$\frac {f^{(n)}(x_0)}{n!}$，总为正或总为负，因$x_0$是极值点</p>
+<p>如果$n$为奇数，则$\frac{f^n(x)(x_0)}{n!}(x-x_0)^n$在$x_0$的两侧变号，因此$x_0$不是极值点</p>
+<h1 id="不定积分"><a href="#不定积分" class="headerlink" title="不定积分"></a>不定积分</h1><p>不定积分是积分学的核心概念，可看作求导和微分的逆运算，同样将一个函数变换成另外一个函数，称为<code>原函数</code></p>
+<blockquote>
+<p>不定积分的定义</p>
+</blockquote>
+<p>对于定义在区间$[a,b]$内的函数$f(x)$，如果存在一个区间$(a,b)$内可导的函数$F(x)$，对于任意的$x \in (a,b)$均有$F’(x)=f(x)$</p>
+<p>则称$F(x)$是$f(x)$的一个<code>原函数</code>，也称为<code>不定积分</code></p>
+<p>不定积分是求导和微分的逆运算，记为$\int f(x)dx $，意为求和(sum)</p>
+<p>如果$F(x)$是$f(x)$的一个原函数，则$F(x)+C$也是$f(x)$的原函数，其中$C$为任意常数</p>
+<p>因此<strong>不定积分与原函数的关系</strong>为：$\int f(x)dx=F(x)+C$</p>
+<p>这是因为$(F(x)+C)’=F’(x)=f(x)$</p>
+<p>如果函数$f(x)$的原函数存在，则称其<code>可积</code>，如果函数在区间$[a,b]$内连续，则其原函数存在，<strong>连续是可积的充分条件</strong></p>
+<p>一切初等函数在其定义域内都是连续的，因此都是可积的</p>
+<p>对于函数$f(x)=x^2$其不定积分为$\int x^2dx=\frac{1}{3}x^3+C$</p>
+<p>对于常数函数$f(x)=c$， 不定积分为线性函数(一次函数)$\int cdx = cx+C$</p>
+<blockquote>
+<p>不定积分的性质</p>
+</blockquote>
+<ul>
+<li><p>对于加法运算</p>
+<script type="math/tex; mode=display">
+\int (f(x)+g(x))dx = \int f(x)dx + \int g(x)dx</script></li>
+<li><p>对于乘法运算</p>
+<script type="math/tex; mode=display">
+\int kf(x)dx = k \int f(x)dx</script></li>
+</ul>
+<p>其中$k$是个常数，这些结论可以根据求导公式得到</p>
+<blockquote>
+<p>计算$\int tan^2(x)dx$</p>
+</blockquote>
+<p>根据三角函数之间的关系有</p>
+<script type="math/tex; mode=display">
+\int tan^2(x)dx=\int \frac{1-cos^2(x)}{cos^2(x)}dx= \int \frac{1}{cos^2(x)}dx-\int 1dx=tan(x)-x+C</script><blockquote>
+<p>计算$\int \frac{1}{(x-a)(x-b)}dx$</p>
+</blockquote>
+<p>对分式进行拆分，可以得到</p>
+<script type="math/tex; mode=display">
+\int \frac{1}{(x-a)(x-b)}dx=\int \frac {1}{a-b}(\frac {1}{x-a} - \frac {1}{x-b})dx \\
+= \frac {1}{a-b}(\int \frac{1}{x-a}dx + \int \frac{1}{x-b}dx)= \frac {1}{a-b} (ln|x-a|+ln|x-b|)+C</script><blockquote>
+<p>基本函数的积分公式</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>积分公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常数函数</td>
+<td>$\int a dx = ax+C $</td>
+</tr>
+<tr>
+<td>幂函数</td>
+<td>$\int x^a dx = \frac {1}{a+1}x^{a+1}+C, a \neq -1$</td>
+</tr>
+<tr>
+<td>幂函数</td>
+<td>$\int \frac {1}{x} dx = ln \vert x \vert +C$</td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td>$\int e^x dx = e^x+C $</td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td>$\int a^x dx = \frac {1}{ln(a)}a^x+C,a&gt;0,a \neq1$</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int sin(x) dx = -cos(x)+C$</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int cos(x) dx = sin(x) + C$</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int tan(x)dx = -ln \vert cos(x) \vert +C $</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int cot(x)dx = ln \vert sin(x) \vert +C$</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int \frac{1}{cos^2(x)} dx = tan(x)+C$</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td>$\int \frac{1}{sin^2(x)} dx = -cot(x)+C$</td>
+</tr>
+<tr>
+<td>反三角函数</td>
+<td>$\int \frac {1}{\sqrt{1-x^2}}dx = arcsin(x) + C = -arccos(x) + C$</td>
+</tr>
+<tr>
+<td>反三角函数</td>
+<td>$\int \frac {1}{1+x^2}dx = arctan(x)+C$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">换元积分法之凑微分法</button></li><li class="tab"><button type="button" data-href="#充分条件-2">换元积分法之变量替换法</button></li><li class="tab"><button type="button" data-href="#充分条件-3">分部积分法</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><p>换元法分为两种类型，第一种称为<code>凑微分法</code>，也称为第一类换元法</p>
+<p>根据复合函数求导公式有$(F(u(x)))’=F’(u(x))u’(x)$，如果有$(F(u(x)))’=f(u(x))u’(x)$</p>
+<p>根据不定积分的定义可以得到$\int f(u(x))u’(x)dx=F(u(x))$，由于$\int f(u)dx=F(u)$，因此有</p>
+<script type="math/tex; mode=display">
+\int f(u(x))u'(x)dx = \int f(u)du</script><p>这种方法的关键是将被积函数写成一个函数$f(u(x))$与另一个函数的导数$u’(x)$的乘积</p>
+<blockquote>
+<p>计算不定积分$\int x cos(x^2+1)dx$</p>
+</blockquote>
+<p>这种方法的关键是”凑出”所需要的复合函数的微分，这里凑出$x^2+1$</p>
+<script type="math/tex; mode=display">
+\int x cos(x^2+1)dx = \int \frac {1}{2}cos(x^2+1)d(x^2+1) = \frac {1}{2}sin(x^2+1)</script><blockquote>
+<p>计算不定积分$\int x e^{x^2}dx$</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\int x e^{x^2}dx = \frac {1}{2} \int e^{x^2}dx^2 = \frac {1}{2}e^{x^2}+C</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p>第二种换元法称为<code>变量替换法</code>，同样根据复合函数的求导公式求出</p>
+<p>对于不定积分$\int f(x)dx$，令$x=u(t)$，如果$u(t)$在区间$I$内单调且可导，反函数$t=u^{-1}(x)$存在，则有$\int f(x)dx = \int f(u(t))du(t)$</p>
+<p>在右侧积出之后，用$t=u^{-1}(x)$将$t$替换回$x$即可</p>
+<blockquote>
+<p>计算积分$\int \frac {1}{1+\sqrt(x)} dx$</p>
+</blockquote>
+<p>这里主要困难是$\sqrt{x}$，因此令$t= \sqrt {x}$，则有$x=t^2$，从而有</p>
+<script type="math/tex; mode=display">
+\int \frac {1}{1+\sqrt(x)} dx = \int \frac{1}{1+t}dt^2 = \int \frac {2t}{1+t}dt = 2 \int (1- \frac {1}{1+t})dt \\
+= 2t -2ln|1+t|+C = 2 \sqrt {x}-2ln|1+\sqrt {x}|+C</script><blockquote>
+<p>计算积分$\int arcsin(x)dx$</p>
+</blockquote>
+<p>令$t=arcsin(x)$，则$x=sin(t)$，从而有</p>
+<script type="math/tex; mode=display">
+\int arcsin(x)dx = \int t d(sin(t)) = t sin(t) - \int sin(t)dt \\
+tsin(t)+cos(t)+C = x arcsin(x)+\sqrt{1-x^2}+C</script><p>这里的第二步用了分部积分法</p>
+<blockquote>
+<p>计算积分$\int \sqrt {a^2-x^2}dx$</p>
+</blockquote>
+<p>令$x=asin(t)$，利用倍角公式有</p>
+<script type="math/tex; mode=display">
+\int \sqrt{a^2-x^2}dx = \int \sqrt{a^2-a^2sin^2(t)}dasin(t) = a^2 \int cos^2(t) dt \\
+ = a^2 \int \frac {1+cos(2t)}{2} dt = a^2 (\frac {1}{2}t + \frac {1}{4}sin(2t))+C = a^2 (\frac {1}{2}arcsin \frac {x}{a}  + \frac {1}{2} sin(t)cos(t) )+C \\
+= \frac {1}{2} a^2 arcsin(\frac {x}{a} ) + \frac {1}{2} \sqrt {a^2-x^2}+C</script><p><strong>换元法的核心</strong>是确定要替换的部分</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-3"><p>分部积分法由乘法求导公式导出，根据乘法的求导公式$(f(x)g(x))’ = f’(x)g(x) + f(x)g’(x)$，变形后得到</p>
+<p>$f(x)g’(x) = (f(x)g(x))’ - f’(x)g(x)$，两边同时求积分得到</p>
+<script type="math/tex; mode=display">
+\int f(x)g'(x)dx = f(x)g(x) - \int f'(x)g(x)dx</script><blockquote>
+<p>计算$\int x^2cos(x)dx$</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\int x^2 cos(x)dx = \int x^2 d sin(x)=x^2 sin(x)-\int sin(x)dx^2 = x^2sin(x)-2 \int xsin(x)dx \\
+= x^2sin(x)+2\int xd(cos(x))+x^2sin(x)+2xcos(x)-2 \int cos(x)dx \\
+= x^2sin(x)+2xcos(x)-2sin(x)+C</script><p><code>初等函数</code>是由幂函数、指数函数、对角函数、三角函数、反三角函数与常数经过有限次有理运算及有限次复合所产生，并且能用一个解析式表示的函数，因此初等函数的导数仍是初等函数，但初等函数的原函数不一定是初等函数</p>
+<p>例如$e^{-x^2}$、$\frac {sin(x)}{x}$、$\frac {1}{ln(x)}$这些函数的不定积分都无法得到解析表达式</p>
+<p><code>刘维尔定理</code>之处，一个初等函数如果有初等的原函数，则它一定能写成同一个微分域的函数加上该域上函数的对数的线性组合，否则不存在初等的原函数</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<p>在python中，符号计算库<code>sympy</code>提供了计算不定积分的功能，由函数<code>integrate</code>实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line">x = symbols(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">r = integrate(cos(x), x)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt; sin(x)  <span class="comment"># 这里忽略常数C</span></span><br></pre></td></tr></table></figure>
+<h1 id="定积分"><a href="#定积分" class="headerlink" title="定积分"></a>定积分</h1><h2 id="定积分的定义与性质"><a href="#定积分的定义与性质" class="headerlink" title="定积分的定义与性质"></a>定积分的定义与性质</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p>定积分将函数映射成实数，是和式的极限，它最初用于解决几何物理问题，如计算函数曲线围成的面积、曲线长度、运动物体的位移等</p>
+<p>常见的有<code>黎曼积分</code>和<code>勒贝格积分</code>，这里只介绍前者，也就是通常所说的<strong>定积分</strong>，勒贝格积分知识可以阅读<code>实变函数教材</code></p>
+<p>函数$f(x)$在区间$[a,b]$上的定积分是下面的极限</p>
+<script type="math/tex; mode=display">
+\lim _{\Delta x \rightarrow 0} {\sum _{i=1}^{n}{f(\xi _i) \Delta x_i}}</script><p>这里用一系列点<script type="math/tex">a = x _0,x _1 \cdots ,x _n = b</script>将区间$ [a,b] $划分成$ n $分，第$ i $份的区间长度为<script type="math/tex">\Delta x_i = x_i - x_{i-1}</script>，<script type="math/tex">\xi _i</script>为第$i$个区间<script type="math/tex">[x_{i-1}, x_i]</script>内任意一点</p>
+<p>只要划分的足够细且函数$f(x)$满足一定的条件，则式中的极限存在，式中的定积分记为$\int _a^b{f(x)dx}$</p>
+<p>若式中的极限存在，则称函数在区间$[a,b]$内<code>可积</code></p>
+<blockquote>
+<p>几何意义</p>
+</blockquote>
+<p>定积分的几何意义是函数在某一区间上与横轴围城的区域面积</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/定积分的几何意义.svg" alt="定积分的几何意义"></p>
+<p>在计算时采用逐步逼近取极限的方法，右侧的和记为矩形条的面积之和</p>
+<p>矩形的宽度为<script type="math/tex">\Delta x_i</script>，高度为<script type="math/tex">[x_{i-1}, x_i]</script>内任意一点<script type="math/tex">\xi _i</script>的函数值$f(\xi _i)$</p>
+<blockquote>
+<p>定积分存在条件</p>
+</blockquote>
+<p>定积分存在条件是函数几乎处处连续，不连续点的测度为$0$</p>
+<p>直观的解释是不连续点的结合是有限集或无限可数集</p>
+<blockquote>
+<p>根据定积分定义计算$\int _0 ^1 {x^2 dx}$</p>
+</blockquote>
+<p>利用下面的公式</p>
+<script type="math/tex; mode=display">
+\sum _{i=1}^{n}{\frac {1}{6}n(n+1)(2n+1)}</script><p>将区间$[0,1]$等分为$n$份，$\Delta x_i = \frac {1}{n}$，根据定积分的定义有</p>
+<script type="math/tex; mode=display">
+\int _0^1 {x^2 dx} = \lim _{x \rightarrow +\infty}{\sum _{i=1}^{n} \frac {1}{n} {(\frac {i}{n})}^2} = \lim _{x \rightarrow +\infty}\frac {1}{n^3} \sum _{i=1}^n {i^2} = \lim _{x \rightarrow +\infty}\frac {1}{n^3} \frac {n(n+1)(2n+1)}{6} = \frac {1}{3}</script><p>直接根据定义来计算定积分是繁琐困难的，后面会使用<code>牛顿-莱布尼茨公式</code>来计算</p>
+<blockquote>
+<p>定积分性质</p>
+</blockquote>
+<p>假设函数$f(x)$和$g(x)$在区间$[a,b]$内可积，$\lambda$是一个常数，则$f(x)+g(x)$与$\lambda f(x)$在区间$[a,b]$内也可积，且有</p>
+<ul>
+<li><p>定积分具有线性的性质</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)+g(x)dx} = \int _{a}^{b}{f(x)dx} + \int _{a}^{b}{g(x)dx}</script><script type="math/tex; mode=display">
+\int _{a}^{b}{\lambda f(x)dx}= \lambda \int _{a}^{b}{f(x)dx}</script></li>
+<li><p>区间可加性</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)dx} + \int _{b}^{c}{f(x)dx} = \int _{a}^{c}{f(x)dx}</script></li>
+<li><p>积分上下限颠倒，积分值取负号</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)dx} = - \int _{b}^{a}{f(x)dx}</script></li>
+</ul>
+<h2 id="牛顿-莱布尼茨公式"><a href="#牛顿-莱布尼茨公式" class="headerlink" title="牛顿-莱布尼茨公式"></a>牛顿-莱布尼茨公式</h2><blockquote>
+<p>牛顿-莱布尼茨(Newton-Leibniz)公式</p>
+</blockquote>
+<p>直接根据定义来计算定积分是繁琐困难的，更高效的方法是利用微积分基本定理，即<code>牛顿-莱布尼茨公式</code>来计算</p>
+<div class="note primary modern"><p>牛顿-莱布尼茨公式建立了定积分与原函数之间的关系</p>
+</div>
+<p>如果函数$f(x)$在区间$[a,b]$内可积，则在此区间内定积分的值等于其原函数在区间两个端点处函数值之差</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b} {fx(dx)} = F(b) - F(a)</script><p>其中$F(x)$是$f(x)$的一个原函数，通常将$F(b)-F(a)$记为$F(x)|_{a}^{b}$，该公式也可以写成</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)dx} = F(x)|_{a}^{b}</script><p>可以用拉格朗日中值定理证明该定理，根据定积分的定义有</p>
+<script type="math/tex; mode=display">
+F(b)-F(a) = \sum _{i=1}^{n}{F(x_i)F(x_{i-1})} = \sum _{i=1}^{n}{F'(\eta _i)(x_i-x_{i-1})} = \sum _{i=1}^{n}{f(\eta _i) \Delta x_i} = \int _a^b{f(x)}dx</script><p>这一定理为计算定积分提供了统一的依据，<strong>是微积分中最重要的结论</strong></p>
+<p>只需计算原函数，然后即可根据原函数的值计算任意区间上的定积分</p>
+<blockquote>
+<p>计算定积分$\int _{0}^{\pi}{sin(x)dx} = -cos(x)| _0^{\pi} = 2$</p>
+</blockquote>
+<p>在python中提供了计算定积分的功能，有<code>integrate</code>支持</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line">x = symbols(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">r = integrate(cos(x), x, -pi, pi)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="定积分的计算"><a href="#定积分的计算" class="headerlink" title="定积分的计算"></a>定积分的计算</h2><p>定积分的计算可以借助<code>牛顿-莱布尼茨</code>公式完成，因此问题的核心是计算不定积分，同样可以使用<code>换元法</code>和<code>分部积分法</code></p>
+<div class="tabs" id="充分条件"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#充分条件-1">换元积分法之凑微分法</button></li><li class="tab"><button type="button" data-href="#充分条件-2">换元积分法之变量替换法</button></li><li class="tab"><button type="button" data-href="#充分条件-3">分部积分法</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="充分条件-1"><p>第一类换元法通过凑微分法得到原函数，在计算定积分时，直接积分上下限带入原函数即可得到结果，</p>
+<script type="math/tex; mode=display">
+\int _{0}^{1}{xe^{x^2}dx} = \int _{0}^{1}{\frac {1}{2}e^{x^2}dx^2} = \frac {1}{2}e^{x^2}|_0^1 = \frac {1}{2}e - \frac {1}{2}</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-2"><p>第二类换元法，由于进行了变量替换，因此<strong>积分上下限要进行相应的变换</strong></p>
+<p>假设函数$f(x)$在区间$[a,b]$内可积，令$x = \varphi (t)$是一个单调函数，且$\varphi (\alpha) = a, \varphi (\beta) = b$，对于第二类换元法有</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)dx} = \int _{\alpha}^{\beta}{f(\varphi (t)) d(\varphi (t))}</script><p>或者写成</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)dx} = \int _{\alpha}^{\beta}{f(\varphi (t)) \varphi' (t) d(t)}</script><blockquote>
+<p>用换元法计算$\int _{0}^{1}{\sqrt {1-x^2} dx}$</p>
+</blockquote>
+<p>如果令$x=sin(t)$，则有</p>
+<script type="math/tex; mode=display">
+\int _{0}^{1}{\sqrt {1-x^2} dx} = \int _{0}^{\frac {\pi}{2}}{cos(t) d (sint(t))} = \int _{0}^{\frac {\pi}{2}}{cos^2(t) dt} = \int _{0}^{\frac {\pi}{2}} {\frac {1+cos(2t)}{2} dt} = \frac {1}{2}t + \frac {1}{4}sin(2t)| _{0}^{\frac {\pi}{2}} = \frac {\pi}{4}</script><p>这恰好是$\frac {1}{4}$的单位元的面积</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="充分条件-3"><p>对于定积分，其分部积分法为</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{f(x)g'(x)dx} = f(a)g(x)|_a^b - \int _{a}^{b}{f'(x)g(x)dx}</script><blockquote>
+<p>用分部积分法计算例子</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\int _{0}^{\pi}{xsin(x)dx} = -\int _{0}^{\pi}{x d(cos(x))} = -x cos(x)|_0^{\pi}+\int _{0}^{\pi}{cos(x)ds} = \pi</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<div class="note primary modern"><p>重要结论，该结论在<code>欧拉-拉格朗日方程</code>推导中使用</p>
+</div>
+<p>假设函数$f(x)$在区间$[a,b]$内连续，函数$\eta (x)$满足端点值约束条件$\eta (a) = \eta (b) = 0$，如果对任意$\eta (x)$都有</p>
+<script type="math/tex; mode=display">
+\int _{a}^{b}{\eta (x) dx} = 0</script><p>则$f(x) \equiv 0$</p>
+<p>这里用<code>反证法</code>证明，假设函数$f(x)$不恒为$0$，由于$\eta (x)$是满足端点值约束的任意函数，可以令$\eta (x) = -f(x)(x-a)(x-b)$</p>
+<p>显然此函数满足端点值约束条件，且在$(a,b)$内$-(x-a)(x-b) &gt; 0$</p>
+<p>因此有<script type="math/tex">\int _{a}^{b}{f(x)\eta (x)dx} = \int _{a}^{b}{-f(x)f(x)(x-a)(x-b) dx} > 0</script></p>
+<p>这结论与上式，因此结论成立</p>
+<h2 id="变上限积分"><a href="#变上限积分" class="headerlink" title="变上限积分"></a>变上限积分</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p><strong>变上限积分函数是以积分上限为自变量的定积分对应的函数</strong></p>
+<p>假设函数<script type="math/tex">f(x)</script>在区间<script type="math/tex">[a,b]</script>内可积，<script type="math/tex">x \in [a,b]</script>，则变上限积分的定义为</p>
+<script type="math/tex; mode=display">
+F(X) = \int _{a} ^{x} f(u)du</script><p>如果<script type="math/tex">G(x)</script>是<script type="math/tex">f(x)</script>的一个原函数，根据牛顿-莱布尼茨公式有<script type="math/tex">F(x) = G(x) - G(a)</script></p>
+<p><code>变上限积分函数是被积分函数的一个原函数</code>，概率论中连续型随机变量的分布函数是典型的变上限积分</p>
+<p>假设<script type="math/tex">f(x) = x^2</script>，则变上限积分对应的函数为<script type="math/tex">F(x) = \int _1^x u^2du = \frac {1}{3}u^3| _1^x = \frac {1}{3} x^3 - \frac {1}{3}</script></p>
+<blockquote>
+<p>证明: 如果函数<script type="math/tex">f(x)</script>在区间<script type="math/tex">[a,b]</script>内连续，则变上限积分是可导的，且其导数为<script type="math/tex">F'(x) = (\int _0 ^x f(u)du)' = f(x)</script></p>
+</blockquote>
+<p>假设<script type="math/tex">G(x)</script>是<script type="math/tex">f(x)</script>的一个原函数，则有</p>
+<script type="math/tex; mode=display">
+(\int _0 ^x f(u)du)' = (G(x)-G(a))' = f(x)</script><p>比如变上限积分<script type="math/tex">\int _a^x e^{t^2} dt</script>其导数为<script type="math/tex">e^{x^2}</script></p>
+<blockquote>
+<p>考虑变上限积分的复合函数</p>
+</blockquote>
+<p>对于变上限积分<script type="math/tex">\int _a^{g(x)} f(u)du</script>，根据复合函数的求导公式，其导数为</p>
+<script type="math/tex; mode=display">
+\int _a^{g(x)} f(u)du = f(g(x))g'(x)</script><p>比如计算变上限积分<script type="math/tex">\int _a^{x^2} e^{t^2} dt</script>的导数值，根据上面公式可以得到<script type="math/tex">e^{(x^2)^2}(x^2)' =2xe^{x^4}</script></p>
+<h2 id="定积分的应用"><a href="#定积分的应用" class="headerlink" title="定积分的应用"></a>定积分的应用</h2><p>定积分可以用于计算某些几何量和物理量，包括曲线所围成的面积、曲线的长度、运动物体的位移、变力的做功等</p>
+<div class="tabs" id="定积分的应用"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#定积分的应用-1">曲线面积</button></li><li class="tab"><button type="button" data-href="#定积分的应用-2">曲线弧长</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="定积分的应用-1"><p>函数在区间内的积分值为其代数面积，即以$[a,b]$区间的两个端点、$x$轴、函数曲线围城的封闭区域的面积，带有正负号</p>
+<p>等价于定积分$ \int _a^b f(x)dx $</p>
+<blockquote>
+<p>计算椭圆$ \frac {x^2}{a^2} + \frac {y^2}{b^2} = 1$的面积</p>
+</blockquote>
+<p>由于椭圆是对称的，因此计算出它在的第一象限内的面积，然后乘以4，即可得到整个椭圆的面积</p>
+<script type="math/tex; mode=display">
+S = 4 \int _0^a ydx = 4 \int _0^a \sqrt{b^2(1- \frac {x^2}{a^2})} dx = 4b \int _0^a \sqrt{1-\frac {x^2}{a^2}}dx</script><p>令$x=asin(t)$，利用倍角公式有</p>
+<script type="math/tex; mode=display">
+S = 4ab \int _0 ^{\frac {\pi}{2}}{cos(t)d(sin(t))} = 4ab \int _0 ^{\frac {\pi}{2}}{cos^2(t)dt} = 2ab \int _0^{\frac {\pi}{2}}(1+cos(2t))dt = \pi ab</script><blockquote>
+<p>假设有区间$[a,b]$内可积函数$f(x)$与$g(x)$，则由曲线$x=a$、$x=b$以及这两条曲线所围成的区域面积为$\int _a^b (f(x)-g(x))dx$</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/抛物线与直线所围成的区域的面积.svg" alt="抛物线与直线所围成的区域的面积"></p>
+<p>比如计算抛物线$y=x^2$与直线$y=x$所围成的区域面积，抛物线与直线交点为$(0,0)$和$(1,1)$，因此围成的区域面积为</p>
+<script type="math/tex; mode=display">
+S = \int _0^1 (x-x^2)dx = (\frac {1}{2}x^2 - \frac {1}{3}x^3) |_0^1 = \frac {1}{6}</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="定积分的应用-2"><blockquote>
+<p>考虑直角坐标系的情况</p>
+</blockquote>
+<p>计算$f(x)$在区间$[a,b]$内的弧长，这可以通过折线逼近函数的曲线、累加折线的长度得到，其中实线为计算长度的曲线，虚线是用折线对曲线进行近似的结果，当划分得足够细的时候，这些折线的长度之和的极限就是曲线的弧长，用电<script type="math/tex">a=x_0,x_1, \cdots , x_n = b</script>，区间<script type="math/tex">[_i, x_{i+1}]</script>内的折线长度为</p>
+<script type="math/tex; mode=display">
+\sqrt {(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2} = \sqrt {\Delta x_i^2 + \Delta y_i^2} = \sqrt {1+(\frac {\Delta y_i}{\Delta x_i})^2} \Delta x_i \approx \sqrt {1+y'^2} \Delta x_i</script><p>令点$M_i = (x_i, y_i)$，则曲线的弧长为如下的极限</p>
+<script type="math/tex; mode=display">
+\lim _{\Delta x \rightarrow 0} {\sum _{i=1}^{n}{|M_{i-1}M_i|}} = \lim _{\Delta x \rightarrow 0} \sum _{i=1}^{n} {\sqrt {1+y'^2} \Delta x_i}</script><p>由此得到曲线在区间$[a,b]$内的弧长为如下的定积分</p>
+<script type="math/tex; mode=display">
+s = \int _a^b {\sqrt{1+y'^2}dx}</script><p>计算曲线$y= \frac {2}{3}x^{\frac {3}{2}}$在区间$[1,2]$内的弧长</p>
+<script type="math/tex; mode=display">
+S = \int _1^2{1+((\frac {2}{3}x^{\frac {3}{2}})')^2}dx = \int _1^2{1+(x^{\frac {1}{2}})^2}dx = \int _1^2{\sqrt {1+x}}dx = \frac {2}{3}(1+x)^{\frac {3}{2}} |_1^2 = \frac {2}{3} \times (3^{\frac {3}{2}} - 2^{\frac {3}{2}})</script><p>计算单位圆$x^2+y^2=1$的周长，由于圆是对称的，因此只需计算第一象限即可，第一象限的曲线为$y=\sqrt {1-x^2}$</p>
+<script type="math/tex; mode=display">
+S = 4 \int _0^1 \sqrt {1+((\sqrt {1-x^2})')^2} dx = 4 \int _0^1 \sqrt {1+(-x(1-x^2)^{-\frac {1}{2}})^2} dx = 4 \int _0^1 \frac {1}{\sqrt {1-x^2}} dx = 4 arcsin(x)| _0^1 = 2 \pi</script><blockquote>
+<p>考虑参数方程的情况</p>
+</blockquote>
+<p>曲线的参数方程为$x = \varphi (t) \qquad y = \psi (t)$，其中$t \in [\alpha, \beta]$</p>
+<p>假设$\varphi (t)$和$\psi (t)$在该区间上连续可导，则弧长元为</p>
+<script type="math/tex; mode=display">
+ds = \sqrt {(dx)^2+(dy)^2} = \sqrt {\varphi '^2(t) + \psi '^2(t)} dt</script><p>从而得到弧长的计算公式为</p>
+<script type="math/tex; mode=display">
+S = \int _{\alpha}^{\beta}{\sqrt{\varphi '^2 (t) + \psi '^2 (t)} dt}</script><p>计算星形线的弧长，其参数方程为$ x = a cos^3(t) \qquad y = a sin^3(t)$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/星形线的形状.svg" alt="星形线的形状"></p>
+<p>由于星形线的形状是对称的，因此只需计算第一象限的曲线弧长即可</p>
+<script type="math/tex; mode=display">
+S = 4 \int _0^{\frac {\pi}{2}}{\sqrt {9a^2 cos^4(t) sin^2 (t) + 9a^2 sin^4 (t) cos^2 (t)}}dt = 4 \times \frac {3}{2} a \int _0^{\frac {\pi}{2}} {sin (2t) dt} = 6a</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<h2 id="广义积分"><a href="#广义积分" class="headerlink" title="广义积分"></a>广义积分</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p><code>广义积分</code>(Improper Integral)是定积分的推广，也称为<code>反常积分</code></p>
+<ul>
+<li><strong>无穷积分</strong>(无穷限广义积分)：积分区间为无限</li>
+<li><strong>瑕积分</strong>(无界函数的广义积分)：积分区间有限但被积分函数无界</li>
+</ul>
+<div class="tabs" id="广义积分"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#广义积分-1">无穷积分</button></li><li class="tab"><button type="button" data-href="#广义积分-2">瑕积分</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="广义积分-1"><p>此时可以使用牛顿-莱布尼茨公式的推广，函数$f(x)$在$[a, + \infty]$内有定义且连续，$F(x)$是原函数，如果下面的极限存在</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow + \infty} {F(x)} = F(+ \infty)</script><p>则有</p>
+<script type="math/tex; mode=display">
+\int _a^{+ \infty}{f(x)dx} = F(+ \infty)-F(a) = F(x) | _a ^{+ \infty}</script><p>对于函数$f(x) = e ^{-x}$，在区间$[0, +\infty]$内的广义积分为</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/bk_resources/math/机器学习_一元函数微积分/e-x的曲线.svg" alt="e-x的曲线"></p>
+<script type="math/tex; mode=display">
+\int _0^{+ \infty}{e^{-x} dx} = -e ^ {-x} | _0^{+ \infty} = lim _{x \rightarrow +\infty}{e^{-x}}+1 = 1</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="广义积分-2"><p>考虑函数值为无限的情况，函数$f(x)$在$[a, b]$内有定义且连续，$F(x)$是原函数，如果下面的极限存在</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow b^-}{F(x)} = F(b^-)</script><p>则有</p>
+<script type="math/tex; mode=display">
+\int _a^b {f(x)dx} = F(b^-)-F(a) = F(x)|_a^b</script><blockquote>
+<p>计算函数$\int _0^1 {\frac {1}{\sqrt{1-x^2}} dx}$的广义积分</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\int _0^1 {\frac {1}{\sqrt{1-x^2}} dx} = arcsin(x)|_0^1 = \frac {\pi}{2}</script><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<p>对于某些连续型随机变量，如正态分布随机变量，其概率密度函数的定义区间无限</p>
+<p>这种随机变量的数学期望和方差即为广义积分</p>
+<h1 id="常微分方程"><a href="#常微分方程" class="headerlink" title="常微分方程"></a>常微分方程</h1><p><code>微分方程(Differential Equation, DE)</code>是含有自变量、函数与其导数的方程，方程的解是函数</p>
+<p>普通的代数方程如二次方程、三次方程的解是实数或复数</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p>含有自变量、函数以及函数各阶导数的方程称为<code>常微分方程(Ordinary Differential Equation, ODE)</code>，它的解是一元函数</p>
+<p>常微分方程可以写成$f(x, y^{(n)}, \cdots, y’, y) = 0$，这里$f$是一个函数，$y$是$x$的函数</p>
+<p>比如$x^2y’’ - x^3y’ + 2y -4x = 0$</p>
+<p>微分方程中出现的导数的最高阶数称为微分方程的<code>阶数</code>，上面的方程是二阶方程</p>
+<p>如果微分方程是未知函数以及导数的一次方程，则称为<code>线性微分方程</code>，否则称为<code>非线性微分方程</code></p>
+<p>$n$阶线性微分方程可以写成如下的形式，其中$a_{n}(x) \neq 0$</p>
+<script type="math/tex; mode=display">
+a_{n}(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+ \cdots + a_0(x)y = g(x)</script><p>如果线性微分方程中未知函数项以及各阶导数项的系数都是常数，则成为<code>常系数线性微分方程</code></p>
+<p>比如二阶常系数线性微分方程$y’’-xy’+y-4x = 0$</p>
+<blockquote>
+<p>应用</p>
+</blockquote>
+<p>微分方程在物理学重经常被使用，以力学为例</p>
+<p>物体在自由落体时如果<strong>不考虑空气阻力</strong>，则只有重力加速度的作用</p>
+<p>根据牛顿第二定律可以建立微分方程$y’’= g$</p>
+<p>其中$y$为$t$时刻的位移，$g$为重力加速度，解此方程可以得到位移函数$y(t)$</p>
+<p>如果<strong>考虑空气的阻力</strong>，对于低速运动的物体，阻力大小与速度大小成正比，方向与重力的方向相反</p>
+<p>速度是位移函数的一阶导数$y’$，加速度是位移函数的二阶导数$y’’$，根据牛顿第二定律可以得到微分方程$my’’ = mg -ky’$</p>
+<p>其中$k$为常数，$m$为物体的质量，变形后可以得到$y’’ + \frac {k}{m}y’ -g = 0$</p>
+<blockquote>
+<p>初值问题</p>
+</blockquote>
+<p>通常情况下微分方程的解不唯一，加上限定条件可以保证解的唯一性，可以指定函数在某一点或某些点的值$y(x_0)=c_0$</p>
+<p>或是其导数在某一点处的值$y’(x_0) = c_1$，加上这种限定条件之后称为<code>初值问题</code></p>
+<blockquote>
+<p>存在性与唯一性判别条件</p>
+</blockquote>
+<p>并非所有微分方程的解都存在，对于初值问题，柯西-李普希茨(Cauchy-Lipschitz)定理给出了解的存在性与唯一性判别条件</p>
+<p>即使解存在，也只有少数简单的微分方程可以求解得到解析解</p>
+<p>在无法求得解析解时，可以利用数值计算的方法近似求解，常用的有<code>龙格-库塔(Runge-Kutta)法</code>和<code>理查森(Richardsoon)外推法</code></p>
+<h2 id="一阶线性微分方程"><a href="#一阶线性微分方程" class="headerlink" title="一阶线性微分方程"></a>一阶线性微分方程</h2><p>在机器学习和深度学习中用到的通常是最简单的方程</p>
+<blockquote>
+<p>一阶方程</p>
+</blockquote>
+<p>对于一阶方程$y’=f(x)$，可以直接对其积分即可得到方程的解<script type="math/tex">y = \int f(x)dx + C</script></p>
+<blockquote>
+<p>对于方程一侧只含有更高阶导数的方程$f^{(n)} = f(x)$</p>
+</blockquote>
+<p>可以通过多次积分求解，这类称为<code>可积分的微分方程</code></p>
+<p>对于下面的方程$y’+ay=0$，将方程两边同乘以$e^{ax}$可得$e^{ax}y’ + aye^{ax} = 0$</p>
+<p>根据乘法的求导公式可以得到$y = Ce^{-ax}$</p>
+<p>其中$y’+ay=0$是<code>齐次方程</code></p>
+<blockquote>
+<p>一般的方程$y’ + ay = b(x)$</p>
+</blockquote>
+<p>同样将方程两边同乘以$e^{ax}$可得$e^{ax}$可得$e^{ax}y’ + aye^{ax} = e^{ax}b(x)$，即$(e^{ax}y)’ = e^{ax}b(x)$</p>
+<p>从而有$e^{ax}y = \int {e^{ax}b(x)dx} + C$，可以解得$y = e^{-ax}(\int e^{ax}b(x)dx + C)$</p>
+<p>其中$y’ + ay = b(x)$是<code>非齐次方程</code></p>
+<blockquote>
+<p>更复杂的方程</p>
+</blockquote>
+<p>对于一阶线性微分方程$y’+a(x)y=b(x)$，将两边同乘以$e^{\int a(x)dx}$可得</p>
+<script type="math/tex; mode=display">
+y'e^{\int a(x)dx} + a(x)ye^{\int a(x)dx} = b(x)e^{\int a(x)dx}</script><p>即$(e^{\int a(x)dx}y) = b(x)e^{\int a(x)dx}$，因此有</p>
+<script type="math/tex; mode=display">
+e^{\int a(x)dx}y = \int e^{\int a(x)dx} b(x)dx + C</script><p>从而可以解得</p>
+<script type="math/tex; mode=display">
+y = e^{-\int a(x)dx}(\int e^{\int a(x)dx} b(x)dx + C)</script><p>这些方程的求解都利用了指数函数求导的优良性质，方程两边同乘以指数函数之后，利用乘积的求导公式，将方程左侧的两项求和转为某两个函数相乘的导数</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/narutohyc">narutohyc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://study.hycbook.com/article/10706.html">https://study.hycbook.com/article/10706.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://study.hycbook.com" target="_blank">兼一书虫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E5%AD%A6/">机器学习数学</a><a class="post-meta__tags" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">微积分</a><a class="post-meta__tags" href="/tags/%E5%AE%9A%E7%A7%AF%E5%88%86/">定积分</a><a class="post-meta__tags" href="/tags/%E5%B8%B8%E5%BE%AE%E5%88%86/">常微分</a><a class="post-meta__tags" href="/tags/%E6%9E%81%E9%99%90%E5%92%8C%E8%BF%9E%E7%BB%AD/">极限和连续</a><a class="post-meta__tags" href="/tags/%E5%AF%BC%E6%95%B0%E5%BE%AE%E5%88%86/">导数微分</a></div><div class="post_share"><div class="social-share" data-image="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">打赏</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/qr_codes/hyc_alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></button></div><audio id="coinAudio" src="https://s1.vika.cn/space/2022/10/29/6db0ad2bccf949f09054b3b206dcc66f?attname=马里奥游戏投币叮当.mp3"></audio><script defer="defer" src="/"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/56863.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/post_cover/蕾姆2.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python协程</div></div></a></div><div class="next-post pull-right"><a href="/article/364ea8cc.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆0.webp" onerror="onerror=null;src='https://pic.hycbook.com/i/hexo/config_imgs/404.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">设计模式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/47032.html" title="机器学习_线性代数与矩阵论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-11</div><div class="title">机器学习_线性代数与矩阵论</div></div></a></div><div><a href="/article/4071.html" title="枚举类Enum"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/post_cover/蕾姆12.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-10</div><div class="title">枚举类Enum</div></div></a></div><div><a href="/article/62278.html" title="pandas小记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆2.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-10</div><div class="title">pandas小记</div></div></a></div><div><a href="/article/30791.html" title="numpy小记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆3.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-10</div><div class="title">numpy小记</div></div></a></div><div><a href="/article/27292.html" title="python_pipe包管道包学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i/hexo/post_cover/蕾姆4.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-10</div><div class="title">python_pipe包管道包学习</div></div></a></div><div><a href="/article/30423.html" title="python多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/post_cover/蕾姆1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-10</div><div class="title">python多线程</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD"><span class="toc-number">1.</span> <span class="toc-text">极限与连续</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E6%95%B0%E9%9B%86%E5%92%8C%E4%B8%8D%E5%8F%AF%E6%95%B0%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">可数集和不可数集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%88%97%E7%9A%84%E6%9E%81%E9%99%90"><span class="toc-number">1.2.</span> <span class="toc-text">数列的极限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E9%99%90%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">极限概念与定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E9%99%90%E5%AD%98%E5%9C%A8%E5%88%A4%E5%AE%9A%E6%B3%95%E5%88%99"><span class="toc-number">1.2.2.</span> <span class="toc-text">极限存在判定法则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90"><span class="toc-number">1.3.</span> <span class="toc-text">函数的极限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7%E4%B8%8E%E9%97%B4%E6%96%AD%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">函数的连续性与间断点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">连续性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">连续函数的性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E7%A1%AE%E7%95%8C%E4%B8%8E%E4%B8%8B%E7%A1%AE%E7%95%8C"><span class="toc-number">1.5.</span> <span class="toc-text">上确界与下确界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%8E%E6%99%AE%E5%B8%8C%E8%8C%A8%E8%BF%9E%E7%BB%AD"><span class="toc-number">1.6.</span> <span class="toc-text">李普希茨连续</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%87%8F"><span class="toc-number">1.7.</span> <span class="toc-text">无穷小量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%BE%AE%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text">导数与微分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%98%B6%E5%AF%BC%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">一阶导数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%92%8C%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">几何和物理意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E5%85%AC%E5%BC%8F"><span class="toc-number">2.1.3.</span> <span class="toc-text">差分公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E7%9A%84%E6%B1%82%E5%AF%BC"><span class="toc-number">2.1.4.</span> <span class="toc-text">基本函数的求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97%E7%9A%84%E6%B1%82%E5%AF%BC%E5%85%AC%E5%BC%8F"><span class="toc-number">2.1.5.</span> <span class="toc-text">四则运算的求导公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">机器学习中常用的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0"><span class="toc-number">2.3.</span> <span class="toc-text">高阶导数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E5%88%86"><span class="toc-number">2.4.</span> <span class="toc-text">微分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9A%84%E5%8D%95%E8%B0%83%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">导数与函数的单调性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%80%BC%E5%88%A4%E5%88%AB%E6%B3%95%E5%88%99"><span class="toc-number">2.6.</span> <span class="toc-text">极值判别法则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%B9%E5%87%B8%E6%80%A7"><span class="toc-number">2.7.</span> <span class="toc-text">导数与函数的凹凸性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">微分中值定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">泰勒公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">5.</span> <span class="toc-text">不定积分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">定积分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="toc-number">6.1.</span> <span class="toc-text">定积分的定义与性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%9B%E9%A1%BF-%E8%8E%B1%E5%B8%83%E5%B0%BC%E8%8C%A8%E5%85%AC%E5%BC%8F"><span class="toc-number">6.2.</span> <span class="toc-text">牛顿-莱布尼茨公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">6.3.</span> <span class="toc-text">定积分的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E4%B8%8A%E9%99%90%E7%A7%AF%E5%88%86"><span class="toc-number">6.4.</span> <span class="toc-text">变上限积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">定积分的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E7%A7%AF%E5%88%86"><span class="toc-number">6.6.</span> <span class="toc-text">广义积分</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text">常微分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">7.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">7.2.</span> <span class="toc-text">一阶线性微分方程</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/footer_bg.webp')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By narutohyc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://demo.jerryc.me/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="https://zixiaoyun.com" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/图床-薄荷图床-green" title="薄荷图床"></a></p><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020502000647" rel="external nofollow noreferrer"><img style="position:relative;top:4px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.hycbook.com/i//hexo/config_imgs//备案图标.webp" alt="ICP"/>闽公网安备35020502000647号  </a><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">闽ICP备2022013843号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();" rel="external nofollow noreferrer"><i class="fas fa-comment"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage"><i class="fa-solid fa-shoe-prints"></i><span>随便逛逛</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://vercel.hycbook.com',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ncn88uooQf0IO2rrGE7Vniwp-gzGzoHsz',
+      appKey: 'Yghpzg1QfBMFJ0MxxHubVzKL',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://vercel.hycbook.com',
+        region: '',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/js/rightMenu.js"></script><script defer data-pjax src="/js/udf_mouse.js"></script><script defer data-pjax src="/js/udf_js.js"></script><script defer data-pjax src="/zhheo/random.js"></script><script data-pjax src="/js/coin.js"></script><script defer src="https://npm.elemecdn.com/vue@2.6.11"></script><script async src="//at.alicdn.com/t/c/font_3670467_a0sijt8frxo.js"></script><script defer src="/live2d-widget/autoload.js"></script><script defer src="/js/udf_js.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "561b80db-3f0f-45cb-b3b1-aae7355939e6";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 兼一书虫上新啦！ 👉</label><a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍭查看新品🍬</span></a></div></div><script>if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      showNotification()
+    })
+  }
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+  })
+}
+
+function showNotification() {
+  if (GLOBAL_CONFIG.Snackbar) {
+    var snackbarBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      GLOBAL_CONFIG.Snackbar.bgLight :
+      GLOBAL_CONFIG.Snackbar.bgDark
+    var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+    Snackbar.show({
+      text: '✨ 兼一书虫上新啦！ 👉',
+      backgroundColor: snackbarBg,
+      duration: 500000,
+      pos: snackbarPos,
+      actionText: '🍭查看新品🍬',
+      actionTextColor: '#fff',
+      onActionClick: function(e) {
+        location.reload()
+      },
+    })
+  } else {
+    var showBg =
+      document.documentElement.getAttribute('data-theme') === 'light' ?
+      '#49b1f5' :
+      '#1f1f1f'
+    var cssText = `top: 0; background: ${showBg};`
+    document.getElementById('app-refresh')
+      .style.cssText = cssText
+  }
+}</script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
