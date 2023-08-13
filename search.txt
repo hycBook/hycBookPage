@@ -393,7 +393,7 @@
 	<entry>
 		<title>python多线程</title>
 		<url>/article/30423.html</url>
-		<content>python多线程Python多线程学习</content>
+		<content>python多线程Python多线程学习多线程用比较少</content>
 	</entry>
 	<entry>
 		<title>python进阶问题</title>
