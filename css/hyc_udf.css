@@ -501,3 +501,14 @@ a,img {
     color: var(--mj-fontcolor);
   }
 
+
+/* 友链页格式定制  */
+#article-container .flink .flink-list > .flink-list-item {
+  width: calc(100% / 4 - 15px);
+  background: #f1d7d7;
+}
+
+.layout.hide-aside {
+  max-width: 1300px;
+}
+
