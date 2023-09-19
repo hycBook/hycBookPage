@@ -512,3 +512,8 @@ a,img {
   max-width: 1300px;
 }
 
+
+/* 首页分类条展示 */
+#category-bar{
+    background: #c880ba45;
+}
