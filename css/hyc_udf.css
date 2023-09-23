@@ -521,7 +521,7 @@ a,img {
 /*白天主题下的配置*/
 #aside-content>.card-widget.card-info {
     /*换成自己图片的地址*/
-    background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/crad_light.webp');
+    background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/card_light.webp');
     background-repeat: no-repeat;
     background-attachment: inherit;
     background-size: 100%
@@ -529,6 +529,6 @@ a,img {
 /*黑暗主题下的配置*/
 [data-theme=dark] #aside-content>.card-widget.card-info {
     /*换成自己图片的地址*/
-    background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/crad_night.webp') !important
+    background-image: url('https://pic.hycbook.com/i/hexo/config_imgs/card_night.webp') !important
 }
 
