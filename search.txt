@@ -26,6 +26,11 @@
 		<content>      本文需要输入密码才能访问哦   </content>
 	</entry>
 	<entry>
+		<title>豚妞成长记录</title>
+		<url>/article/51068.html</url>
+		<content>      本文需要输入密码才能访问哦   </content>
+	</entry>
+	<entry>
 		<title>图神经网络</title>
 		<url>/article/47450.html</url>
 		<content>概述PyG DocumentationPyG(PyTorch Geometric)是一个建立在 PyTorch 基础上的库，用于轻松编写和训练图神经网络(GNN)，用于与结构化数据相关的广泛应用任务形态GNN中常见任务：Graph级别任务、Node级别任务、Edge级别任务包括：节点分类，节点连接预测，图相似度检测，异常检测，图分类多层GNN不会改变图的拓扑结构，但是会改变点的特征，多层GNN处理可以扩大感受野GCN和CNN有什么不同和相同点不同点：图卷积中每个点的邻居数量是不确定的，图卷积中的数据输入格式不确定相同点：GCN和CNN本质都需要对输入数据做特征提取，且都是根据某个点周围点的情况提取特征GCN 可以处理 semi-supervised learning，即只有部分节点有标签的情况，计算损失时只用有标签的计算GCN 的层数一般3~5层比较好，层数叠加可能导致反效果</content>
