@@ -49,14 +49,25 @@ document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.key === 'k') {
         // 当按下 Ctrl+K 时执行搜索操作
         event.preventDefault(); // 防止浏览器默认行为（可能会触发浏览器的搜索）
-        //search(); // 调用执行搜索的函数
+        // 调用执行搜索的函数
         var divElement = document.getElementById('search-button');
         var linkElement = divElement.querySelector('a');
         linkElement.click(); 
     }
 });
 
-        
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'm') {
+        // 当按下 Ctrl+K 时执行搜索操作
+        event.preventDefault(); // 防止浏览器默认行为（可能会触发浏览器的搜索）
+        // 跳转到分类目录
+        window.location.href = '/categories/common/';
+    }
+});
+
+
 
 /* 自定义弹窗  https://moonshuo.cn/posts/25274.html#自带的弹窗 */
 document.addEventListener("copy", (function (e) {
