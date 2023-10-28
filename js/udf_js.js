@@ -60,10 +60,21 @@ document.addEventListener('keydown', function(event) {
 
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.key === 'm') {
-        // 当按下 Ctrl+K 时执行搜索操作
+        // 当按下 Ctrl+m 时跳转到分类页
         event.preventDefault(); // 防止浏览器默认行为（可能会触发浏览器的搜索）
         // 跳转到分类目录
         window.location.href = '/categories/common/';
+    }
+});
+
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'b') {
+        // 当按下 Ctrl+b 时跳转到标签页
+        event.preventDefault(); // 防止浏览器默认行为（可能会触发浏览器的搜索）
+        // 跳转到分类目录
+        window.location.href = '/tags';
     }
 });
 
