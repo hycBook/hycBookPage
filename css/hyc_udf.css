@@ -578,7 +578,7 @@ a,img {
   --hr-before-color: rgba(255,255,255,0.7);
   --search-bg: #935aabe6;
   --search-input-color: rgba(255,255,255,0.7);
-  --search-result-title: rgba(255,255,255,0.9);
+  --search-result-title: rgb(43 189 162 / 90%);;
   --preloader-bg: #0d0d0d;
   --preloader-color: rgba(255,255,255,0.7);
   --tab-border-color: #2c2c2c;
