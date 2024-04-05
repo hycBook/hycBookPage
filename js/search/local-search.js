@@ -24,7 +24,6 @@ const isJson=url=>{const reg=/\.json$/
 return reg.test(url)}
 const fetchData=async(path)=>{let data=[]
 const response=await fetch(path)
-response.url='https://pic.hycbook.com/i/gitbook_search/search.txt'
 if(isJson(path)){data=await response.json()}else{const res=await response.text()
 const t=await new window.DOMParser().parseFromString(res,'text/xml')
 const a=await t
@@ -33,7 +32,9 @@ if(response.ok){const $loadDataItem=document.getElementById('loading-database')
 $loadDataItem.nextElementSibling.style.display='block'
 $loadDataItem.remove()}
 return data}
-const search=()=>{if(!GLOBAL_CONFIG.localSearch.preload){dataObj=fetchData(GLOBAL_CONFIG.localSearch.path)}
+const search=()=>{GLOBAL_CONFIG.localSearch.path='https://pic.hycbook.com/i/gitbook_search/search.txt'
+console.log(GLOBAL_CONFIG.localSearch.path)
+if(!GLOBAL_CONFIG.localSearch.preload){dataObj=fetchData(GLOBAL_CONFIG.localSearch.path)}
 const $input=document.querySelector('#local-search-input input')
 const $resultContent=document.getElementById('local-search-results')
 const $loadingStatus=document.getElementById('loading-status')
