@@ -6,7 +6,7 @@
   <link href="https://study.hycbook.com/atom.xml" rel="self"/>
   
   <link href="https://study.hycbook.com/"/>
-  <updated>2024-11-27T06:24:39.066Z</updated>
+  <updated>2024-12-11T06:42:05.915Z</updated>
   <id>https://study.hycbook.com/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>实战：数据优化、多GPU加速与数值稳定性的最佳实践</title>
+    <link href="https://study.hycbook.com/article/4289.html"/>
+    <id>https://study.hycbook.com/article/4289.html</id>
+    <published>2024-12-11T05:17:34.000Z</published>
+    <updated>2024-12-11T06:42:05.915Z</updated>
+    
+    
+    <summary type="html">描述了一个完整的深度学习开发流程，包括数据处理、训练优化和部署</summary>
+    
+    
+    
+    <category term="deep-learning" scheme="https://study.hycbook.com/categories/deep-learning/"/>
+    
+    
+    <category term="深度学习" scheme="https://study.hycbook.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="数据并行处理" scheme="https://study.hycbook.com/tags/%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数据加载优化" scheme="https://study.hycbook.com/tags/%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="DeepSpeed多卡训练" scheme="https://study.hycbook.com/tags/DeepSpeed%E5%A4%9A%E5%8D%A1%E8%AE%AD%E7%BB%83/"/>
+    
+    <category term="NaN检测修复" scheme="https://study.hycbook.com/tags/NaN%E6%A3%80%E6%B5%8B%E4%BF%AE%E5%A4%8D/"/>
+    
+    <category term="TorchProfile" scheme="https://study.hycbook.com/tags/TorchProfile/"/>
+    
+    <category term="Huggingface" scheme="https://study.hycbook.com/tags/Huggingface/"/>
+    
+  </entry>
+  
+  <entry>
     <title>24年演讲材料</title>
     <link href="https://study.hycbook.com/article/61189.html"/>
     <id>https://study.hycbook.com/article/61189.html</id>
     <published>2024-03-24T08:19:53.000Z</published>
-    <updated>2024-11-27T06:24:39.066Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">24年公司演讲材料</summary>
@@ -40,7 +71,7 @@
     <link href="https://study.hycbook.com/article/53040.html"/>
     <id>https://study.hycbook.com/article/53040.html</id>
     <published>2024-02-20T06:38:53.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">pytorch学习_进阶知识</summary>
@@ -59,7 +90,7 @@
     <link href="https://study.hycbook.com/article/57252.html"/>
     <id>https://study.hycbook.com/article/57252.html</id>
     <published>2024-02-15T00:39:15.000Z</published>
-    <updated>2024-11-27T06:24:39.058Z</updated>
+    <updated>2024-12-11T06:42:05.911Z</updated>
     
     
     <summary type="html">LLM Tokenizer分词系列</summary>
@@ -80,7 +111,7 @@
     <link href="https://study.hycbook.com/article/61183.html"/>
     <id>https://study.hycbook.com/article/61183.html</id>
     <published>2023-11-11T03:49:23.000Z</published>
-    <updated>2024-11-27T06:24:39.066Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">记录关于咕呱锻炼随笔</summary>
@@ -99,7 +130,7 @@
     <link href="https://study.hycbook.com/article/8171.html"/>
     <id>https://study.hycbook.com/article/8171.html</id>
     <published>2023-09-08T12:46:25.000Z</published>
-    <updated>2024-11-27T06:24:39.074Z</updated>
+    <updated>2024-12-11T06:42:05.923Z</updated>
     
     
     <summary type="html">机器学习的数学基础入门知识</summary>
@@ -128,7 +159,7 @@
     <link href="https://study.hycbook.com/article/14910.html"/>
     <id>https://study.hycbook.com/article/14910.html</id>
     <published>2023-09-08T03:53:23.000Z</published>
-    <updated>2024-11-27T06:24:39.074Z</updated>
+    <updated>2024-12-11T06:42:05.923Z</updated>
     
     
     <summary type="html">机器学习的数学基础入门知识</summary>
@@ -159,7 +190,7 @@
     <link href="https://study.hycbook.com/article/41340.html"/>
     <id>https://study.hycbook.com/article/41340.html</id>
     <published>2023-09-08T03:51:43.000Z</published>
-    <updated>2024-11-27T06:24:39.074Z</updated>
+    <updated>2024-12-11T06:42:05.923Z</updated>
     
     
     <summary type="html">机器学习的数学基础入门知识</summary>
@@ -180,7 +211,7 @@
     <link href="https://study.hycbook.com/article/29825.html"/>
     <id>https://study.hycbook.com/article/29825.html</id>
     <published>2023-09-08T01:47:22.000Z</published>
-    <updated>2024-11-27T06:24:39.078Z</updated>
+    <updated>2024-12-11T06:42:05.923Z</updated>
     
     
     <summary type="html">机器学习的数学基础入门知识</summary>
@@ -203,7 +234,7 @@
     <link href="https://study.hycbook.com/article/58496.html"/>
     <id>https://study.hycbook.com/article/58496.html</id>
     <published>2023-09-08T01:42:38.000Z</published>
-    <updated>2024-11-27T06:24:39.078Z</updated>
+    <updated>2024-12-11T06:42:05.923Z</updated>
     
     
     <summary type="html">机器学习的数学基础入门知识</summary>
@@ -226,7 +257,7 @@
     <link href="https://study.hycbook.com/article/51068.html"/>
     <id>https://study.hycbook.com/article/51068.html</id>
     <published>2023-09-01T04:11:13.000Z</published>
-    <updated>2024-11-27T06:24:39.066Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">记录豚妞的成长经历</summary>
@@ -245,7 +276,7 @@
     <link href="https://study.hycbook.com/article/47450.html"/>
     <id>https://study.hycbook.com/article/47450.html</id>
     <published>2023-08-16T02:01:54.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">图神经网络</summary>
@@ -266,7 +297,7 @@
     <link href="https://study.hycbook.com/article/42898.html"/>
     <id>https://study.hycbook.com/article/42898.html</id>
     <published>2023-06-22T06:08:17.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.911Z</updated>
     
     
     <summary type="html">nlp关键词和摘要提取技术整理</summary>
@@ -289,7 +320,7 @@
     <link href="https://study.hycbook.com/article/59381.html"/>
     <id>https://study.hycbook.com/article/59381.html</id>
     <published>2023-06-15T04:46:10.000Z</published>
-    <updated>2024-11-27T06:24:39.058Z</updated>
+    <updated>2024-12-11T06:42:05.911Z</updated>
     
     
     <summary type="html">LLM模型微调系列</summary>
@@ -316,7 +347,7 @@
     <link href="https://study.hycbook.com/article/24897.html"/>
     <id>https://study.hycbook.com/article/24897.html</id>
     <published>2023-06-12T13:22:34.000Z</published>
-    <updated>2024-11-27T06:24:39.058Z</updated>
+    <updated>2024-12-11T06:42:05.911Z</updated>
     
     
     <summary type="html">LLM模型部署调试推理</summary>
@@ -337,7 +368,7 @@
     <link href="https://study.hycbook.com/article/57912.html"/>
     <id>https://study.hycbook.com/article/57912.html</id>
     <published>2023-06-10T10:36:10.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.911Z</updated>
     
     
     <summary type="html">huggingface基本使用教程</summary>
@@ -358,7 +389,7 @@
     <link href="https://study.hycbook.com/article/53377.html"/>
     <id>https://study.hycbook.com/article/53377.html</id>
     <published>2023-06-04T10:46:57.000Z</published>
-    <updated>2024-11-27T06:24:39.066Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">深度学习模型压缩技术</summary>
@@ -379,7 +410,7 @@
     <link href="https://study.hycbook.com/article/58490.html"/>
     <id>https://study.hycbook.com/article/58490.html</id>
     <published>2023-06-04T08:15:13.000Z</published>
-    <updated>2024-11-27T06:24:39.066Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">作文赏析_语文从我身边走过</summary>
@@ -398,7 +429,7 @@
     <link href="https://study.hycbook.com/article/54081.html"/>
     <id>https://study.hycbook.com/article/54081.html</id>
     <published>2023-06-04T00:41:21.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">图像分割算法</summary>
@@ -419,7 +450,7 @@
     <link href="https://study.hycbook.com/article/36065.html"/>
     <id>https://study.hycbook.com/article/36065.html</id>
     <published>2023-05-26T08:31:14.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
+    <updated>2024-12-11T06:42:05.915Z</updated>
     
     
     <summary type="html">深度学习核心之优化器</summary>
@@ -434,29 +465,6 @@
     <category term="神经网络" scheme="https://study.hycbook.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
     <category term="优化算法" scheme="https://study.hycbook.com/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习核心之损失函数</title>
-    <link href="https://study.hycbook.com/article/46832.html"/>
-    <id>https://study.hycbook.com/article/46832.html</id>
-    <published>2023-05-26T08:25:15.000Z</published>
-    <updated>2024-11-27T06:24:39.062Z</updated>
-    
-    
-    <summary type="html">深度学习核心之损失函数</summary>
-    
-    
-    
-    <category term="deep-learning" scheme="https://study.hycbook.com/categories/deep-learning/"/>
-    
-    
-    <category term="深度学习" scheme="https://study.hycbook.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="神经网络" scheme="https://study.hycbook.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="损失函数" scheme="https://study.hycbook.com/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
